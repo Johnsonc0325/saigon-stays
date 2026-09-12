@@ -82,6 +82,12 @@ tbody td.n{white-space:nowrap;color:var(--muted)}
 .row{border-bottom:1px solid var(--line);padding:30px 0;display:grid;
   grid-template-columns:44px minmax(230px,340px) 1fr;gap:28px;align-items:start;cursor:pointer}
 .row:hover .title{text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:4px}
+@media (hover:hover) and (pointer:fine){
+  .row{transition:background .18s ease,box-shadow .18s ease;border-radius:var(--r)}
+  .row:hover{background:var(--card);box-shadow:0 7px 22px -15px rgba(23,22,20,.3)}
+  .row:hover .shot img{transform:scale(1.015)}
+  .shot img{transition:transform .3s ease}
+}
 .idx{font-family:var(--serif);font-size:13px;color:var(--muted);padding-top:3px}
 .shot{position:relative;background:#EAE7E1;border-radius:var(--r);overflow:hidden;aspect-ratio:4/3}
 .shot img{width:100%;height:100%;object-fit:cover;transition:opacity .25s}
