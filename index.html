@@ -191,7 +191,12 @@ ul.pl.neg .m{color:var(--muted)}
   .more{order:7;align-self:flex-start}
   .hero{padding-top:40px}
   .topbar{position:static}
-  .toolbar{position:static;margin-top:28px}
+  .toolbar{position:sticky;top:0;z-index:20;margin-top:28px;background:rgba(246,244,240,.97)}
+  .toolbar .wrap{flex-wrap:wrap;gap:8px;padding-top:10px;padding-bottom:10px}
+  .chips{width:100%;flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch;padding-bottom:1px}
+  .chips::-webkit-scrollbar{display:none}
+  .chip{flex:0 0 auto}
+  .sortbox{flex:0 0 auto}
   .panel{max-width:640px}
   .gal{padding:18px 20px 0}
   .sect{padding:24px 20px 0}
