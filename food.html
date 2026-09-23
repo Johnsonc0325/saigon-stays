@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>美食 · 胡志明 5 天攻略</title>
+<meta name="description" content="胡志明美食精選與完整清單（57 篇筆記）：河粉、法棍、咖啡、燒烤、海鮮、米其林。">
+<style>
+*,*::before,*::after{box-sizing:border-box}
+:root{
+  --paper:#F6F4F0; --card:#FFFFFF; --ink:#171614; --ink2:#3A3833; --muted:#7C776E;
+  --line:#E4DFD6; --line2:#CFC9BD; --accent:#2C5340; --accent-soft:#E9EFE9;
+  --warn:#8A5A1E; --warn-soft:#F7EFE2;
+  --sans:"PingFang TC","Microsoft JhengHei","Noto Sans TC","Hiragino Sans TC",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --serif:Georgia,"Times New Roman","Songti TC","Source Han Serif TC",serif;
+  --maxw:1100px; --r:3px;
+}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);
+  font-size:15px;line-height:1.72;text-wrap:pretty;-webkit-font-smoothing:antialiased}
+img{display:block;max-width:100%}
+a{color:inherit}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px}
+.num{font-family:var(--serif);font-variant-numeric:tabular-nums}
+
+/* topbar + nav */
+.topbar{position:sticky;top:0;z-index:30;background:rgba(246,244,240,.93);
+  border-bottom:1px solid var(--line);backdrop-filter:saturate(120%) blur(6px)}
+.topbar .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;
+  min-height:58px;padding-top:8px;padding-bottom:8px;flex-wrap:wrap}
+.brand{font-weight:600;letter-spacing:.01em;font-size:14.5px}
+.brand .dot{color:var(--muted);margin:0 6px}
+.nav{display:flex;gap:4px;flex-wrap:wrap}
+.nav a{font-size:13px;color:var(--muted);text-decoration:none;padding:5px 11px;border-radius:999px;
+  transition:background .15s,color .15s}
+.nav a:hover{color:var(--ink);background:var(--card)}
+.nav a[aria-current="page"]{color:#fff;background:var(--ink)}
+.trip{font-size:12.5px;color:var(--muted);letter-spacing:.02em}
+.trip b{color:var(--ink);font-weight:600;font-family:var(--serif)}
+
+/* hero */
+.hero{padding-top:60px;padding-bottom:6px}
+.eyebrow{font-family:var(--serif);font-size:11px;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--muted);margin:0 0 20px}
+h1{font-size:clamp(28px,4.6vw,46px);line-height:1.24;letter-spacing:-.02em;margin:0 0 26px;font-weight:700;max-width:780px}
+h1 span{color:var(--muted);font-weight:400}
+.lede{margin:0;color:var(--ink2);font-size:14.5px;max-width:64ch}
+.lede b{font-weight:600;color:var(--ink)}
+
+/* section */
+section{padding-top:56px}
+h2{font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);
+  font-weight:600;margin:0 0 20px;padding-bottom:14px;border-bottom:1px solid var(--line2)}
+h3{font-size:19px;font-weight:600;letter-spacing:-.01em;margin:0 0 6px}
+p{margin:0 0 12px}
+
+/* hotel card */
+.hotel{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:30px;align-items:start}
+.hotel .shot{background:#EAE7E1;border-radius:var(--r);overflow:hidden;aspect-ratio:4/3}
+.hotel .shot img{width:100%;height:100%;object-fit:cover}
+.thumbs{display:flex;gap:8px;overflow-x:auto;padding-top:10px;scrollbar-width:thin}
+.thumbs img{width:70px;height:52px;object-fit:cover;border-radius:2px;flex:0 0 auto;opacity:.6;
+  cursor:pointer;border:1px solid transparent;transition:opacity .15s}
+.thumbs img:hover{opacity:.9}
+.thumbs img.on{opacity:1;border-color:var(--ink)}
+.badge{display:inline-block;font-size:11.5px;background:var(--accent);color:#fff;
+  border-radius:2px;padding:3px 9px;letter-spacing:.04em;margin-bottom:12px}
+.facts{display:flex;align-items:baseline;gap:16px;flex-wrap:wrap;margin:14px 0 16px}
+.price{font-family:var(--serif);font-size:26px;letter-spacing:-.01em}
+.price .cur{font-size:13px;color:var(--muted);margin-right:3px}
+.price .unit{font-family:var(--sans);font-size:12px;color:var(--muted);margin-left:6px}
+.rating{font-size:13px;color:var(--ink2)}
+.rating b{font-family:var(--serif);font-size:15px}
+.dl{display:grid;grid-template-columns:82px 1fr;gap:7px 16px;margin:0 0 18px;font-size:13.5px}
+.dl dt{color:var(--muted);font-size:12.5px}
+.dl dd{margin:0;color:var(--ink2)}
+ul.pl{list-style:none;margin:0;padding:0;font-size:13.5px;color:var(--ink2)}
+ul.pl li{display:flex;gap:9px;margin-bottom:5px}
+ul.pl .m{color:var(--accent);flex:0 0 auto}
+ul.pl.neg li{color:var(--muted)}
+ul.pl.neg .m{color:var(--muted)}
+.tag{display:inline-block;font-size:11.5px;color:var(--muted);background:var(--accent-soft);
+  border-radius:2px;padding:2px 8px;margin:0 6px 6px 0}
+
+/* table */
+table{width:100%;border-collapse:collapse;font-size:13.5px}
+th,td{text-align:left;padding:11px 14px 11px 0;border-bottom:1px solid var(--line);vertical-align:baseline}
+th{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:600;
+  border-bottom-color:var(--line2)}
+td.r,th.r{text-align:right;padding-right:0}
+tbody tr:hover{background:var(--card)}
+tbody td:first-child{color:var(--muted);font-family:var(--serif)}
+tbody td.p{font-family:var(--serif);font-size:14.5px;white-space:nowrap}
+.tnote{color:var(--muted);font-size:12.5px;margin:14px 0 0}
+
+/* cards grid */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:22px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);
+  overflow:hidden;display:flex;flex-direction:column}
+.card .shot{background:#EAE7E1;aspect-ratio:4/3;overflow:hidden}
+.card .shot img{width:100%;height:100%;object-fit:cover;transition:transform .3s}
+.card:hover .shot img{transform:scale(1.02)}
+.card .in{padding:16px 17px 18px;flex:1;display:flex;flex-direction:column}
+.card h3{font-size:16px;margin:0 0 6px;line-height:1.4}
+.card .meta{font-size:12.5px;color:var(--muted);margin:0 0 10px}
+.card p{font-size:13.5px;color:var(--ink2);margin:0 0 10px}
+.card .foot{margin-top:auto;font-size:12.5px;color:var(--muted);display:flex;gap:12px;flex-wrap:wrap}
+.pill{display:inline-block;font-size:11.5px;border:1px solid var(--line2);border-radius:999px;
+  padding:2px 9px;color:var(--ink2);margin:0 6px 6px 0}
+
+/* callout */
+.callout{background:var(--warn-soft);border-left:3px solid var(--warn);border-radius:var(--r);
+  padding:15px 18px;font-size:13.5px;color:var(--ink2);margin:0 0 18px}
+.callout b{color:var(--ink)}
+.note{background:var(--accent-soft);border-left:3px solid var(--accent);border-radius:var(--r);
+  padding:15px 18px;font-size:13.5px;color:var(--ink2);margin:0 0 18px}
+
+/* tips accordion */
+details{background:var(--card);border:1px solid var(--line);border-radius:var(--r);
+  margin-bottom:12px;overflow:hidden}
+details summary{padding:15px 18px;cursor:pointer;font-weight:600;font-size:14.5px;list-style:none;
+  display:flex;justify-content:space-between;align-items:center;gap:12px}
+details summary::-webkit-details-marker{display:none}
+details summary::after{content:"＋";color:var(--muted);font-weight:400}
+details[open] summary::after{content:"−"}
+details .dbody{padding:0 18px 18px;font-size:13.5px;color:var(--ink2);border-top:1px solid var(--line)}
+details .dbody h4{margin:16px 0 8px;font-size:13px;color:var(--ink)}
+details .dbody ul{margin:0 0 12px;padding-left:20px}
+details .dbody li{margin-bottom:5px}
+details .dbody code{background:var(--paper);border:1px solid var(--line);border-radius:2px;
+  padding:1px 6px;font-size:12.5px}
+
+footer{margin-top:70px;border-top:1px solid var(--line);padding:26px 0 70px;font-size:12.5px;color:var(--muted)}
+footer p{margin:0 0 6px}
+footer a{color:var(--accent);border-bottom:1px solid currentColor;text-decoration:none}
+
+@media (max-width:860px){
+  .wrap{padding-left:20px;padding-right:20px}
+  .hero{padding-top:38px}
+  .topbar{position:static}
+  .hotel{grid-template-columns:1fr;gap:22px}
+  .nav{width:100%;overflow-x:auto;flex-wrap:nowrap;scrollbar-width:none;padding-bottom:2px}
+  .nav::-webkit-scrollbar{display:none}
+  .nav a{flex:0 0 auto}
+  .grid{grid-template-columns:1fr}
+  section{padding-top:42px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+
+</head>
+<body>
+
+<header class="topbar">
+  <div class="wrap">
+    <div class="brand">胡志明 5 天 <span class="dot">·</span> <em style="font-style:normal;color:var(--muted);font-weight:400">2026.10.26–30</em></div>
+    <nav class="nav"><a href="index.html">主頁</a><a href="attractions.html">景點</a><a href="food.html" aria-current="page">美食</a><a href="tips.html">注意事項</a></nav>
+    <div class="trip">住 <b>Centoria Hotel</b>｜Go Vap 區</div>
+  </div>
+</header>
+
+
+<main class="wrap">
+  <div class="hero">
+    <p class="eyebrow">Food · 57 篇筆記</p>
+    <h1>美食 <span>· 精選 12 家 + 完整清單</span></h1>
+    <p class="lede">從 vault 的 57 篇美食筆記挑出 12 家代表作，
+    另外附上完整清單（依類型分組），想吃什麼自己翻。</p>
+  </div>
+
+  <section>
+    <h2>精選 12 家</h2>
+    <div class="grid">
+      <article class="card">
+        <div class="shot"><img src="images/food_最紅法棍_Bánh_Mì_Huynh_Hoa.jpg" alt="最紅法棍｜Bánh Mì Huynh Hoa" loading="lazy"></div>
+        <div class="in">
+          <span class="pill">法棍</span>
+          <h3 style="font-size:15.5px">最紅法棍｜Bánh Mì Huynh Hoa</h3>
+          <p style="margin:6px 0 10px">胡志明最有名的法棍，排隊名店，料多到滿出來</p>
+          <div class="foot"><span>⭐ 4.1（7615 評）| ☎ 0338 044 646</span></div>
+          
+        </div>
+      </article>
+      <article class="card">
+        <div class="shot"><img src="images/food_河粉_Phở_Hòa_Pasteur.jpg" alt="河粉｜Phở Hòa Pasteur" loading="lazy"></div>
+        <div class="in">
+          <span class="pill">河粉</span>
+          <h3 style="font-size:15.5px">河粉｜Phở Hòa Pasteur</h3>
+          <p style="margin:6px 0 10px">老字號河粉，湯頭清甜，觀光客與本地人都愛</p>
+          <div class="foot"><span>🕐 每日 05:30 – 22:30</span></div>
+          
+        </div>
+      </article>
+      <article class="card">
+        <div class="shot"><img src="images/food_24小時河粉_Phố_Quỳnh.jpg" alt="24小時河粉｜Phố Quỳnh" loading="lazy"></div>
+        <div class="in">
+          <span class="pill">河粉</span>
+          <h3 style="font-size:15.5px">24小時河粉｜Phố Quỳnh</h3>
+          <p style="margin:6px 0 10px">24 小時營業，宵夜救星</p>
+          <div class="foot"><span>🕐 24 小時營業</span><span>⭐ 4.1（518 評）| ☎ 0968 500 197</span></div>
+          
+        </div>
+      </article>
+      <article class="card">
+        <div class="shot"><img src="images/food_Pizza_4P_s_越南必吃手工披薩與螃蟹奶油麵.jpg" alt="Pizza 4P's：越南必吃手工披薩與螃蟹奶油麵" loading="lazy"></div>
+        <div class="in">
+          <span class="pill">異國</span>
+          <h3 style="font-size:15.5px">Pizza 4P's：越南必吃手工披薩與螃蟹奶油麵</h3>
+          <p style="margin:6px 0 10px">越南必吃手工披薩，螃蟹奶油麵 5 星推薦</p>
+          <div class="foot"><span>⭐ 4.9（30,757 則）</span></div>
+          
+        </div>
+      </article>
+      <article class="card">
+        <div class="shot"><img src="images/food_米其林越南菜餐廳_Bếp_Mẹ_Ỉn.jpg" alt="米其林越南菜餐廳｜Bếp Mẹ Ỉn" loading="lazy"></div>
+        <div class="in">
+          <span class="pill">米其林</span>
+          <h3 style="font-size:15.5px">米其林越南菜餐廳｜Bếp Mẹ Ỉn</h3>
+          <p style="margin:6px 0 10px">米其林推薦的越南家常菜</p>
+          <div class="foot"><span>🕐 每日 10:30 – 22:30</span></div>
+          
+        </div>
+      </article>
+      <article class="card">
+        <div class="shot"><img src="images/food_軟殼蟹米其林_Quán_Thuý_94.jpg" alt="軟殼蟹米其林｜Quán Thuý 94" loading="lazy"></div>
+        <div class="in">
+          <span class="pill">米其林</span>
+          <h3 style="font-size:15.5px">軟殼蟹米其林｜Quán Thuý 94</h3>
+          <p style="margin:6px 0 10px">軟殼蟹招牌，米其林必比登</p>
+          <div class="foot"><span>⭐ 3.9（2800 評）| ☎ 028 3910 1062</span></div>
+          
+        </div>
+      </article>
+      <article class="card">
+        <div class="shot"><img src="images/food_亞洲Top3咖啡_The_Workshop_Coff.jpg" alt="亞洲Top3咖啡｜The Workshop Coffee" loading="lazy"></div>
+        <div class="in">
+          <span class="pill">咖啡</span>
+          <h3 style="font-size:15.5px">亞洲Top3咖啡｜The Workshop Coffee</h3>
+          <p style="margin:6px 0 10px">亞洲 Top3 咖啡館，工業風空間</p>
+          <div class="foot"><span>⭐ 4.4（4108 評）| ☎ 028 3824 6801</span></div>
+          
+        </div>
+      </article>
+      <article class="card">
+        <div class="shot"><img src="images/food_百年老宅咖啡店_Dabao_Concept.jpg" alt="百年老宅咖啡店｜Dabao Concept" loading="lazy"></div>
+        <div class="in">
+          <span class="pill">咖啡</span>
+          <h3 style="font-size:15.5px">百年老宅咖啡店｜Dabao Concept</h3>
+          <p style="margin:6px 0 10px">百年老宅改建，庭園咖啡</p>
+          <div class="foot"><span>🕐 每日 09:00 – 22:00</span></div>
+          
+        </div>
+      </article>
+      <article class="card">
+        <div class="shot"><img src="images/food_蛋咖啡早餐_Little_Hà_Nội.jpg" alt="蛋咖啡早餐｜Little Hà Nội" loading="lazy"></div>
+        <div class="in">
+          <span class="pill">咖啡</span>
+          <h3 style="font-size:15.5px">蛋咖啡早餐｜Little Hà Nội</h3>
+          <p style="margin:6px 0 10px">河內名物蛋咖啡，早餐時段最對味</p>
+          <div class="foot"><span>🕐 每日 07:00 – 21:30</span></div>
+          
+        </div>
+      </article>
+      <article class="card">
+        <div class="shot"><img src="images/food_老賴羊肉火鍋_廣東梅州第五代的胡志明老店.jpg" alt="老賴羊肉火鍋：廣東梅州第五代的胡志明老店" loading="lazy"></div>
+        <div class="in">
+          <span class="pill">火鍋</span>
+          <h3 style="font-size:15.5px">老賴羊肉火鍋：廣東梅州第五代的胡志明老店</h3>
+          <p style="margin:6px 0 10px">梅州華僑第五代經營，羊肉料理傳承兩代</p>
+          <div class="foot"><span>⭐ ️⭐️⭐️⭐️</span></div>
+          
+        </div>
+      </article>
+      <article class="card">
+        
+        <div class="in">
+          <span class="pill">燒烤</span>
+          <h3 style="font-size:15.5px">胡志明暗巷巴西烤肉：ALEGRIA 15種肉吃到飽</h3>
+          <p style="margin:6px 0 10px">暗巷巴西烤肉吃到飽，比吃牛排還划算</p>
+          <div class="foot"></div>
+          
+        </div>
+      </article>
+      <article class="card">
+        <div class="shot"><img src="images/food_日式炭火燒肉_5KU_Station.jpg" alt="日式炭火燒肉｜5KU Station" loading="lazy"></div>
+        <div class="in">
+          <span class="pill">燒烤</span>
+          <h3 style="font-size:15.5px">日式炭火燒肉｜5KU Station</h3>
+          <p style="margin:6px 0 10px">日式炭火燒肉，本地人氣店</p>
+          <div class="foot"><span>🕐 每日 16:00 – 04:00</span></div>
+          
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section>
+    <h2>完整清單（57 篇）</h2>
+    <p class="tnote" style="margin:0 0 16px">點開分類查看。這些都在 Obsidian vault 有完整筆記。</p>
+    <details><summary>其他（13）</summary><div class='dbody'><ul><li>Bartels｜Sourdough Brunch</li><li>“越”美丽- Day11 鲜活海鲜随便吃</li><li>亞洲 Top50 酒吧｜STIR</li><li>炭烤豬排飯｜Cơm tấm Nguyễn Văn Cù</li><li>牛肉鐵板麵包｜Bò Né Bà Nũi</li><li>石鍋咖喱粉｜BẾP ÔNG CẬU</li><li>老賴羊肉火鍋：廣東梅州第五代的胡志明老店</li><li>胡志明石鍋牛排粉</li><li>越南限定辣醬炸雞｜Jollibee</li><li>这家餐厅让我对胡志明🇻🇳念念不忘</li><li>郵輪碼頭對面牛肉麵小店</li><li>雞肉糯米飯｜Xui Ga Number One</li><li>麵包店｜Breadventure</li></ul></div></details><details><summary>咖啡（8）</summary><div class='dbody'><ul><li>亞洲Top3咖啡｜The Workshop Coffee</li><li>咖啡廳｜Hummingbird Coffee</li><li>安靜咖啡店｜Nicotin Tearoom & Coffee</li><li>復古咖啡店｜Tiệm cà phê Linh</li><li>日系咖啡店｜Machiya Cafe</li><li>本地連鎖咖啡店｜Công Cà Phê</li><li>百年老宅咖啡店｜Dabao Concept</li><li>蛋咖啡早餐｜Little Hà Nội</li></ul></div></details><details><summary>海鮮（7）</summary><div class='dbody'><ul><li>Pizza 4P's：越南必吃手工披薩與螃蟹奶油麵</li><li>海鮮大排檔｜CHỢ THỰC PHẨM 79</li><li>海鮮小吃街｜Ben Nghe Street Food</li><li>胡志明探店🔥人均60➕活蝦自助</li><li>蟹肉粉｜Bánh Canh Cua 87</li><li>蟹黃火鍋｜Nha Tu</li><li>軟殼蟹米其林｜Quán Thuý 94</li></ul></div></details><details><summary>甜點 / 冰品（6）</summary><div class='dbody'><ul><li>抹茶布丁｜Garden Kisses</li><li>椰子冰淇淋｜Codonut</li><li>水果甜品店｜Sinh Tố 167</li><li>糖水店｜Ngọc Thạch Quán Q1</li><li>街頭桃子冰茶</li><li>鮮榨奶昔｜Five Boys Number One Smoothies</li></ul></div></details><details><summary>河粉 / 麵食（5）</summary><div class='dbody'><ul><li>24小時河粉｜Phố Quỳnh</li><li>外賣河粉｜Pho Ông Cát Gia Truyền Since 1988｜</li><li>河粉｜Phở Hòa Pasteur</li><li>石鍋牛肉河粉｜Phở Việt Nam</li><li>連鎖河粉店｜Phở 24</li></ul></div></details><details><summary>米其林 / Fine Dining（4）</summary><div class='dbody'><ul><li>Fine Dining｜Little Bear Bar</li><li>米其林法餐｜La Fontaine</li><li>米其林越南菜餐廳｜Bếp Mẹ Ỉn</li><li>胡志明平價米其林小店</li></ul></div></details><details><summary>燒烤（4）</summary><div class='dbody'><ul><li>外賣燒烤｜Quán Chị Sinh</li><li>烤肉｜Quán Ăn Cô Liêng</li><li>胡志明暗巷巴西烤肉：ALEGRIA 15種肉吃到飽</li><li>越南燒烤（胡志明平盛郡）｜Mơ Nướng</li></ul></div></details><details><summary>法棍 Bánh Mì（4）</summary><div class='dbody'><ul><li>最紅法棍｜Bánh Mì Huynh Hoa</li><li>街邊法棍早餐｜Bánh Mì Hòa Mã</li><li>路邊攤法棍｜Bánh Mì Hòa Mã</li><li>路邊早餐店｜Bánh mì chảo Dì Nữ</li></ul></div></details><details><summary>越南菜（3）</summary><div class='dbody'><ul><li>精緻越南菜｜Restaurant Hương Lai</li><li>越南菜｜Mặn Mòi（Thảo Điền）</li><li>越式餐廳｜Propaganda Vietnamese Bistro</li></ul></div></details><details><summary>自助 / 吃到飽（2）</summary><div class='dbody'><ul><li>胡志明市海鲜自助 POSEIDON 波塞冬</li><li>胡志明自助餐，70w 一個人，店名是叫九雲龍</li></ul></div></details><details><summary>日式（1）</summary><div class='dbody'><ul><li>日式炭火燒肉｜5KU Station</li></ul></div></details>
+  </section>
+</main>
+
+
+<footer>
+  <div class="wrap">
+    <p>胡志明 5 天攻略 · 以 Centoria Hotel By Urban B（Go Vap 區）為據點的個人行程筆記</p>
+    <p>行程 2026.10.26–30（4 晚）· 資料來源：Obsidian 筆記、Booking.com、Google Maps</p>
+    <p>最後更新 2026-09-22</p>
+  </div>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>注意事項 · 胡志明 5 天攻略</title>
+<meta name="description" content="出發前必讀：越南電子入境卡填寫教學、出行必備清單、預約提醒。">
+<style>
+*,*::before,*::after{box-sizing:border-box}
+:root{
+  --paper:#F6F4F0; --card:#FFFFFF; --ink:#171614; --ink2:#3A3833; --muted:#7C776E;
+  --line:#E4DFD6; --line2:#CFC9BD; --accent:#2C5340; --accent-soft:#E9EFE9;
+  --warn:#8A5A1E; --warn-soft:#F7EFE2;
+  --sans:"PingFang TC","Microsoft JhengHei","Noto Sans TC","Hiragino Sans TC",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --serif:Georgia,"Times New Roman","Songti TC","Source Han Serif TC",serif;
+  --maxw:1100px; --r:3px;
+}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);
+  font-size:15px;line-height:1.72;text-wrap:pretty;-webkit-font-smoothing:antialiased}
+img{display:block;max-width:100%}
+a{color:inherit}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px}
+.num{font-family:var(--serif);font-variant-numeric:tabular-nums}
+
+/* topbar + nav */
+.topbar{position:sticky;top:0;z-index:30;background:rgba(246,244,240,.93);
+  border-bottom:1px solid var(--line);backdrop-filter:saturate(120%) blur(6px)}
+.topbar .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;
+  min-height:58px;padding-top:8px;padding-bottom:8px;flex-wrap:wrap}
+.brand{font-weight:600;letter-spacing:.01em;font-size:14.5px}
+.brand .dot{color:var(--muted);margin:0 6px}
+.nav{display:flex;gap:4px;flex-wrap:wrap}
+.nav a{font-size:13px;color:var(--muted);text-decoration:none;padding:5px 11px;border-radius:999px;
+  transition:background .15s,color .15s}
+.nav a:hover{color:var(--ink);background:var(--card)}
+.nav a[aria-current="page"]{color:#fff;background:var(--ink)}
+.trip{font-size:12.5px;color:var(--muted);letter-spacing:.02em}
+.trip b{color:var(--ink);font-weight:600;font-family:var(--serif)}
+
+/* hero */
+.hero{padding-top:60px;padding-bottom:6px}
+.eyebrow{font-family:var(--serif);font-size:11px;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--muted);margin:0 0 20px}
+h1{font-size:clamp(28px,4.6vw,46px);line-height:1.24;letter-spacing:-.02em;margin:0 0 26px;font-weight:700;max-width:780px}
+h1 span{color:var(--muted);font-weight:400}
+.lede{margin:0;color:var(--ink2);font-size:14.5px;max-width:64ch}
+.lede b{font-weight:600;color:var(--ink)}
+
+/* section */
+section{padding-top:56px}
+h2{font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);
+  font-weight:600;margin:0 0 20px;padding-bottom:14px;border-bottom:1px solid var(--line2)}
+h3{font-size:19px;font-weight:600;letter-spacing:-.01em;margin:0 0 6px}
+p{margin:0 0 12px}
+
+/* hotel card */
+.hotel{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:30px;align-items:start}
+.hotel .shot{background:#EAE7E1;border-radius:var(--r);overflow:hidden;aspect-ratio:4/3}
+.hotel .shot img{width:100%;height:100%;object-fit:cover}
+.thumbs{display:flex;gap:8px;overflow-x:auto;padding-top:10px;scrollbar-width:thin}
+.thumbs img{width:70px;height:52px;object-fit:cover;border-radius:2px;flex:0 0 auto;opacity:.6;
+  cursor:pointer;border:1px solid transparent;transition:opacity .15s}
+.thumbs img:hover{opacity:.9}
+.thumbs img.on{opacity:1;border-color:var(--ink)}
+.badge{display:inline-block;font-size:11.5px;background:var(--accent);color:#fff;
+  border-radius:2px;padding:3px 9px;letter-spacing:.04em;margin-bottom:12px}
+.facts{display:flex;align-items:baseline;gap:16px;flex-wrap:wrap;margin:14px 0 16px}
+.price{font-family:var(--serif);font-size:26px;letter-spacing:-.01em}
+.price .cur{font-size:13px;color:var(--muted);margin-right:3px}
+.price .unit{font-family:var(--sans);font-size:12px;color:var(--muted);margin-left:6px}
+.rating{font-size:13px;color:var(--ink2)}
+.rating b{font-family:var(--serif);font-size:15px}
+.dl{display:grid;grid-template-columns:82px 1fr;gap:7px 16px;margin:0 0 18px;font-size:13.5px}
+.dl dt{color:var(--muted);font-size:12.5px}
+.dl dd{margin:0;color:var(--ink2)}
+ul.pl{list-style:none;margin:0;padding:0;font-size:13.5px;color:var(--ink2)}
+ul.pl li{display:flex;gap:9px;margin-bottom:5px}
+ul.pl .m{color:var(--accent);flex:0 0 auto}
+ul.pl.neg li{color:var(--muted)}
+ul.pl.neg .m{color:var(--muted)}
+.tag{display:inline-block;font-size:11.5px;color:var(--muted);background:var(--accent-soft);
+  border-radius:2px;padding:2px 8px;margin:0 6px 6px 0}
+
+/* table */
+table{width:100%;border-collapse:collapse;font-size:13.5px}
+th,td{text-align:left;padding:11px 14px 11px 0;border-bottom:1px solid var(--line);vertical-align:baseline}
+th{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:600;
+  border-bottom-color:var(--line2)}
+td.r,th.r{text-align:right;padding-right:0}
+tbody tr:hover{background:var(--card)}
+tbody td:first-child{color:var(--muted);font-family:var(--serif)}
+tbody td.p{font-family:var(--serif);font-size:14.5px;white-space:nowrap}
+.tnote{color:var(--muted);font-size:12.5px;margin:14px 0 0}
+
+/* cards grid */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:22px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);
+  overflow:hidden;display:flex;flex-direction:column}
+.card .shot{background:#EAE7E1;aspect-ratio:4/3;overflow:hidden}
+.card .shot img{width:100%;height:100%;object-fit:cover;transition:transform .3s}
+.card:hover .shot img{transform:scale(1.02)}
+.card .in{padding:16px 17px 18px;flex:1;display:flex;flex-direction:column}
+.card h3{font-size:16px;margin:0 0 6px;line-height:1.4}
+.card .meta{font-size:12.5px;color:var(--muted);margin:0 0 10px}
+.card p{font-size:13.5px;color:var(--ink2);margin:0 0 10px}
+.card .foot{margin-top:auto;font-size:12.5px;color:var(--muted);display:flex;gap:12px;flex-wrap:wrap}
+.pill{display:inline-block;font-size:11.5px;border:1px solid var(--line2);border-radius:999px;
+  padding:2px 9px;color:var(--ink2);margin:0 6px 6px 0}
+
+/* callout */
+.callout{background:var(--warn-soft);border-left:3px solid var(--warn);border-radius:var(--r);
+  padding:15px 18px;font-size:13.5px;color:var(--ink2);margin:0 0 18px}
+.callout b{color:var(--ink)}
+.note{background:var(--accent-soft);border-left:3px solid var(--accent);border-radius:var(--r);
+  padding:15px 18px;font-size:13.5px;color:var(--ink2);margin:0 0 18px}
+
+/* tips accordion */
+details{background:var(--card);border:1px solid var(--line);border-radius:var(--r);
+  margin-bottom:12px;overflow:hidden}
+details summary{padding:15px 18px;cursor:pointer;font-weight:600;font-size:14.5px;list-style:none;
+  display:flex;justify-content:space-between;align-items:center;gap:12px}
+details summary::-webkit-details-marker{display:none}
+details summary::after{content:"＋";color:var(--muted);font-weight:400}
+details[open] summary::after{content:"−"}
+details .dbody{padding:0 18px 18px;font-size:13.5px;color:var(--ink2);border-top:1px solid var(--line)}
+details .dbody h4{margin:16px 0 8px;font-size:13px;color:var(--ink)}
+details .dbody ul{margin:0 0 12px;padding-left:20px}
+details .dbody li{margin-bottom:5px}
+details .dbody code{background:var(--paper);border:1px solid var(--line);border-radius:2px;
+  padding:1px 6px;font-size:12.5px}
+
+footer{margin-top:70px;border-top:1px solid var(--line);padding:26px 0 70px;font-size:12.5px;color:var(--muted)}
+footer p{margin:0 0 6px}
+footer a{color:var(--accent);border-bottom:1px solid currentColor;text-decoration:none}
+
+@media (max-width:860px){
+  .wrap{padding-left:20px;padding-right:20px}
+  .hero{padding-top:38px}
+  .topbar{position:static}
+  .hotel{grid-template-columns:1fr;gap:22px}
+  .nav{width:100%;overflow-x:auto;flex-wrap:nowrap;scrollbar-width:none;padding-bottom:2px}
+  .nav::-webkit-scrollbar{display:none}
+  .nav a{flex:0 0 auto}
+  .grid{grid-template-columns:1fr}
+  section{padding-top:42px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+
+</head>
+<body>
+
+<header class="topbar">
+  <div class="wrap">
+    <div class="brand">胡志明 5 天 <span class="dot">·</span> <em style="font-style:normal;color:var(--muted);font-weight:400">2026.10.26–30</em></div>
+    <nav class="nav"><a href="index.html">主頁</a><a href="attractions.html">景點</a><a href="food.html">美食</a><a href="tips.html" aria-current="page">注意事項</a></nav>
+    <div class="trip">住 <b>Centoria Hotel</b>｜Go Vap 區</div>
+  </div>
+</header>
+
+
+<main class="wrap">
+  <div class="hero">
+    <p class="eyebrow">Before You Go · 出發前必讀</p>
+    <h1>注意事項 <span>· 3 件事先辦好</span></h1>
+    <p class="lede">越南「會懲罰每一個不提前預約的人」。
+    出發前務必完成：<b>電子入境卡</b>（抵達前填）、<b>簽證</b>、<b>行李清單</b>。</p>
+  </div>
+
+  <section>
+    <h2>① 越南電子入境卡</h2>
+    <div class="note">
+      官網 <b>prearrival.immigration.gov.vn</b> —— 越早填越省入境排隊時間，記得<b>抵達前</b>填完。
+    </div>
+    <details open>
+      <summary>填寫步驟（保姆級教學）</summary>
+      <div class="dbody"><p>🇻🇳 電子卡填寫官網：<b>prearrival.immigration.gov.vn</b>（越早填越省入境排隊時間，記得抵達前填完）</p>
+<h4>① 進入官網</h4>
+<p>開啟 <code>prearrival.immigration.gov.vn</code>，頁面右上角語言選單<b>切換成中文</b>，點藍色按鈕「<b>創建並提交行前信息</b>」（Create & Submit Pre-arrival）。</p>
+<h4>② 輸入驗證碼</h4>
+<p>出現驗證碼彈窗，輸入圖中顯示的驗證碼（如 5XAZA），點「核實」。</p>
+<h4>③ 選擇國籍</h4>
+<p>國籍選 <b>China</b>（下拉選單選中國）。</p>
+<h4>④ 填寫乘客信息</h4>
+<ul><li>預計到達日期：選抵達越南的日期</li>
+<li><b>上傳護照照片</b>（上傳後護照號碼等資訊會自動填好）</li>
+<li>護照類型：P – Popular Passport</li>
+<li>核對護照號碼、到期日期</li>
+<li>性別、姓氏、名字（<b>姓氏要和護照一致</b>）</li>
+<li>出生日期（注意格式）</li>
+<li>國籍：China、國家代碼 (+86)</li>
+</ul><h4>⑤ 填寫簽證信息（只要填帶 * 的部分）</h4>
+<ul><li>簽證類型：電子簽 / 落地簽 / 另紙簽（對應數字輸入框）</li>
+<li>簽證號碼：<b>另紙簽看紅色數字</b></li>
+<li>簽發日期、到期日期（看簽證上右邊日期列）</li>
+<li>若幫同行人填寫，點「添加乘客 +」重複步驟</li>
+<li>填寫簽證號碼可啟用機場自動閘門服務</li>
+</ul><h4>⑥ 電子郵件＆同行人關係</h4>
+<ul><li>填自己的郵箱號</li>
+<li>「與領頭乘客的關係」：幫父母填就選父母、幫孩子填就選子女（配偶/子女/父母/兄弟姐妹/祖父母）</li>
+<li><b>沒幫同行人填寫信息的話，可以直接跳過這頁</b></li>
+</ul><h4>⑦ 旅行信息</h4>
+<ul><li>抵達越南前的出發地點：從中國出發就選 <b>China</b></li>
+<li>旅行目的：選「旅遊」</li>
+<li>旅行方式：空運（飛機）</li>
+<li>航班代碼：填航班號</li>
+<li>邊境口岸：選抵達機場</li>
+</ul><p>  - <b>HAN</b> 河內｜<b>DAD</b> 峴港｜<b>SGN</b> 胡志明｜<b>PQC</b> 富國島｜<b>CXR</b> 芽莊金蘭</p>
+<h4>⑧ 航班＆住宿</h4>
+<ul><li>航班號</li>
+<li>入境口岸（如 DAD 峴港國際機場）</li>
+<li>越南住宿類型（如「住宅」）+ 住宿地址（<b>複製自己訂的酒店地址</b>）</li>
+<li>預計離開越南的日期</li>
+<li>點「<b>審核並提交</b>」</li>
+</ul><h4>⑨ 提交成功！保存二維碼</h4>
+<ul><li>頁面顯示「您的提交成功！」</li>
+<li><b>截圖保存好二維碼</b>（之後查詢申報信息用）</li>
+<li>下載 PDF 格式的行前卡</li>
+<li>確認函及出入境（DE）號碼會發到你的郵箱，越南逗留期間可下載/打印副本</li>
+</ul><h4>📌 一句話速覽</h4>
+<p>官網 <code>prearrival.immigration.gov.vn</code>（切中文）→ 創建提交 → 驗證碼 → 國籍 China → 上傳護照＋填乘客信息 → 簽證信息（另紙簽看紅色數字）→ 郵箱/同行人 → 旅行信息（航班＋抵達機場）→ 住宿地址 → 提交後<b>截圖保存二維碼＋下載 PDF</b>！</p></div>
+    </details>
+  </section>
+
+  <section>
+    <h2>② 出行必備清單</h2>
+    <details open>
+      <summary>證件 / 錢 / 電子 / 穿搭 / 過濾花灑</summary>
+      <div class="dbody"><p>刚从越南回来，整理了一份超全出行必备清单，大家照着收行李就行啦~越南玩得开心</p>
+<h4>🧾 證件＆簽證</h4>
+<ul><li>护照（有效期 > 6 个月）</li>
+<li>越南签证/另纸签（打印 2 份）</li>
+<li>护照+签证复印件（与原件分开放）</li>
+<li>机票行程单、酒店预订单（打印/存手机）</li>
+<li>2 寸白底照片（备用）</li>
+<li>旅行保险单（电子版+纸质）</li>
+</ul><h4>💰 錢＆支付</h4>
+<ul><li>现金（少量备用）</li>
+<li>越南盾（当地兑换更划算）</li>
+<li>Visa/Mastercard 银行卡</li>
+<li>手机开通境外支付（没 visa 的，打车可用滴滴）</li>
+</ul><h4>📱 電子＆通訊</h4>
+<ul><li>越南电话卡（Viettel 信号稳）</li>
+<li>充电线、充电头</li>
+<li>充电宝（≤ 2 万 mAh）</li>
+<li>转换插头（德标两孔）</li>
+<li>耳机、自拍杆</li>
+</ul><h4>👕 穿搭＆日用品</h4>
+<ul><li>沙滩裙、短袖等衣物</li>
+<li>湿巾、洗漱用品</li>
+<li>防晒霜、防蚊液</li>
+</ul><h4>🚿 過濾花灑（必帶！）</h4>
+<p style='color:var(--muted);font-size:13px'>东南亚水质是真的差！富国岛用了滤芯 1 次就明显脏了，非常建议提前买</p>
+<p style='color:var(--muted);font-size:13px'>越南的水质不敢直接洗，洗一次澡滤芯就黄了，还有很多杂质泥沙，容易因为水质问题皮肤敏痒，建议多备几个好替换</p>
+<p>选了国内的强抑菌花洒（百沐野），相对 pp 芯过滤会干净，墙裂推荐！</p>
+<h4>💊 常用藥品</h4>
+<ul><li>肠胃药（止泻、消化不良）</li>
+<li>感冒药、退烧药</li>
+<li>晕车/晕船药</li>
+<li>创可贴、消毒棉片</li>
+<li>个人常备药</li>
+</ul><h4>📲 必下 App</h4>
+<ul><li>Google Maps（找路、找餐厅）</li>
+<li>Google 翻译（方便交流）</li>
+<li>Grab（打车 + 叫外卖）</li>
+<li>Agoda、Booking、Klook（订酒店、定一日游，一般比较便宜，房源更全）</li>
+</ul><h4>⚠️ 出行安全小提醒</h4>
+<ul><li>证件、现金分开放</li>
+<li>手机背包贴身放（防飞车抢夺）</li>
+<li>不随意给海关小费</li>
+<li>存好当地紧急电话</li>
+</ul><h4>📌 一句話速覽</h4>
+<p>行李照清單收：證件簽證印兩份＋越南盾當地換＋Viettel 電話卡＋德標轉接頭＋<b>過濾花灑必帶</b>（越南水質差）＋腸胃藥＋Grab/Google Maps，證件現金分開放防飛車搶！</p></div>
+    </details>
+  </section>
+
+  <section>
+    <h2>③ 預約提醒（別當 P 人）</h2>
+    <details>
+      <summary>越南熱門景點、必吃美食、行程速覽</summary>
+      <div class="dbody"><p>大家好，我是越南中文导游阿胜🙋</p>
+<p>越南的美景和美食真的会惩罚每一个不做计划的P人😢</p>
+<p>真的整理了一份保姆级越南攻略，求求大家去之前看看，少走弯路，不被坑</p>
+<h4>🌆 越南热门景点</h4>
+<ul><li>📍 <b>河内</b>：火车街、三十六行古街、还剑湖、巴亭广场等</li>
+<li>📍 <b>胡志明</b>：中央邮局、新定教堂、邮局、咖啡公寓、胡志明美术馆、范五老街等</li>
+<li>📍 <b>芽庄</b>：芽庄大教堂、婆那加占婆塔、钟屿石岬角、珍珠岛游乐园</li>
+<li>📍 <b>美奈</b>：白沙丘、红沙丘、美奈渔村、仙女溪</li>
+<li>📍 <b>富国岛</b>：日落小镇、日落沙滩、珍珠乐园、富国大世界</li>
+</ul><h4>🍽️ 越南本地美食</h4>
+<ul><li>🔥 <b>河粉（Phở）</b>：越南国民美食，汤头清甜，搭配嫩牛肉或鸡肉，佐以香菜、青柠和辣椒，风味独特。</li>
+<li>🔥 <b>春卷（Gỏi cuốn）</b>：米纸包裹鲜虾、猪肉、蔬菜和米粉，蘸鱼露酱汁，清爽可口。</li>
+<li>🔥 <b>法棍三明治（Bánh mì）</b>：殖民文化融合的经典，脆皮法棍夹腌肉、黄瓜、香菜和辣椒，口感丰富。</li>
+<li>🔥 <b>越南咖啡（Cà phê sữa đá）</b>：浓郁滴漏咖啡加炼乳，冰镇后醇香甜美，是消暑必备</li>
+</ul><h4>📍 越南游玩行程速览</h4>
+<ul><li><b>D1</b> 飞抵芽庄，躺平入住，开启度假模式✨</li>
+<li><b>D2</b> 出海跳岛！黑岛 / 珊瑚岛 / 索伊岛，浮潜看海爽翻🌊</li>
+<li><b>D3</b> 打卡芽庄大教堂 & 天依女神庙，冲去美奈白沙丘追日落🌄</li>
+<li><b>D4</b> 美奈渔村 / 红沙丘打卡，晚上直达胡志明，城市感拉满</li>
+<li><b>D5</b> 红教堂 + 战争博物馆逛吃，随后返程</li>
+</ul><h4>🖼️ 圖片重點</h4>
+<h4>景點預約資訊（img_1）</h4>
+<p>河內大教堂：免費、不用約、08:00–17:00｜占婆塔：40,000đ、<b>提前 1 天預約</b>等——各景點是否免費/需預約一目了然。</p>
+<h4>行前準備（img_2）</h4>
+<ul><li>貨幣：需換越南盾，建議機場或市區換</li>
+<li>氣溫：全年平均 22–30℃，帶輕薄夏裝＋防曬</li>
+<li>富國島看日落：<b>選西部</b>，東邊看不到</li>
+<li>交通：少紅綠燈、多摩托車，過馬路要小心</li>
+<li>電子簽：落地換紙簽，<b>出境入境都用</b></li>
+<li>電話卡：用 <b>vinaphone</b>（某寶預訂）</li>
+<li>越南盾計數：以 k 為單位（65000 = 65k，換人民幣去掉三個 0 × 0.38）</li>
+</ul><h4>實用提醒（img_3）</h4>
+<ul><li>范五老街：搭訕不要理、晚間不遲留</li>
+<li>帶充電寶；過馬路小心（機車密度高、紅綠燈短、人車混行）</li>
+<li>飲食偏甜可減糖；插座兩孔＋三孔混用需轉換頭</li>
+<li>進寺廟著裝端莊不暴露；酒店小費 10k–20k VND</li>
+<li>海鮮餐廳：先問價、按重量算、有「遊客價」要留意</li>
+</ul><h4>景點表格（img_4）</h4>
+<p>胡志明（西貢聖母大教堂、中央郵局、統一宮、咖啡公寓、粉紅教堂、范五老街、博物館）／河內（大教堂、還劍湖、文廟、胡志明陵墓、獨柱寺）／芽莊（占婆塔、鐘嶼石岬角、珍珠島、海灘）／大叻（瘋狂屋、瑪麗修道院、達坦拉瀑布）——含開放時間與門票價格。</p>
+<h4>必買特產（img_5 / img_6）</h4>
+<p>滴漏咖啡（中原 G7）、黃龍綠豆糕、檳榔椰子糖、綜合蔬果乾/芒果乾/菠蘿蜜乾、白虎活絡膏、紫皮腰果、越南香水（奧黛瓶身）、越南河粉泡麵——送禮自用兩相宜。</p>
+<h4>特色體驗（img_7）</h4>
+<p>泥漿浴（芽庄火山礦物泥漿浴）、洗頭文化（洗髮＋按摩一條龍）、會安椰子船（360 旋轉漂移）、學做越南春卷、芽莊四島遊（黑島浮潛/蠶島/海釣/船上派對）、滴漏咖啡/雞蛋咖啡體驗、跨海纜車（世界最長 8km）、火車街（鐵路穿過居民樓）。</p>
+<h4>5 天行程推薦（img_8）</h4>
+<p>芽莊→美奈→胡志明，不走回頭路：山海雙體驗（海島出海＋沙丘日落）、節奏鬆弛、浮潛/沙丘/城市人文全覆蓋。</p>
+<h4>📌 一句話速覽</h4>
+<p>去越南前先看這篇！行前換越南盾＋vinaphone 卡＋電子簽落地換紙簽；富國島看日落選西部；范五老街搭訕不要理、晚間不遲留；海鮮先問價防遊客價；部分景點（如占婆塔）<b>提前預約</b>——不做計畫真的會被懲罰！😆</p></div>
+    </details>
+  </section>
+</main>
+
+
+<footer>
+  <div class="wrap">
+    <p>胡志明 5 天攻略 · 以 Centoria Hotel By Urban B（Go Vap 區）為據點的個人行程筆記</p>
+    <p>行程 2026.10.26–30（4 晚）· 資料來源：Obsidian 筆記、Booking.com、Google Maps</p>
+    <p>最後更新 2026-09-22</p>
+  </div>
+</footer>
+
+</body>
+</html>
