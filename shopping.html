@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>體驗 & 購物 · 胡志明 5 天攻略</title>
+<meta name="description" content="胡志明體驗與購物：湄公河一日遊、美甲、手信超市、陶瓷家居小店。">
+<style>
+*,*::before,*::after{box-sizing:border-box}
+:root{
+  --paper:#F6F4F0; --card:#FFFFFF; --ink:#171614; --ink2:#3A3833; --muted:#7C776E;
+  --line:#E4DFD6; --line2:#CFC9BD; --accent:#2C5340; --accent-soft:#E9EFE9;
+  --warn:#8A5A1E; --warn-soft:#F7EFE2;
+  --sans:"PingFang TC","Microsoft JhengHei","Noto Sans TC","Hiragino Sans TC",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --serif:Georgia,"Times New Roman","Songti TC","Source Han Serif TC",serif;
+  --maxw:1100px; --r:3px;
+}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);
+  font-size:15px;line-height:1.72;text-wrap:pretty;-webkit-font-smoothing:antialiased}
+img{display:block;max-width:100%}
+a{color:inherit}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px}
+.num{font-family:var(--serif);font-variant-numeric:tabular-nums}
+
+/* topbar + nav */
+.topbar{position:sticky;top:0;z-index:30;background:rgba(246,244,240,.93);
+  border-bottom:1px solid var(--line);backdrop-filter:saturate(120%) blur(6px)}
+.topbar .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;
+  min-height:58px;padding-top:8px;padding-bottom:8px;flex-wrap:wrap}
+.brand{font-weight:600;letter-spacing:.01em;font-size:14.5px}
+.brand .dot{color:var(--muted);margin:0 6px}
+.nav{display:flex;gap:4px;flex-wrap:wrap}
+.nav a{font-size:13px;color:var(--muted);text-decoration:none;padding:5px 11px;border-radius:999px;
+  transition:background .15s,color .15s}
+.nav a:hover{color:var(--ink);background:var(--card)}
+.nav a[aria-current="page"]{color:#fff;background:var(--ink)}
+.trip{font-size:12.5px;color:var(--muted);letter-spacing:.02em}
+.trip b{color:var(--ink);font-weight:600;font-family:var(--serif)}
+
+/* hero */
+.hero{padding-top:60px;padding-bottom:6px}
+.eyebrow{font-family:var(--serif);font-size:11px;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--muted);margin:0 0 20px}
+h1{font-size:clamp(28px,4.6vw,46px);line-height:1.24;letter-spacing:-.02em;margin:0 0 26px;font-weight:700;max-width:780px}
+h1 span{color:var(--muted);font-weight:400}
+.lede{margin:0;color:var(--ink2);font-size:14.5px;max-width:64ch}
+.lede b{font-weight:600;color:var(--ink)}
+
+/* section */
+section{padding-top:56px}
+h2{font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);
+  font-weight:600;margin:0 0 20px;padding-bottom:14px;border-bottom:1px solid var(--line2)}
+h3{font-size:19px;font-weight:600;letter-spacing:-.01em;margin:0 0 6px}
+p{margin:0 0 12px}
+
+/* hotel card */
+.hotel{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:30px;align-items:start}
+.hotel .shot{background:#EAE7E1;border-radius:var(--r);overflow:hidden;aspect-ratio:4/3}
+.hotel .shot img{width:100%;height:100%;object-fit:cover}
+.thumbs{display:flex;gap:8px;overflow-x:auto;padding-top:10px;scrollbar-width:thin}
+.thumbs img{width:70px;height:52px;object-fit:cover;border-radius:2px;flex:0 0 auto;opacity:.6;
+  cursor:pointer;border:1px solid transparent;transition:opacity .15s}
+.thumbs img:hover{opacity:.9}
+.thumbs img.on{opacity:1;border-color:var(--ink)}
+.badge{display:inline-block;font-size:11.5px;background:var(--accent);color:#fff;
+  border-radius:2px;padding:3px 9px;letter-spacing:.04em;margin-bottom:12px}
+.facts{display:flex;align-items:baseline;gap:16px;flex-wrap:wrap;margin:14px 0 16px}
+.price{font-family:var(--serif);font-size:26px;letter-spacing:-.01em}
+.price .cur{font-size:13px;color:var(--muted);margin-right:3px}
+.price .unit{font-family:var(--sans);font-size:12px;color:var(--muted);margin-left:6px}
+.rating{font-size:13px;color:var(--ink2)}
+.rating b{font-family:var(--serif);font-size:15px}
+.dl{display:grid;grid-template-columns:82px 1fr;gap:7px 16px;margin:0 0 18px;font-size:13.5px}
+.dl dt{color:var(--muted);font-size:12.5px}
+.dl dd{margin:0;color:var(--ink2)}
+ul.pl{list-style:none;margin:0;padding:0;font-size:13.5px;color:var(--ink2)}
+ul.pl li{display:flex;gap:9px;margin-bottom:5px}
+ul.pl .m{color:var(--accent);flex:0 0 auto}
+ul.pl.neg li{color:var(--muted)}
+ul.pl.neg .m{color:var(--muted)}
+.tag{display:inline-block;font-size:11.5px;color:var(--muted);background:var(--accent-soft);
+  border-radius:2px;padding:2px 8px;margin:0 6px 6px 0}
+
+/* table */
+table{width:100%;border-collapse:collapse;font-size:13.5px}
+th,td{text-align:left;padding:11px 14px 11px 0;border-bottom:1px solid var(--line);vertical-align:baseline}
+th{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:600;
+  border-bottom-color:var(--line2)}
+td.r,th.r{text-align:right;padding-right:0}
+tbody tr:hover{background:var(--card)}
+tbody td:first-child{color:var(--muted);font-family:var(--serif)}
+tbody td.p{font-family:var(--serif);font-size:14.5px;white-space:nowrap}
+.tnote{color:var(--muted);font-size:12.5px;margin:14px 0 0}
+
+/* cards grid */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:22px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);
+  overflow:hidden;display:flex;flex-direction:column}
+.card .shot{background:#EAE7E1;aspect-ratio:4/3;overflow:hidden}
+.card .shot img{width:100%;height:100%;object-fit:cover;transition:transform .3s}
+.card:hover .shot img{transform:scale(1.02)}
+.card .in{padding:16px 17px 18px;flex:1;display:flex;flex-direction:column}
+.card h3{font-size:16px;margin:0 0 6px;line-height:1.4}
+.card .meta{font-size:12.5px;color:var(--muted);margin:0 0 10px}
+.card p{font-size:13.5px;color:var(--ink2);margin:0 0 10px}
+.card .foot{margin-top:auto;font-size:12.5px;color:var(--muted);display:flex;gap:12px;flex-wrap:wrap}
+.pill{display:inline-block;font-size:11.5px;border:1px solid var(--line2);border-radius:999px;
+  padding:2px 9px;color:var(--ink2);margin:0 6px 6px 0}
+
+/* callout */
+.callout{background:var(--warn-soft);border-left:3px solid var(--warn);border-radius:var(--r);
+  padding:15px 18px;font-size:13.5px;color:var(--ink2);margin:0 0 18px}
+.callout b{color:var(--ink)}
+.note{background:var(--accent-soft);border-left:3px solid var(--accent);border-radius:var(--r);
+  padding:15px 18px;font-size:13.5px;color:var(--ink2);margin:0 0 18px}
+
+/* tips accordion */
+details{background:var(--card);border:1px solid var(--line);border-radius:var(--r);
+  margin-bottom:12px;overflow:hidden}
+details summary{padding:15px 18px;cursor:pointer;font-weight:600;font-size:14.5px;list-style:none;
+  display:flex;justify-content:space-between;align-items:center;gap:12px}
+details summary::-webkit-details-marker{display:none}
+details summary::after{content:"＋";color:var(--muted);font-weight:400}
+details[open] summary::after{content:"−"}
+details .dbody{padding:0 18px 18px;font-size:13.5px;color:var(--ink2);border-top:1px solid var(--line)}
+details .dbody h4{margin:16px 0 8px;font-size:13px;color:var(--ink)}
+details .dbody ul{margin:0 0 12px;padding-left:20px}
+details .dbody li{margin-bottom:5px}
+details .dbody code{background:var(--paper);border:1px solid var(--line);border-radius:2px;
+  padding:1px 6px;font-size:12.5px}
+
+footer{margin-top:70px;border-top:1px solid var(--line);padding:26px 0 70px;font-size:12.5px;color:var(--muted)}
+footer p{margin:0 0 6px}
+footer a{color:var(--accent);border-bottom:1px solid currentColor;text-decoration:none}
+
+@media (max-width:860px){
+  .wrap{padding-left:20px;padding-right:20px}
+  .hero{padding-top:38px}
+  .topbar{position:static}
+  .hotel{grid-template-columns:1fr;gap:22px}
+  .nav{width:100%;overflow-x:auto;flex-wrap:nowrap;scrollbar-width:none;padding-bottom:2px}
+  .nav::-webkit-scrollbar{display:none}
+  .nav a{flex:0 0 auto}
+  .grid{grid-template-columns:1fr}
+  section{padding-top:42px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+
+</head>
+<body>
+
+<header class="topbar">
+  <div class="wrap">
+    <div class="brand">胡志明 5 天 <span class="dot">·</span> <em style="font-style:normal;color:var(--muted);font-weight:400">2026.10.26–30</em></div>
+    <nav class="nav"><a href="index.html">主頁</a><a href="attractions.html">景點</a><a href="food.html">美食</a><a href="shopping.html" aria-current="page">體驗購物</a><a href="tips.html">注意事項</a></nav>
+    <div class="trip">住 <b>Centoria Hotel</b>｜Go Vap 區</div>
+  </div>
+</header>
+
+
+<main class="wrap">
+  <div class="hero">
+    <p class="eyebrow">Experience &amp; Shopping · 10 篇</p>
+    <h1>體驗 &amp; 購物 <span>· 玩什麼、買什麼</span></h1>
+    <p class="lede">除了景點和美食，越南還有這些值得安排：
+    <b>湄公河一日遊</b>（坐船）、<b>美甲</b>（便宜又好看），
+    以及回程前的採買——<b>手信超市</b>、<b>陶瓷家居</b>。</p>
+  </div>
+
+  <section>
+    <h2>體驗（2）</h2>
+    <div class="grid">
+      <article class="card">
+        <div class="shot"><img src="images/shop_湄公河一日遊.jpg" alt="湄公河一日遊" loading="lazy"></div>
+        <div class="in">
+          <span class="pill">體驗</span>
+          <h3 style="font-size:15.5px">湄公河一日遊</h3>
+          <p class="meta">Mekong Delta day trip</p>
+          <p style="margin:6px 0 10px">最期待的就是湄公河坐船，幾十塊錢玩一天，性價比很高。木船在泥濘河水中航行，船上的人戴斗笠。可參加當地一日遊團（多為 My Tho / Ben Tre 路線）。</p>
+          <div class="foot"><span>🕐 一日遊多為 08:00 出發、17:00 返回</span></div>
+          <p style="margin:8px 0 0;font-size:12.5px;color:var(--muted)">📍 （體驗類，非單一店家，多從第 1 區出發）</p>
+          
+        </div>
+      </article>
+      <article class="card">
+        <div class="shot"><img src="images/shop_美甲___Fame_Nails.jpg" alt="美甲 · Fame Nails" loading="lazy"></div>
+        <div class="in">
+          <span class="pill">體驗</span>
+          <h3 style="font-size:15.5px">美甲 · Fame Nails</h3>
+          <p class="meta">Pham Hong Thai（七郡）</p>
+          <p style="margin:6px 0 10px">逛七郡逛累了臨時走進去，做完對着陽光拍了十分鐘手。東南亞度假風海鹽藍跳色，員工推薦加細閃，陽光下熱帶感十足。環境偏輕 spa，價格比中國輕鬆很多。也可做 foot spa（約 80–120）。</p>
+          <div class="foot"><span>🕐 依店家</span></div>
+          <p style="margin:8px 0 0;font-size:12.5px;color:var(--muted)">📍 Fame Nails - Pham Hong Thai（一郡、二郡也有分店）</p>
+          <p style="margin:10px 0 0;font-size:12.5px"><a href="https://www.google.com/maps/search/?api=1&query=10.7714952,106.6960343" target="_blank" rel="noopener" style="color:var(--accent);border-bottom:1px solid currentColor;text-decoration:none">Google Maps ↗</a></p>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section>
+    <h2>購物（8）</h2>
+    <div class="callout">
+      <b>陶瓷 / 家居小店聚落：</b>In The Mood、TuHu Ceramics、grade b 三家都在
+      <b>An Khánh（第 2 區 Thảo Điền 一帶）</b>，彼此走路可達，建議排同一趟。
+      <b>amaï Dong Khoi</b> 在第 1 區精品街，逛景點時可順路。
+    </div>
+    <div class="grid">
+      <article class="card">
+        <div class="shot"><img src="images/shop_CU_便利店___椰皇.jpg" alt="CU 便利店 · 椰皇" loading="lazy"></div>
+        <div class="in">
+          <span class="pill">購物</span>
+          <h3 style="font-size:15.5px">CU 便利店 · 椰皇</h3>
+          <p class="meta">范五老街盡頭</p>
+          <p style="margin:6px 0 10px">冷藏櫃的椰皇可以插吸管喝，Mua 1 Tặng 1（買一送一）24,000đ ≈ 2 個椰皇。店員會幫忙開，插上吸管邊走邊喝。</p>
+          <div class="foot"><span>🕐 24 小時（便利商店）</span></div>
+          <p style="margin:8px 0 0;font-size:12.5px;color:var(--muted)">📍 范五老街盡頭 CU 便利店（連鎖）</p>
+          
+        </div>
+      </article>
+      <article class="card">
+        <div class="shot"><img src="images/shop_Grab_綠色騎士帽.jpg" alt="Grab 綠色騎士帽" loading="lazy"></div>
+        <div class="in">
+          <span class="pill">購物</span>
+          <h3 style="font-size:15.5px">Grab 綠色騎士帽</h3>
+          <p class="meta">路邊攤</p>
+          <p style="margin:6px 0 10px">沒去特別熱門的那家，路過看到講價就買了，比熱門那家便宜。</p>
+          <div class="foot"><span>🕐 —</span></div>
+          <p style="margin:8px 0 0;font-size:12.5px;color:var(--muted)">📍 路邊攤（非固定店家）</p>
+          
+        </div>
+      </article>
+      <article class="card">
+        <div class="shot"><img src="images/shop_手信超市___Big_C_GO.jpg" alt="手信超市 · Big C GO" loading="lazy"></div>
+        <div class="in">
+          <span class="pill">購物</span>
+          <h3 style="font-size:15.5px">手信超市 · Big C GO</h3>
+          <p class="meta">268 Tô Hiến Thành</p>
+          <p style="margin:6px 0 10px">買手信就來這裡，好多越南限定：燕窩、椰子咖啡、零食、河粉都值得買。</p>
+          <div class="foot"><span>🕐 每日 08:00–22:00</span><span>⭐ 4.0（13,150 則）</span></div>
+          <p style="margin:8px 0 0;font-size:12.5px;color:var(--muted)">📍 268 Tô Hiến Thành（大C超市·東方店）</p>
+          <p style="margin:10px 0 0;font-size:12.5px"><a href="https://www.google.com/maps/search/?api=1&query=10.7782741,106.6654692" target="_blank" rel="noopener" style="color:var(--accent);border-bottom:1px solid currentColor;text-decoration:none">Google Maps ↗</a></p>
+        </div>
+      </article>
+      <article class="card">
+        
+        <div class="in">
+          <span class="pill">購物</span>
+          <h3 style="font-size:15.5px">超市巡禮 · Tops Market</h3>
+          <p class="meta">685 Âu Cơ, Tân Phú</p>
+          <p style="margin:6px 0 10px">除了逛景點吃美食，很推薦逛當地超市。Tops Market 進去很容易越逛越久——法棍麵包區一大片，越南限定商品很多。</p>
+          <div class="foot"><span>🕐 每日 07:30–22:00</span><span>⭐ 4.1（3,451 則）</span></div>
+          <p style="margin:8px 0 0;font-size:12.5px;color:var(--muted)">📍 685 Âu Cơ, Tân Phú（Oriental Plaza）</p>
+          <p style="margin:10px 0 0;font-size:12.5px"><a href="https://www.google.com/maps/search/?api=1&query=10.7896085,106.6392619" target="_blank" rel="noopener" style="color:var(--accent);border-bottom:1px solid currentColor;text-decoration:none">Google Maps ↗</a></p>
+        </div>
+      </article>
+      <article class="card">
+        <div class="shot"><img src="images/shop_家居用品___In_The_Mood.jpg" alt="家居用品 · In The Mood" loading="lazy"></div>
+        <div class="in">
+          <span class="pill">購物</span>
+          <h3 style="font-size:15.5px">家居用品 · In The Mood</h3>
+          <p class="meta">32 Trần Ngọc Diện, An Khánh</p>
+          <p style="margin:6px 0 10px">這家店有兩家、就對著開，不要錯過！很好逛，東西有質感，杯子杯墊方巾都適合送朋友。</p>
+          <div class="foot"><span>🕐 每日 10:00–19:00</span><span>⭐ 4.8</span></div>
+          <p style="margin:8px 0 0;font-size:12.5px;color:var(--muted)">📍 32 Trần Ngọc Diện, An Khánh</p>
+          <p style="margin:10px 0 0;font-size:12.5px"><a href="https://www.google.com/maps/search/?api=1&query=10.8054138,106.7408371" target="_blank" rel="noopener" style="color:var(--accent);border-bottom:1px solid currentColor;text-decoration:none">Google Maps ↗</a></p>
+        </div>
+      </article>
+      <article class="card">
+        <div class="shot"><img src="images/shop_陶瓷工藝___amaï_Dong_Khoi.jpg" alt="陶瓷工藝 · amaï Dong Khoi" loading="lazy"></div>
+        <div class="in">
+          <span class="pill">購物</span>
+          <h3 style="font-size:15.5px">陶瓷工藝 · amaï Dong Khoi</h3>
+          <p class="meta">76 Đồng Khởi, Quận 1</p>
+          <p style="margin:6px 0 10px">陶瓷工藝品店，也有很多木質調餐具，品種多、顏色豐富。位於第 1 區精品街，離景點很近。</p>
+          <div class="foot"><span>🕐 每日 09:30–21:00</span><span>⭐ 5.0</span></div>
+          <p style="margin:8px 0 0;font-size:12.5px;color:var(--muted)">📍 76 Đồng Khởi, Quận 1</p>
+          <p style="margin:10px 0 0;font-size:12.5px"><a href="https://www.google.com/maps/search/?api=1&query=10.7751852,106.7041498" target="_blank" rel="noopener" style="color:var(--accent);border-bottom:1px solid currentColor;text-decoration:none">Google Maps ↗</a></p>
+        </div>
+      </article>
+      <article class="card">
+        <div class="shot"><img src="images/shop_陶瓷店___TuHu_Ceramics.jpg" alt="陶瓷店 · TuHu Ceramics" loading="lazy"></div>
+        <div class="in">
+          <span class="pill">購物</span>
+          <h3 style="font-size:15.5px">陶瓷店 · TuHu Ceramics</h3>
+          <p class="meta">11 Nguyễn Ư Dĩ, An Khánh</p>
+          <p style="margin:6px 0 10px">偏陶瓷和木質，很多挺日式的，可以搭配，不會空手而歸。</p>
+          <div class="foot"><span>🕐 每日 09:00–18:00</span><span>⭐ 4.7</span></div>
+          <p style="margin:8px 0 0;font-size:12.5px;color:var(--muted)">📍 11 Nguyễn Ư Dĩ, An Khánh</p>
+          <p style="margin:10px 0 0;font-size:12.5px"><a href="https://www.google.com/maps/search/?api=1&query=10.8066159,106.7431647" target="_blank" rel="noopener" style="color:var(--accent);border-bottom:1px solid currentColor;text-decoration:none">Google Maps ↗</a></p>
+        </div>
+      </article>
+      <article class="card">
+        <div class="shot"><img src="images/shop_陶瓷杯碗___grade_b.jpg" alt="陶瓷杯碗 · grade b" loading="lazy"></div>
+        <div class="in">
+          <span class="pill">購物</span>
+          <h3 style="font-size:15.5px">陶瓷杯碗 · grade b</h3>
+          <p class="meta">14 Trần Ngọc Diện, An Khánh</p>
+          <p style="margin:6px 0 10px">附近有好幾家可以一起逛，咖啡杯盤都很好看，還有冰淇淋色系碗，適合回家做甜品。</p>
+          <div class="foot"><span>🕐 每日 09:00–20:00</span><span>⭐ 4.8</span></div>
+          <p style="margin:8px 0 0;font-size:12.5px;color:var(--muted)">📍 14 Trần Ngọc Diện, An Khánh</p>
+          <p style="margin:10px 0 0;font-size:12.5px"><a href="https://www.google.com/maps/search/?api=1&query=10.8033558,106.7391731" target="_blank" rel="noopener" style="color:var(--accent);border-bottom:1px solid currentColor;text-decoration:none">Google Maps ↗</a></p>
+        </div>
+      </article>
+    </div>
+  </section>
+</main>
+
+
+<footer>
+  <div class="wrap">
+    <p>胡志明 5 天攻略 · 以 Centoria Hotel By Urban B（Go Vap 區）為據點的個人行程筆記</p>
+    <p>行程 2026.10.26–30（4 晚）· 資料來源：Obsidian 筆記、Booking.com、Google Maps</p>
+    <p>最後更新 2026-09-22</p>
+  </div>
+</footer>
+
+</body>
+</html>

@@ -167,7 +167,8 @@ footer a{color:var(--accent);border-bottom:1px solid currentColor;text-decoratio
 # ------------------------------------------------------------------ helpers
 def page(title, desc, active, body, extra_head=""):
     nav_items = [("index.html", "主頁"), ("attractions.html", "景點"),
-                 ("food.html", "美食"), ("tips.html", "注意事項")]
+                 ("food.html", "美食"), ("shopping.html", "體驗購物"),
+                 ("tips.html", "注意事項")]
     nav = "".join(
         '<a href="%s"%s>%s</a>' % (h, ' aria-current="page"' if h == active else "", t)
         for h, t in nav_items)
@@ -395,6 +396,10 @@ def build_index():
         <div class="in"><h3>🍜 美食</h3><p>河粉、法棍、咖啡、燒烤、米其林 · 精選 + 完整清單</p>
         <div class="foot"><span>精選 12 家</span></div></div>
       </a>
+      <a class="card" href="shopping.html" style="text-decoration:none">
+        <div class="in"><h3>🛍️ 體驗 & 購物</h3><p>湄公河遊船、美甲、陶瓷家居、超市手信</p>
+        <div class="foot"><span>10 篇</span></div></div>
+      </a>
       <a class="card" href="tips.html" style="text-decoration:none">
         <div class="in"><h3>🧳 注意事項</h3><p>電子入境卡教學、出行必備清單、預約提醒</p>
         <div class="foot"><span>3 篇</span></div></div>
@@ -591,6 +596,87 @@ def build_food():
                 "food.html", body)
 
 
+
+# ------------------------------------------------------------------ 體驗 & 購物頁
+EXP_SHOP = [
+  # (類型, 標題, 副標, 說明, 圖檔, 地址, 營業時間, 評分, lat, lng)
+  ("體驗", "湄公河一日遊", "Mekong Delta day trip", "最期待的就是湄公河坐船，幾十塊錢玩一天，性價比很高。木船在泥濘河水中航行，船上的人戴斗笠。可參加當地一日遊團（多為 My Tho / Ben Tre 路線）。", "6a9409c1_img_7.jpg", "（體驗類，非單一店家，多從第 1 區出發）", "一日遊多為 08:00 出發、17:00 返回", "", None, None),
+  ("體驗", "美甲 · Fame Nails", "Pham Hong Thai（七郡）", "逛七郡逛累了臨時走進去，做完對着陽光拍了十分鐘手。東南亞度假風海鹽藍跳色，員工推薦加細閃，陽光下熱帶感十足。環境偏輕 spa，價格比中國輕鬆很多。也可做 foot spa（約 80–120）。", "6a200905_img_1.jpg", "Fame Nails - Pham Hong Thai（一郡、二郡也有分店）", "依店家", "", 10.7714952, 106.6960343),
+  ("購物", "CU 便利店 · 椰皇", "范五老街盡頭", "冷藏櫃的椰皇可以插吸管喝，Mua 1 Tặng 1（買一送一）24,000đ ≈ 2 個椰皇。店員會幫忙開，插上吸管邊走邊喝。", "6a9409c1_img_14.jpg", "范五老街盡頭 CU 便利店（連鎖）", "24 小時（便利商店）", "", None, None),
+  ("購物", "Grab 綠色騎士帽", "路邊攤", "沒去特別熱門的那家，路過看到講價就買了，比熱門那家便宜。", "6a9409c1_img_9.jpg", "路邊攤（非固定店家）", "—", "", None, None),
+  ("購物", "手信超市 · Big C GO", "268 Tô Hiến Thành", "買手信就來這裡，好多越南限定：燕窩、椰子咖啡、零食、河粉都值得買。", "6a9409c1_img_18.jpg", "268 Tô Hiến Thành（大C超市·東方店）", "每日 08:00–22:00", "4.0（13,150 則）", 10.7782741, 106.6654692),
+  ("購物", "超市巡禮 · Tops Market", "685 Âu Cơ, Tân Phú", "除了逛景點吃美食，很推薦逛當地超市。Tops Market 進去很容易越逛越久——法棍麵包區一大片，越南限定商品很多。", None, "685 Âu Cơ, Tân Phú（Oriental Plaza）", "每日 07:30–22:00", "4.1（3,451 則）", 10.7896085, 106.6392619),
+  ("購物", "家居用品 · In The Mood", "32 Trần Ngọc Diện, An Khánh", "這家店有兩家、就對著開，不要錯過！很好逛，東西有質感，杯子杯墊方巾都適合送朋友。", "6a79301f_img_8.jpg", "32 Trần Ngọc Diện, An Khánh", "每日 10:00–19:00", "4.8", 10.8054138, 106.7408371),
+  ("購物", "陶瓷工藝 · amaï Dong Khoi", "76 Đồng Khởi, Quận 1", "陶瓷工藝品店，也有很多木質調餐具，品種多、顏色豐富。位於第 1 區精品街，離景點很近。", "6a79301f_img_11.jpg", "76 Đồng Khởi, Quận 1", "每日 09:30–21:00", "5.0", 10.7751852, 106.7041498),
+  ("購物", "陶瓷店 · TuHu Ceramics", "11 Nguyễn Ư Dĩ, An Khánh", "偏陶瓷和木質，很多挺日式的，可以搭配，不會空手而歸。", "6a79301f_img_7.jpg", "11 Nguyễn Ư Dĩ, An Khánh", "每日 09:00–18:00", "4.7", 10.8066159, 106.7431647),
+  ("購物", "陶瓷杯碗 · grade b", "14 Trần Ngọc Diện, An Khánh", "附近有好幾家可以一起逛，咖啡杯盤都很好看，還有冰淇淋色系碗，適合回家做甜品。", "6a79301f_img_12.jpg", "14 Trần Ngọc Diện, An Khánh", "每日 09:00–20:00", "4.8", 10.8033558, 106.7391731),
+]
+
+def _shop_card(cat, name, sub, desc, img_name, addr, hours, rating, lat, lng):
+    img = None
+    if img_name:
+        img = copy_img(img_name, "shop_" + re.sub(r"[^\w]", "_", name)[:24] + ".jpg", maxw=900)
+    shot = f'<div class="shot"><img src="{img}" alt="{name}" loading="lazy"></div>' if img else ""
+    foot = ""
+    if hours: foot += f"<span>🕐 {hours}</span>"
+    if rating: foot += f"<span>⭐ {rating}</span>"
+    maps = ""
+    if lat:
+        maps = f'<p style="margin:10px 0 0;font-size:12.5px"><a href="https://www.google.com/maps/search/?api=1&query={lat},{lng}" target="_blank" rel="noopener" style="color:var(--accent);border-bottom:1px solid currentColor;text-decoration:none">Google Maps ↗</a></p>'
+    return f"""
+      <article class="card">
+        {shot}
+        <div class="in">
+          <span class="pill">{cat}</span>
+          <h3 style="font-size:15.5px">{name}</h3>
+          <p class="meta">{sub}</p>
+          <p style="margin:6px 0 10px">{desc}</p>
+          <div class="foot">{foot}</div>
+          <p style="margin:8px 0 0;font-size:12.5px;color:var(--muted)">📍 {addr}</p>
+          {maps}
+        </div>
+      </article>"""
+
+
+def build_shopping():
+    exp_cards = "".join(_shop_card(*row) for row in EXP_SHOP if row[0] == "體驗")
+    shop_cards = "".join(_shop_card(*row) for row in EXP_SHOP if row[0] == "購物")
+    n_exp = sum(1 for r in EXP_SHOP if r[0] == "體驗")
+    n_shop = sum(1 for r in EXP_SHOP if r[0] == "購物")
+
+    body = f"""
+<main class="wrap">
+  <div class="hero">
+    <p class="eyebrow">Experience &amp; Shopping · {len(EXP_SHOP)} 篇</p>
+    <h1>體驗 &amp; 購物 <span>· 玩什麼、買什麼</span></h1>
+    <p class="lede">除了景點和美食，越南還有這些值得安排：
+    <b>湄公河一日遊</b>（坐船）、<b>美甲</b>（便宜又好看），
+    以及回程前的採買——<b>手信超市</b>、<b>陶瓷家居</b>。</p>
+  </div>
+
+  <section>
+    <h2>體驗（{n_exp}）</h2>
+    <div class="grid">{exp_cards}
+    </div>
+  </section>
+
+  <section>
+    <h2>購物（{n_shop}）</h2>
+    <div class="callout">
+      <b>陶瓷 / 家居小店聚落：</b>In The Mood、TuHu Ceramics、grade b 三家都在
+      <b>An Khánh（第 2 區 Thảo Điền 一帶）</b>，彼此走路可達，建議排同一趟。
+      <b>amaï Dong Khoi</b> 在第 1 區精品街，逛景點時可順路。
+    </div>
+    <div class="grid">{shop_cards}
+    </div>
+  </section>
+</main>
+"""
+    return page("體驗 & 購物 · 胡志明 5 天攻略",
+                "胡志明體驗與購物：湄公河一日遊、美甲、手信超市、陶瓷家居小店。",
+                "shopping.html", body)
+
+
 # ------------------------------------------------------------------ 注意事項頁
 def build_tips():
     def md_body(fn):
@@ -677,6 +763,7 @@ def main():
         "index.html": build_index(),
         "attractions.html": build_attractions(),
         "food.html": build_food(),
+        "shopping.html": build_shopping(),
         "tips.html": build_tips(),
     }
     for fn, content in files.items():
