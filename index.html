@@ -109,6 +109,27 @@ tbody td.p{font-family:var(--serif);font-size:14.5px;white-space:nowrap}
 .pill{display:inline-block;font-size:11.5px;border:1px solid var(--line2);border-radius:999px;
   padding:2px 9px;color:var(--ink2);margin:0 6px 6px 0}
 
+
+/* integrated itinerary */
+.itinerary-intro{display:grid;grid-template-columns:1.2fr .8fr;gap:26px;align-items:end;margin-bottom:22px}
+.itinerary-intro p{color:var(--ink2);font-size:14px;margin:0}
+.itinerary-meta{font-family:var(--serif);font-size:13px;color:var(--muted);text-align:right}
+.days{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+.daycard{background:var(--card);border:1px solid var(--line);padding:20px 20px 18px;position:relative;overflow:hidden}
+.daycard.featured{grid-column:1/-1;display:grid;grid-template-columns:118px 1fr;gap:22px;align-items:start;background:linear-gradient(135deg,var(--card),var(--accent-soft))}
+.dayno{font-family:var(--serif);font-size:44px;line-height:1;color:var(--accent);letter-spacing:-.03em}
+.daydate{font-family:var(--serif);font-size:11px;letter-spacing:.14em;color:var(--muted);margin:4px 0 12px}
+.daycard h3{font-size:18px;margin-bottom:8px}
+.dayroute{font-size:13px;color:var(--ink2);margin-bottom:12px}
+.daylist{list-style:none;padding:0;margin:0 0 12px;font-size:13px;color:var(--ink2)}
+.daylist li{padding:6px 0;border-top:1px solid var(--line);display:flex;gap:9px}
+.daylist li:first-child{border-top:0}
+.daylist b{color:var(--accent);font-weight:600;min-width:42px}
+.flexnote{font-size:12px;color:var(--muted);background:var(--paper);padding:9px 11px;border-left:2px solid var(--accent)}
+.daylink{display:inline-block;margin-top:10px;font-size:12px;color:var(--accent);text-decoration:none;border-bottom:1px solid currentColor}
+@media(max-width:860px){.itinerary-intro{grid-template-columns:1fr}.itinerary-meta{text-align:left}.days{grid-template-columns:1fr}.daycard.featured{grid-column:auto;grid-template-columns:78px 1fr}.dayno{font-size:38px}}
+@media(max-width:520px){.daycard.featured{display:block}.daycard.featured .dayno{margin-bottom:8px}}
+
 /* callout */
 .callout{background:var(--warn-soft);border-left:3px solid var(--warn);border-radius:var(--r);
   padding:15px 18px;font-size:13.5px;color:var(--ink2);margin:0 0 18px}
@@ -154,19 +175,65 @@ footer.spacer{margin-top:70px;border-top:1px solid var(--line);height:72px}
 <header class="topbar">
   <div class="wrap">
     <div class="brand">胡志明 5 天 <span class="dot">·</span> <em style="font-style:normal;color:var(--muted);font-weight:400">2026.10.26–30</em></div>
-    <nav class="nav"><a href="index.html" aria-current="page">主頁</a><a href="itinerary.html">每日行程</a><a href="attractions.html">景點</a><a href="food.html">美食</a><a href="shopping.html">體驗購物</a><a href="tips.html">注意事項</a></nav>
+    <nav class="nav"><a href="index.html" aria-current="page">主頁</a><a href="#itinerary">每日行程</a><a href="attractions.html">景點</a><a href="food.html">美食</a><a href="shopping.html">體驗購物</a><a href="tips.html">注意事項</a></nav>
     <div class="trip">住 <b>Centoria Hotel</b>｜Go Vap 區</div>
   </div>
 </header>
 
 
-<main class="wrap"><section id="latest-itinerary" style="padding:32px 0 12px"><div style="background:#e9efe9;border-left:3px solid #2c5340;padding:26px 28px"><p style="font-size:11px;letter-spacing:.15em;color:#2c5340;margin:0 0 9px">NEW · 2026.10.26–30</p><h2 style="font-size:23px;letter-spacing:0;text-transform:none;color:#171614;border:0;padding:0;margin:0 0 10px">最新五日行程 · 每日時間軸</h2><p style="font-size:14px;color:#3a3833">從 Gò Vấp 的第一晚，到粉紅教堂對面的 Cộng Cà Phê、Thảo Điền 文青小店、Fame Nails 與楚雲龍 Buffet。保留可選夜生活與水上巴士備案，旅行時可直接照著走。</p><a href="itinerary.html" style="display:inline-block;margin-top:8px;padding:9px 16px;background:#2c5340;color:white;text-decoration:none;font-size:13px">查看 Day 1–5 詳細攻略 →</a></div></section>
+<main class="wrap">
   <div class="hero">
     <p class="eyebrow">Ho Chi Minh City · 5 Days</p>
     <h1>胡志明 5 天<br><span>以 Centoria Hotel 為據點</span></h1>
     <p class="lede">2026 年 10 月 26–30 日，4 晚。住宿訂在 <b>Go Vap 區的 Centoria Hotel By Urban B</b>（3 星、評分 9.5）。
     這份攻略以它為中心，整理了交通時間、景點、美食與出入境注意事項。<b>重點：到市中心各景點約 6–7 公里，需搭 Grab 約 20–25 分鐘。</b></p>
   </div>
+
+
+  <section id="itinerary">
+    <h2>每日行程 · 5 DAYS</h2>
+    <div class="itinerary-intro">
+      <p>這次不把行程獨立成另一個「工具頁」，而是直接放回整份攻略裡。每一天只保留旅行時真正需要看的順序、時間與備案；景點、美食與購物的詳細資料則繼續留在原本分頁。</p>
+      <div class="itinerary-meta">26–30 OCT 2026<br>2 PEOPLE · GÒ VẤP BASE</div>
+    </div>
+    <div class="days">
+      <article class="daycard featured">
+        <div><div class="dayno">01</div><div class="daydate">MON · 10.26</div></div>
+        <div><h3>抵達・Gò Vấp 慢生活</h3><p class="dayroute">機場 → 酒店 → Bếp Nhà Thơm → Làng Hoa → OM Nướng</p>
+        <ul class="daylist"><li><b>午間</b><span>抵達後寄放行李，吃 Bánh Mì Chảo – Bếp Nhà Thơm</span></li><li><b>17:00</b><span>Gò Vấp Floral Village Park 散步、拍照</span></li><li><b>19:00</b><span>OM Nướng – Phan Văn Trị 晚餐</span></li></ul>
+        <div class="flexnote">有精神才加碼：Saigon Japan Town → 7 Bridges；累了就直接 Grab 回酒店。</div></div>
+      </article>
+
+      <article class="daycard">
+        <div class="dayno">02</div><div class="daydate">TUE · 10.27</div>
+        <h3>粉紅教堂・老城建築・夜生活</h3><p class="dayroute">Hai Bà Trưng → 郵局 / 教堂 / 書街 → 市政廳 → Phở Museum</p>
+        <ul class="daylist"><li><b>08:00</b><span>Quán Châu Ký 早餐</span></li><li><b>09:00</b><span>Tân Định 粉紅教堂 → 對面 Cộng Cà Phê，找能看教堂的樓上座位</span></li><li><b>晚上</b><span>Bùi Viện 與 STIR 二選一，或體力好就都去</span></li></ul>
+        <a class="daylink" href="attractions.html">看市中心景點資料 →</a>
+      </article>
+
+      <article class="daycard">
+        <div class="dayno">03</div><div class="daydate">WED · 10.28</div>
+        <h3>Nguyễn Huệ・Thảo Điền・藝術散步</h3><p class="dayroute">FAHASA → Cafe Apartment → Metro → Thảo Điền → Quang San → Sala</p>
+        <ul class="daylist"><li><b>上午</b><span>阮惠書店與咖啡公寓，再搭 Metro Line 1</span></li><li><b>午後</b><span>Xuân Thủy 一帶逛選物、飾品、咖啡與 Quang San Art Museum</span></li><li><b>晚餐</b><span>Pizza 4P’s Trần Ngọc Diện</span></li></ul>
+        <div class="flexnote">水上巴士是彈性收尾：晚餐後班次合適才搭，否則 Grab。</div>
+      </article>
+
+      <article class="daycard">
+        <div class="dayno">04</div><div class="daydate">THU · 10.29</div>
+        <h3>美甲・設計小店・海鮮 Buffet</h3><p class="dayroute">Fame Nails → KOKONIC / Moss → Nguyễn Huệ → Cửu Vân Long → 超市</p>
+        <ul class="daylist"><li><b>09:30</b><span>Fame Nails – Mạc Thị Bưởi</span></li><li><b>午後</b><span>逛設計小物、飾品與阮惠一帶；濱城市場可選</span></li><li><b>晚餐後</b><span>去超市大量買零食，直接回酒店整理行李</span></li></ul>
+        <a class="daylink" href="shopping.html">看購物與體驗資料 →</a>
+      </article>
+
+      <article class="daycard">
+        <div class="dayno">05</div><div class="daydate">FRI · 10.30</div>
+        <h3>退房・前往機場</h3><p class="dayroute">Centoria Hotel → Tân Sơn Nhất International Airport</p>
+        <ul class="daylist"><li><b>早班機</b><span>不排景點；按航班與航空公司值機要求倒推出發時間。</span></li></ul>
+        <div class="flexnote">前一晚已採購、打包完畢，早上只做退房與 Grab 機場。</div>
+      </article>
+    </div>
+    <p class="tnote" style="margin-top:14px">帶「待確認」的項目會在最終發布前再核對：水上巴士班次、Phở Museum 票務、Quang San 開放時間、Fame Nails 與 Cửu Vân Long 分店 / 訂位。</p>
+  </section>
 
   <section id="hotel">
     <h2>住宿 · 已訂</h2>
