@@ -76,6 +76,74 @@ nav a{color:#636a63;font-size:12px;transition:color .2s}nav a:hover{color:var(--
   .grid{column-gap:14px;row-gap:20px}
   .hero + .grid{margin-top:20px}
 }
+</style><style>
+/* Lists workspace: editable local checklists in the same editorial visual system. */
+.listsPanel{grid-column:1/-1}
+.listsApp{display:grid;grid-template-columns:230px minmax(0,1fr);gap:24px;border:1px solid var(--line);border-radius:12px;background:#fbfcf9;overflow:hidden}
+.listsSidebar{padding:20px;border-right:1px solid var(--line);background:#f5f7f2}
+.listProgressCard{padding:16px;border:1px solid #e2e8df;border-radius:12px;background:#fff}
+.listProgressTop{display:flex;align-items:baseline;justify-content:space-between;gap:8px;color:var(--muted);font-size:11px}
+.listProgressTop strong{font:700 28px/1 Georgia,serif;color:var(--ink)}
+.listProgressTrack{height:6px;margin:13px 0 8px;border-radius:99px;background:#e5e9e3;overflow:hidden}
+.listProgressTrack span{display:block;height:100%;width:0;border-radius:inherit;background:#4e9b70;transition:width .2s}
+.listProgressCard small{font-size:11px;color:var(--muted)}
+.listsSectionLabel{margin:22px 0 8px;font-size:10px;font-weight:700;letter-spacing:.14em;color:#9a9f96}
+.listNav{display:grid;gap:5px}
+.listNav button{display:flex;align-items:center;justify-content:space-between;gap:8px;width:100%;padding:10px 11px;border:0;border-radius:9px;background:transparent;text-align:left;color:#657068;cursor:pointer;font:inherit}
+.listNav button:hover{background:#e9efe8;color:var(--ink)}
+.listNav button.active{background:#fff;color:var(--ink);box-shadow:0 2px 10px rgba(41,70,60,.07);font-weight:700}
+.listNav button span:last-child{min-width:22px;padding:2px 6px;border-radius:99px;background:#e8ede7;text-align:center;font-size:10px;color:#7a847b}
+.addListButton{width:100%;margin-top:12px;padding:10px;border:1px dashed #bdcbbd;border-radius:9px;background:transparent;color:#597060;cursor:pointer;font:inherit}
+.addListButton:hover{background:#e9f0e8}
+.newListForm{display:grid;gap:8px;margin-top:10px}
+.newListForm input,.addTaskForm input,.addTaskForm select{min-width:0;border:1px solid #dce4da;border-radius:8px;background:#fff;color:var(--text);font:inherit;padding:10px 11px;outline:none}
+.newListForm input:focus,.addTaskForm input:focus,.addTaskForm select:focus{border-color:#789681;box-shadow:0 0 0 3px #78968118}
+.newListForm>div{display:flex;gap:6px}
+.newListForm button{flex:1;border:0;border-radius:7px;padding:8px 6px;background:var(--ink);color:#fff;cursor:pointer;font-size:11px}
+.newListForm .formCancel{background:#e9eee8;color:var(--ink)}
+.listMain{min-width:0;padding:20px 22px 18px;background:#fff}
+.listMainHead{display:flex;justify-content:space-between;align-items:center;gap:14px;padding-bottom:14px;border-bottom:1px solid var(--line)}
+.listMainHead strong{font:600 24px/1.3 Georgia,"Songti TC",serif;color:var(--ink)}
+.listCount{display:inline-block;margin-left:8px;padding:3px 7px;border-radius:99px;background:#eef2ed;color:#78837b;font-size:10px;vertical-align:middle}
+.listFilters{display:flex;gap:4px;flex-wrap:wrap}
+.listFilters button{border:0;border-radius:99px;padding:7px 10px;background:#f2f4f0;color:#738077;cursor:pointer;font-size:11px}
+.listFilters button:hover,.listFilters button.active{background:#e5eee5;color:var(--ink);font-weight:700}
+.taskList{min-height:94px}
+.taskRow{display:grid;grid-template-columns:17px 23px minmax(0,1fr) auto 28px;align-items:center;gap:10px;padding:14px 2px;border-bottom:1px solid #eef1ec}
+.taskGrip{color:#a9b3aa;font-size:15px;letter-spacing:-4px;user-select:none}
+.taskCheck{width:18px;height:18px;margin:0;accent-color:var(--ink);cursor:pointer}
+.taskBody{min-width:0}
+.taskTitle{display:block;overflow:hidden;color:var(--text);font-size:13px;text-overflow:ellipsis;white-space:nowrap}
+.taskRow.done .taskTitle{text-decoration:line-through;color:#9aa19a}
+.taskPriority{padding:3px 7px;border-radius:5px;background:#f0f3ef;color:#758278;font-size:10px;white-space:nowrap}
+.taskPriority.high{background:#faece8;color:#a95f50}
+.taskPriority.low{background:#f3f1e8;color:#9b8756}
+.taskDelete{width:26px;height:26px;border:0;border-radius:7px;background:transparent;color:#a2aaa3;cursor:pointer;font-size:16px;line-height:1}
+.taskDelete:hover{background:#f7e9e7;color:#a95f50}
+.taskEmpty{padding:28px 10px;text-align:center;color:#8a938b;font-size:12px}
+.addTaskForm{display:grid;grid-template-columns:minmax(0,1fr) 90px auto;gap:8px;margin-top:14px;padding-top:14px;border-top:1px solid var(--line)}
+.addTaskForm button{border:0;border-radius:8px;background:var(--ink);color:#fff;padding:0 15px;cursor:pointer;font:inherit;font-size:12px}
+.addTaskForm button:hover{background:#3b6254}
+@media(max-width:950px){
+  .listsApp{grid-template-columns:190px minmax(0,1fr);gap:0}
+  .listsSidebar{padding:16px}
+  .listMain{padding:18px 16px}
+}
+@media(max-width:600px){
+  .listsApp{display:block}
+  .listsSidebar{border-right:0;border-bottom:1px solid var(--line)}
+  .listNav{display:flex;overflow-x:auto;padding-bottom:2px}
+  .listNav button{min-width:150px}
+  .addListButton{width:auto;padding:8px 12px}
+  .newListForm{max-width:270px}
+  .listMainHead{display:block}
+  .listFilters{margin-top:12px}
+  .taskRow{grid-template-columns:17px 22px minmax(0,1fr) 28px;gap:8px}
+  .taskPriority{display:none}
+  .addTaskForm{grid-template-columns:1fr auto}
+  .addTaskForm select{grid-column:1}
+  .addTaskForm button{grid-column:2;grid-row:1 / span 2}
+}
 </style></head><body>
 <header class="site-header"><div class="site-header-inner"><a class="site-logo" href="index.html">SAIGON STAYS<small>HO CHI MINH TRAVEL GUIDE</small></a><nav class="site-nav" aria-label="主選單"><a href="index.html" aria-current="page">首頁</a><a href="itinerary.html">每日行程</a><a href="attractions.html">景點</a><a href="food.html">美食</a><a href="shopping.html">體驗購物</a><a href="transport.html">住宿交通</a><a href="tips.html">注意事項</a></nav></div></header>
 <main class="wrap"><section class="hero hero--minimal"><div class="heroCopy"><div class="script">HO CHI MINH CITY</div><h1>胡志明市</h1><div class="meta"><span><strong>26 — 30 OCT</strong><small>2026 · 5 DAYS</small></span></div></div></section>
@@ -91,7 +159,7 @@ nav a{color:#636a63;font-size:12px;transition:color .2s}nav a:hover{color:var(--
 <a class="mini" href="food-cuu-van-long.html"><div class="photo" data-photo="images/food_軟殼蟹米其林_Quán_Thuý_94.jpg"></div><div class="in"><h3>Cửu Vân Long</h3><p>海鮮 Buffet</p><span class="pill">Day 4</span><span class="view">查看詳情 <span aria-hidden="true">↗</span></span></div></a></div></section>
 <section class="panel hotel" id="hotel"><div class="head"><h2>⌂ 住宿資訊</h2><small>已訂</small></div><div class="hotelbox"><div class="hotelpic"></div><div class="info"><h3>Centoria Hotel By Urban B</h3><p>Gò Vấp · 4 晚<br>656/52 Đường Quang Trung</p><div class="quick"><span>位置優勢</span><span>周邊美食</span><span>房型資訊</span></div></div></div></section>
 <section class="panel transport"><div class="head"><h2>▣ 交通指南</h2></div><ul class="list"><li><b>機場交通</b><br><small>SGN → Gò Vấp</small></li><li><b>市內交通</b><br><small>Grab · Metro · Waterbus · 步行</small></li><li><b>交通卡與票券</b><br><small>出發前再核對最新規則</small></li></ul></section>
-<section class="panel packing"><div class="head"><h2>✓ 打包清單</h2><a href="tips.html">查看詳情 →</a></div><p class="statusline">勾選進度會保存在這台裝置的瀏覽器中。</p><div class="check"><label><input type="checkbox">護照 / 簽證資料</label><label><input type="checkbox">手機 / 充電器 / 行動電源</label><label><input type="checkbox">轉換插頭</label><label><input type="checkbox">常用藥品</label><label><input type="checkbox">輕便雨具</label></div></section>
+<section class="panel listsPanel" id="lists"><div class="head"><div><div class="kicker">MY LISTS</div><h2>列表 <span class="headingEn">/ Lists</span></h2><small>自訂清單、待辦事項與打包進度都集中在這裡。</small></div><a href="tips.html">查看注意事項 →</a></div><div class="listsApp"><aside class="listsSidebar"><div class="listProgressCard"><div class="listProgressTop"><strong id="listProgress">0%</strong><span>目前清單</span></div><div class="listProgressTrack"><span id="listProgressBar"></span></div><small id="listProgressText">0 / 0 已完成</small></div><div class="listsSectionLabel">清單</div><div class="listNav" id="listNav"></div><button class="addListButton" id="showListForm" type="button">＋ 新增清單</button><form class="newListForm" id="newListForm" hidden><input id="newListName" type="text" maxlength="24" placeholder="清單名稱" autocomplete="off"><div><button type="submit">建立</button><button class="formCancel" id="cancelListForm" type="button">取消</button></div></form></aside><div class="listMain"><div class="listMainHead"><div><strong id="activeListTitle">打包清單</strong><span class="listCount" id="activeListCount">0 項</span></div><div class="listFilters" id="listFilters" role="tablist" aria-label="待辦篩選"><button type="button" data-filter="all">全部</button><button type="button" data-filter="open">未完成</button><button type="button" data-filter="done">已完成</button></div></div><div class="taskList" id="taskList" aria-live="polite"></div><form class="addTaskForm" id="addTaskForm"><input id="newTaskTitle" type="text" maxlength="80" placeholder="新增一項待辦…" autocomplete="off" required><select id="newTaskPriority" aria-label="待辦優先級"><option value="normal">一般</option><option value="high">重要</option><option value="low">低優先</option></select><button type="submit">新增待辦</button></form></div></div></section>
 <section class="panel reminders"><div class="head"><h2>♟ 重要提醒</h2><a href="tips.html">查看詳情 →</a></div><ul class="list"><li><b>入境文件</b>　護照有效期與簽證資料出發前再確認</li><li><b>待確認預約</b>　Phở Museum、Quang San、Fame Nails、Cửu Vân Long</li><li><b>Waterbus</b>　Day 3 晚間班次出發前再查</li></ul></section>
 <section class="panel tools"><div class="head"><h2>⌘ 旅行工具與資源</h2></div><div class="toolsGrid"><a class="tool" href="https://maps.google.com/" target="_blank" rel="noopener" aria-label="Google Maps：地圖導航 ↗"><span class="toolIcon" data-fallback="MAP" role="img" aria-label="Google Maps"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M12 2.5a6.2 6.2 0 0 0-6.2 6.2c0 4.5 6.2 12.8 6.2 12.8s6.2-8.3 6.2-12.8A6.2 6.2 0 0 0 12 2.5Zm0 8.7a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5Z"/></svg></span><span class="toolCopy"><b>Google Maps</b><small>地圖導航 ↗</small></span></a><a class="tool" href="https://www.grab.com/vn/" target="_blank" rel="noopener" aria-label="Grab：叫車 · 外送 ↗"><span class="toolIcon" data-fallback="GRAB" role="img" aria-label="Grab"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M5 11V9.7A4.7 4.7 0 0 1 9.7 5h4.6A4.7 4.7 0 0 1 19 9.7V11l1.6 1.4a1.5 1.5 0 0 1 .5 1.1v3.2a1.8 1.8 0 0 1-1.8 1.8h-.8a1.5 1.5 0 1 1-3 0H8.5a1.5 1.5 0 1 1-3 0h-.8A1.8 1.8 0 0 1 3 16.7v-3.2a1.5 1.5 0 0 1 .5-1.1L5 11Zm2 1h10V9.7A2.7 2.7 0 0 0 14.3 7H9.7A2.7 2.7 0 0 0 7 9.7V12Zm-1.5 3.5a1.2 1.2 0 1 0 0-2.4 1.2 1.2 0 0 0 0 2.4Zm13 0a1.2 1.2 0 1 0 0-2.4 1.2 1.2 0 0 0 0 2.4Z"/></svg></span><span class="toolCopy"><b>Grab</b><small>叫車 · 外送 ↗</small></span></a><a class="tool" href="https://www.google.com/search?q=MYR+to+VND" target="_blank" rel="noopener" aria-label="匯率換算：MYR → VND ↗"><span class="toolIcon" data-fallback="FX" role="img" aria-label="匯率換算"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M7.5 5.5h9M8 18.5h8M9 3.5v17M15 3.5v17M6 8c0-1.4 1.1-2.5 2.5-2.5h4a2.5 2.5 0 1 1 0 5h-5a2.5 2.5 0 1 0 0 5h4a2.5 2.5 0 1 0 0-5"/></svg></span><span class="toolCopy"><b>匯率換算</b><small>MYR → VND ↗</small></span></a><a class="tool" href="https://translate.google.com/" target="_blank" rel="noopener" aria-label="Google 翻譯：翻譯工具 ↗"><span class="toolIcon" data-fallback="文" role="img" aria-label="Google 翻譯"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M4 4h8a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2H9.5L6 18v-3H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2Zm13 5h3a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2h-2l-2 2v-4h-1a2 2 0 0 1-2-2v-2h2v1h3.7l-1.6-3.2H16L13.8 16h-2.2l3.7-7h1.7Z"/></svg></span><span class="toolCopy"><b>Google 翻譯</b><small>翻譯工具 ↗</small></span></a><a class="tool" href="https://evisa.gov.vn/" target="_blank" rel="noopener" aria-label="越南簽證：官方網站 ↗"><span class="toolIcon" data-fallback="VISA" role="img" aria-label="越南簽證"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M5 3h11l3 3v15H5V3Zm2 2v14h10V7h-3V5H7Zm2 5h6v1.7H9V10Zm0 3h6v1.7H9V13Z"/></svg></span><span class="toolCopy"><b>越南簽證</b><small>官方網站 ↗</small></span></a><a class="tool" href="https://www.google.com/travel/flights" target="_blank" rel="noopener" aria-label="航班查詢：Google Flights ↗"><span class="toolIcon" data-fallback="✈" role="img" aria-label="航班查詢"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="m21.2 4.3-7.1 3.5-5-4.6-1.6.8 3.4 5.4-5 2.4-3-1.7-1.3.7 2.5 3.2-.2 3.8 1.3.7 1.8-3 5.3-1.8-.8 6.3 1.6.8 3.5-7.9 6.3-5.6c.9-.8.4-2.2-.7-1.8Z"/></svg></span><span class="toolCopy"><b>航班查詢</b><small>Google Flights ↗</small></span></a></div></section></div></main><footer>五天四夜 · 胡志明市　吃好 · 拍好 · 買好 · 放鬆好</footer>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script><script>
@@ -132,4 +200,122 @@ routeDays.forEach((x,i)=>{const b=document.createElement("button");b.className="
 document.querySelector("#allroutes").addEventListener("click",()=>{if(selectedDay===null){show(0);return;}showAll=!showAll;document.querySelector("#allroutes").textContent=showAll?"只顯示選取日期":"顯示全部日期";document.querySelector("#mapday").textContent=showAll?"ALL DAYS":"DAY "+String(selectedDay+1).padStart(2,"0");draw()});
 initMap();showOverview();
 try{const saved=JSON.parse(localStorage.getItem("saigon-packing-v1")||"[]");document.querySelectorAll(".check input").forEach((box,i)=>{box.checked=!!saved[i];box.addEventListener("change",()=>localStorage.setItem("saigon-packing-v1",JSON.stringify([...document.querySelectorAll(".check input")].map(x=>x.checked))))})}catch(e){}
-</script><script>if("IntersectionObserver" in window){const photos=document.querySelectorAll(".mini .photo[data-photo]");const observer=new IntersectionObserver(entries=>{entries.forEach(entry=>{if(!entry.isIntersecting)return;const el=entry.target;const image=new Image();image.onload=()=>{el.style.backgroundImage='url("'+image.src+'")';el.classList.remove("fallback")};image.onerror=()=>{el.classList.add("fallback");el.textContent="圖片暫時無法載入"};image.src=el.dataset.photo;observer.unobserve(el)})},{rootMargin:"250px"});photos.forEach(el=>observer.observe(el))}else{document.querySelectorAll(".mini .photo[data-photo]").forEach(el=>el.style.backgroundImage='url("'+el.dataset.photo+'")')}</script><script>document.querySelectorAll(".toolIcon[data-fallback]").forEach(icon=>{const svg=icon.querySelector("svg");if(!svg)return;svg.addEventListener("error",()=>{icon.classList.add("fallback");icon.textContent=icon.dataset.fallback},{once:true})});</script></body></html>
+</script><script>if("IntersectionObserver" in window){const photos=document.querySelectorAll(".mini .photo[data-photo]");const observer=new IntersectionObserver(entries=>{entries.forEach(entry=>{if(!entry.isIntersecting)return;const el=entry.target;const image=new Image();image.onload=()=>{el.style.backgroundImage='url("'+image.src+'")';el.classList.remove("fallback")};image.onerror=()=>{el.classList.add("fallback");el.textContent="圖片暫時無法載入"};image.src=el.dataset.photo;observer.unobserve(el)})},{rootMargin:"250px"});photos.forEach(el=>observer.observe(el))}else{document.querySelectorAll(".mini .photo[data-photo]").forEach(el=>el.style.backgroundImage='url("'+el.dataset.photo+'")')}</script><script>document.querySelectorAll(".toolIcon[data-fallback]").forEach(icon=>{const svg=icon.querySelector("svg");if(!svg)return;svg.addEventListener("error",()=>{icon.classList.add("fallback");icon.textContent=icon.dataset.fallback},{once:true})});</script><script>
+(function(){
+  const storageKey="saigon-lists-v1";
+  const legacyKey="saigon-packing-v1";
+  const legacyTitles=["護照 / 簽證資料","手機 / 充電器 / 行動電源","轉換插頭","常用藥品","輕便雨具"];
+  const nav=document.querySelector("#listNav");
+  const taskList=document.querySelector("#taskList");
+  const titleEl=document.querySelector("#activeListTitle");
+  const countEl=document.querySelector("#activeListCount");
+  const progressEl=document.querySelector("#listProgress");
+  const progressBar=document.querySelector("#listProgressBar");
+  const progressText=document.querySelector("#listProgressText");
+  const taskInput=document.querySelector("#newTaskTitle");
+  const priorityInput=document.querySelector("#newTaskPriority");
+  const newListForm=document.querySelector("#newListForm");
+  const newListInput=document.querySelector("#newListName");
+  if(!nav||!taskList)return;
+  const makeId=prefix=>prefix+"-"+Date.now().toString(36)+"-"+Math.random().toString(36).slice(2,7);
+  function readLegacy(){
+    try{const saved=JSON.parse(localStorage.getItem(legacyKey)||"[]");return Array.isArray(saved)?saved:[];}catch(e){return [];}
+  }
+  function defaultState(){
+    const saved=readLegacy();
+    return {activeListId:"packing",filter:"all",lists:[{id:"packing",name:"打包清單",tasks:legacyTitles.map((title,i)=>({id:"packing-"+i,title,done:!!saved[i],priority:"normal"}))}]};
+  }
+  function loadState(){
+    try{
+      const parsed=JSON.parse(localStorage.getItem(storageKey)||"null");
+      if(parsed&&Array.isArray(parsed.lists)&&parsed.lists.length)return parsed;
+    }catch(e){}
+    return defaultState();
+  }
+  let state=loadState();
+  function activeList(){
+    let list=state.lists.find(item=>item.id===state.activeListId);
+    if(!list){list=state.lists[0];state.activeListId=list.id;}
+    return list;
+  }
+  function save(){
+    try{
+      localStorage.setItem(storageKey,JSON.stringify(state));
+      const packing=state.lists.find(item=>item.id==="packing");
+      if(packing)localStorage.setItem(legacyKey,JSON.stringify(packing.tasks.map(task=>!!task.done)));
+    }catch(e){}
+  }
+  function progress(list){
+    const total=list.tasks.length,done=list.tasks.filter(task=>task.done).length;
+    return {total,done,percent:total?Math.round(done/total*100):0};
+  }
+  function priorityText(priority){
+    return priority==="high"?"重要":priority==="low"?"低優先":"一般";
+  }
+  function render(){
+    const list=activeList(),stats=progress(list);
+    progressEl.textContent=stats.percent+"%";
+    progressBar.style.width=stats.percent+"%";
+    progressText.textContent=stats.done+" / "+stats.total+" 已完成";
+    titleEl.textContent=list.name;
+    countEl.textContent=list.tasks.length+" 項";
+    nav.innerHTML="";
+    state.lists.forEach(item=>{
+      const button=document.createElement("button");
+      button.type="button";button.dataset.listId=item.id;button.className=item.id===state.activeListId?"active":"";
+      const name=document.createElement("span");name.textContent=item.name;
+      const count=document.createElement("span");count.textContent=item.tasks.length;
+      button.append(name,count);nav.appendChild(button);
+    });
+    document.querySelectorAll("#listFilters button").forEach(button=>button.classList.toggle("active",button.dataset.filter===state.filter));
+    taskList.innerHTML="";
+    const filtered=list.tasks.filter(task=>state.filter==="done"?task.done:state.filter==="open"?!task.done:true);
+    if(!filtered.length){
+      const empty=document.createElement("div");empty.className="taskEmpty";empty.textContent=state.filter==="done"?"目前沒有已完成待辦":state.filter==="open"?"太好了，這份清單已完成。":"這份清單還沒有待辦，先新增一項吧。";taskList.appendChild(empty);
+    }else{
+      filtered.forEach(task=>{
+        const row=document.createElement("div");row.className="taskRow"+(task.done?" done":"");
+        const grip=document.createElement("span");grip.className="taskGrip";grip.textContent="⋮⋮";
+        const checkbox=document.createElement("input");checkbox.type="checkbox";checkbox.className="taskCheck";checkbox.checked=!!task.done;checkbox.dataset.taskId=task.id;checkbox.setAttribute("aria-label","完成 "+task.title);
+        const body=document.createElement("div");body.className="taskBody";
+        const taskTitle=document.createElement("span");taskTitle.className="taskTitle";taskTitle.textContent=task.title;body.appendChild(taskTitle);
+        const priority=document.createElement("span");priority.className="taskPriority "+task.priority;priority.textContent=priorityText(task.priority);
+        const remove=document.createElement("button");remove.type="button";remove.className="taskDelete";remove.dataset.deleteId=task.id;remove.setAttribute("aria-label","刪除 "+task.title);remove.textContent="×";
+        row.append(grip,checkbox,body,priority,remove);taskList.appendChild(row);
+      });
+    }
+  }
+  nav.addEventListener("click",event=>{
+    const button=event.target.closest("button[data-list-id]");if(!button)return;
+    state.activeListId=button.dataset.listId;state.filter="all";save();render();
+  });
+  document.querySelector("#listFilters").addEventListener("click",event=>{
+    const button=event.target.closest("button[data-filter]");if(!button)return;
+    state.filter=button.dataset.filter;render();
+  });
+  taskList.addEventListener("change",event=>{
+    if(!event.target.matches(".taskCheck"))return;
+    const list=activeList(),task=list.tasks.find(item=>item.id===event.target.dataset.taskId);if(!task)return;
+    task.done=event.target.checked;save();render();
+  });
+  taskList.addEventListener("click",event=>{
+    const button=event.target.closest("button[data-delete-id]");if(!button)return;
+    const list=activeList();list.tasks=list.tasks.filter(task=>task.id!==button.dataset.deleteId);save();render();
+  });
+  document.querySelector("#addTaskForm").addEventListener("submit",event=>{
+    event.preventDefault();const value=taskInput.value.trim();if(!value)return;
+    activeList().tasks.unshift({id:makeId("task"),title:value,done:false,priority:priorityInput.value});save();taskInput.value="";render();taskInput.focus();
+  });
+  document.querySelector("#showListForm").addEventListener("click",()=>{
+    newListForm.hidden=false;newListInput.focus();
+  });
+  document.querySelector("#cancelListForm").addEventListener("click",()=>{
+    newListForm.hidden=true;newListInput.value="";
+  });
+  newListForm.addEventListener("submit",event=>{
+    event.preventDefault();const value=newListInput.value.trim();if(!value)return;
+    const list={id:makeId("list"),name:value,tasks:[]};state.lists.push(list);state.activeListId=list.id;state.filter="all";save();newListInput.value="";newListForm.hidden=true;render();taskInput.focus();
+  });
+  render();
+})();
+</script></body></html>
