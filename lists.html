@@ -182,14 +182,17 @@ nav a{color:#636a63;font-size:12px;transition:color .2s}nav a:hover{color:var(--
 @media(max-width:600px){.undoNotice{left:16px;right:16px}.taskDelete{width:44px;height:44px}}
 .syncStatus{position:absolute;right:20px;top:20px;border:1px solid #e2e8df;border-radius:999px;background:#fffdfa;color:#526b5b;padding:6px 10px;cursor:pointer;font:600 11px/1 inherit;display:inline-flex;align-items:center;gap:6px}.syncStatus i{width:8px;height:8px;border-radius:50%;background:#9aa39b}.syncStatus.synced i{background:#3f9b62}.syncStatus.offline i{background:#e58b2c}.syncDialog{position:fixed;z-index:20;inset:0;background:#1A202C55;display:grid;place-items:center;padding:18px}.syncDialog[hidden]{display:none}.syncCard{width:min(440px,100%);background:#fff;border-radius:13px;padding:22px;box-shadow:0 12px 40px #0003}.syncCard h2{margin:0 0 8px;color:var(--ink);font-size:20px}.syncCard p{margin:0 0 14px;color:var(--muted);font-size:12px}.syncCard input{width:100%;padding:10px;border:1px solid var(--line);border-radius:8px}.syncActions{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}.syncActions button{border:0;border-radius:8px;padding:9px 12px;background:#294f43;color:#fff;cursor:pointer}.syncActions button.secondary{background:#eef2ed;color:#294f43}.syncError{color:#b45c35;font-size:12px;margin-top:10px;min-height:18px}
 </style><style>
-/* Two independent local profiles for the lists workspace. */
-.profileSwitcher{display:flex;align-items:center;gap:10px;margin-top:16px;padding:11px 13px;border:1px solid #dfe7dd;border-radius:10px;background:#f8faf6;color:#5d6e62;font-size:12px}
-.profileSwitcher label{font-weight:700;color:#29463c;white-space:nowrap}.profileSwitcher select{min-width:150px;border:1px solid #cbd9cb;border-radius:7px;background:#fff;color:#29463c;padding:7px 30px 7px 9px;font:600 12px inherit}.profileSwitcher small{color:#7b867d}.profileSwitcher strong{color:#29463c}
-@media(max-width:600px){.profileSwitcher{align-items:flex-start;flex-wrap:wrap;gap:7px}.profileSwitcher select{flex:1;min-width:135px}.profileSwitcher small{width:100%;}}
+/* Compact one-tap profile switch. */
+.profileSwitcher{display:inline-flex;align-items:center;gap:3px;margin-top:12px;padding:3px;border:1px solid #ffffff40;border-radius:999px;background:#ffffff18}
+.profileSwitcher button{border:0;border-radius:999px;background:transparent;color:#f8faf8;padding:6px 13px;font:600 12px/1.3 inherit;cursor:pointer;transition:background .16s,color .16s}
+.profileSwitcher button:hover{background:#ffffff22}
+.profileSwitcher button.active{background:#fff;color:#29463c;box-shadow:0 1px 4px #0002}
+.profileSwitcher button:focus-visible{outline:2px solid #fff;outline-offset:2px}
+@media(max-width:600px){.profileSwitcher{margin-top:10px}.profileSwitcher button{padding:7px 14px;}}
 </style></head><body class="trek-ui trek-lists">
 <header class="site-header"><div class="site-header-inner"><a class="site-logo" href="index.html">SAIGON STAYS<small>HO CHI MINH TRAVEL GUIDE</small></a><nav class="site-nav" aria-label="主選單"><a href="index.html">首頁</a><a href="lists.html" aria-current="page">列表</a><a href="itinerary.html">每日行程</a><a href="attractions.html">景點</a><a href="food.html">美食</a><a href="shopping.html">體驗購物</a><a href="transport.html">住宿交通</a><a href="tips.html">注意事項</a></nav></div></header>
 <main class="wrap">
-<section class="panel pageIntro"><div class="kicker">TRAVEL WORKSPACE</div><h1>列表 <span class="headingEn">/ Lists</span></h1><p>把打包清單、旅程待辦與自訂項目集中管理，資料會在首頁與列表頁同步。</p><button class="syncStatus" id="syncStatus" type="button"><i></i><span>僅本機</span></button><div class="profileSwitcher" role="group" aria-label="選擇清單 Profile"><label for="profileSelect">目前 Profile</label><select id="profileSelect"><option value="johnson">Johnson</option><option value="jessie">Jessie</option></select><small id="profileHint">各自管理自己的清單與待辦</small></div></section>
+<section class="panel pageIntro"><div class="kicker">TRAVEL WORKSPACE</div><h1>列表 <span class="headingEn">/ Lists</span></h1><p>把打包清單、旅程待辦與自訂項目集中管理，資料會在首頁與列表頁同步。</p><button class="syncStatus" id="syncStatus" type="button"><i></i><span>僅本機</span></button><div class="profileSwitcher" role="group" aria-label="切換清單 Profile"><button type="button" data-profile="johnson" aria-pressed="true">Johnson</button><button type="button" data-profile="jessie" aria-pressed="false">Jessie</button></div></section>
 <div class="syncDialog" id="syncDialog" hidden><div class="syncCard" role="dialog" aria-modal="true" aria-labelledby="syncDialogTitle"><h2 id="syncDialogTitle">同步設定</h2><p id="syncDialogText"></p><input id="syncTokenInput" type="text" placeholder="貼上分享碼或分享連結" autocomplete="off"><div class="syncActions"><button id="syncPrimary" type="button">連結</button><button class="secondary" id="syncCopy" type="button" hidden>複製連結</button><button class="secondary" id="syncClear" type="button" hidden>解除連結</button><button class="secondary" id="syncClose" type="button">關閉</button></div><div class="syncError" id="syncError" role="status" aria-live="polite"></div></div></div>
 <div class="grid listPageGrid"><section class="panel listsPanel" id="lists"><div class="head"><div><div class="kicker">MY LISTS</div><h2>列表 <span class="headingEn">/ Lists</span></h2><small>自訂清單、待辦事項與打包進度都集中在這裡。</small></div><a href="index.html">回到首頁 →</a></div><div class="listsApp"><aside class="listsSidebar"><div class="listProgressCard"><div class="listProgressTop"><strong id="listProgress">0%</strong><span>目前清單</span></div><div class="listProgressTrack"><span id="listProgressBar"></span></div><small id="listProgressText">0 / 0 已完成</small></div><div class="listsSectionLabel">清單</div><div class="listNav" id="listNav"></div><button class="addListButton" id="showListForm" type="button">＋ 新增清單</button><form class="newListForm" id="newListForm" hidden><input id="newListName" type="text" maxlength="24" placeholder="清單名稱" autocomplete="off"><div><button type="submit">建立</button><button class="formCancel" id="cancelListForm" type="button">取消</button></div></form></aside><div class="listMain"><div class="undoNotice" id="undoNotice" role="status" aria-live="polite" hidden><span id="undoMessage"></span><button id="undoDelete" type="button">復原</button></div><div class="listMainHead"><div class="listTitleArea"><div class="listTitleLine"><strong id="activeListTitle">打包清單</strong><span class="listCount" id="activeListCount">0 項</span><button class="listRenameButton" id="showRenameForm" type="button">修改名稱</button></div><form class="renameListForm" id="renameListForm" hidden><input id="renameListName" type="text" maxlength="24" aria-label="清單名稱"><button type="submit">儲存</button><button class="renameCancel" id="cancelRenameForm" type="button">取消</button></form></div><div class="listFilters" id="listFilters" role="tablist" aria-label="待辦篩選"><button type="button" data-filter="all">全部</button><button type="button" data-filter="open">未完成</button><button type="button" data-filter="done">已完成</button></div></div><div class="taskList" id="taskList" aria-live="polite"></div><form class="addTaskForm" id="addTaskForm"><input id="newTaskTitle" type="text" maxlength="80" placeholder="新增一項待辦…" autocomplete="off" required><select id="newTaskPriority" aria-label="待辦優先級"><option value="normal">一般</option><option value="high">重要</option><option value="low">低優先</option></select><button type="submit">新增待辦</button></form></div></div></section></div>
 </main>
@@ -212,14 +215,19 @@ nav a{color:#636a63;font-size:12px;transition:color .2s}nav a:hover{color:var(--
   let editingTaskId=null;
   let undoTimer=null,undoState=null;
   let state=sync.getState();
-  const profileSelect=document.querySelector("#profileSelect"),profileHint=document.querySelector("#profileHint");
+  const profileSwitcher=document.querySelector(".profileSwitcher");
   function renderProfile(){
     const id=store.currentProfileId?store.currentProfileId():"johnson";
-    if(profileSelect)profileSelect.value=id;
-    if(profileHint)profileHint.innerHTML=id==="jessie"?"Jessie 的清單與待辦只會保存在 Jessie Profile":"Johnson 的清單與待辦只會保存在 Johnson Profile";
+    if(profileSwitcher)profileSwitcher.querySelectorAll("button[data-profile]").forEach(function(button){
+      const active=button.dataset.profile===id;
+      button.classList.toggle("active",active);
+      button.setAttribute("aria-pressed",active?"true":"false");
+    });
   }
-  profileSelect&&profileSelect.addEventListener("change",function(){
-    state=sync.switchProfile(profileSelect.value);editingTaskId=null;clearUndo();renderProfile();render();
+  profileSwitcher&&profileSwitcher.addEventListener("click",function(event){
+    const button=event.target.closest("button[data-profile]");
+    if(!button||button.getAttribute("aria-pressed")==="true")return;
+    state=sync.switchProfile(button.dataset.profile);editingTaskId=null;clearUndo();renderProfile();render();
   });
   const statusButton=document.querySelector("#syncStatus"),dialog=document.querySelector("#syncDialog"),statusText=statusButton&&statusButton.querySelector("span");
   const tokenInput=document.querySelector("#syncTokenInput"),syncError=document.querySelector("#syncError"),syncPrimary=document.querySelector("#syncPrimary"),syncCopy=document.querySelector("#syncCopy"),syncClear=document.querySelector("#syncClear");
