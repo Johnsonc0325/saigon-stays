@@ -219,7 +219,8 @@ nav a{color:#636a63;font-size:12px;transition:color .2s}nav a:hover{color:var(--
     state.lists.forEach(item=>{const button=document.createElement("button");button.type="button";button.dataset.listId=item.id;button.className=item.id===state.activeListId?"active":"";const name=document.createElement("span");name.textContent=item.name;const count=document.createElement("span");count.textContent=item.tasks.length;button.append(name,count);nav.appendChild(button);});
     document.querySelectorAll("#listFilters button").forEach(button=>button.classList.toggle("active",button.dataset.filter===state.filter));
     taskList.innerHTML="";
-    const filtered=list.tasks.filter(task=>state.filter==="done"?task.done:state.filter==="open"?!task.done:true);
+    const priorityRank={high:0,normal:1,low:2};
+    const filtered=list.tasks.map((task,index)=>({task,index})).filter(({task})=>state.filter==="done"?task.done:state.filter==="open"?!task.done:true).sort((a,b)=>(priorityRank[a.task.priority]??1)-(priorityRank[b.task.priority]??1)||a.index-b.index).map(({task})=>task);
     if(!filtered.length){const empty=document.createElement("div");empty.className="taskEmpty";empty.textContent=state.filter==="done"?"目前沒有已完成待辦":state.filter==="open"?"太好了，這份清單已完成。":"這份清單還沒有待辦，先新增一項吧。";taskList.appendChild(empty);return;}
     filtered.forEach(task=>{
       const row=document.createElement("div");row.className="taskRow"+(task.done?" done":"");
