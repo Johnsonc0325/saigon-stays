@@ -202,3 +202,39 @@ body.trek-home .currencyRate{margin:14px 0 2px!important;color:#485364!important
 body.trek-home .currencyStatus{margin:0!important;color:#8a929f!important;font-size:10px!important;line-height:1.5!important}
 @media(max-width:1050px){body.trek-home .currencyCard{margin-bottom:0!important;border-bottom:1px solid var(--trek-line)!important}}
 @media(max-width:440px){body.trek-home .currencyCard{padding:18px!important}body.trek-home .currencyGrid{grid-template-columns:minmax(0,1fr) 34px minmax(0,1fr)!important;gap:6px!important}body.trek-home .currencySwap{width:34px!important;height:34px!important;font-size:18px!important}body.trek-home .currencyField{padding:10px!important}}
+
+/* Desktop sidebar: each tool lives in its own spaced card. */
+body.trek-home .currencyPanel{
+  grid-column:9 / -1!important;
+  grid-row:1!important;
+  min-width:0!important;
+  padding:0!important;
+  overflow:hidden!important;
+}
+body.trek-home .listsPanel{
+  grid-column:9 / -1!important;
+  grid-row:2 / span 4!important;
+  min-width:0!important;
+  padding:0!important;
+}
+body.trek-home .currencyPanel .currencyCard{
+  margin:0!important;
+  border:0!important;
+  background:transparent!important;
+}
+body.trek-home .listsPanel>.head{
+  padding:22px 22px 0!important;
+}
+body.trek-home .listsPanel .listsSidebar{
+  padding:16px 22px!important;
+}
+body.trek-home .listsPanel .listMain{
+  padding:16px 22px 20px!important;
+}
+@media(max-width:1050px){
+  body.trek-home .currencyPanel,
+  body.trek-home .listsPanel{
+    grid-column:1 / -1!important;
+    grid-row:auto!important;
+  }
+}
