@@ -148,3 +148,34 @@ body.trek-home .taskRow .taskBody{min-width:0!important;overflow:visible!importa
 body.trek-home .taskRow .taskTitle{display:block!important;min-width:0!important;overflow:visible!important;text-overflow:clip!important;white-space:normal!important;overflow-wrap:anywhere!important;line-height:1.35!important}
 body.trek-home .taskRow .taskPriority{white-space:nowrap!important}
 body.trek-home .taskRow .taskDelete{justify-self:end!important}
+
+/* Lightweight white date label on the photo, without a card surface. */
+body.trek-home .hero>.meta{
+  display:flex!important;
+  left:46px!important;
+  right:46px!important;
+  bottom:30px!important;
+  padding:0!important;
+  border:0!important;
+  border-radius:0!important;
+  background:transparent!important;
+  backdrop-filter:none!important;
+  box-shadow:none!important;
+}
+body.trek-home .hero>.meta>span{
+  display:flex!important;
+  flex-direction:column!important;
+  gap:5px!important;
+  padding:0!important;
+  border:0!important;
+}
+body.trek-home .hero>.meta strong,
+body.trek-home .hero>.meta small{
+  color:#fff!important;
+  text-shadow:0 2px 10px rgba(0,0,0,.72)!important;
+}
+body.trek-home .hero>.meta strong{font-size:17px!important}
+body.trek-home .hero>.meta small{font-size:11px!important}
+@media(max-width:700px){
+  body.trek-home .hero>.meta{left:24px!important;right:24px!important;bottom:20px!important}
+}
