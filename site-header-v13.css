@@ -99,3 +99,18 @@ body.trek-lists .listsSidebar{background:#f8fafb!important}
 @media(max-width:700px){header.site-header .site-header-inner{display:flex!important;flex-direction:column!important;align-items:stretch!important;gap:5px!important;min-height:0!important;padding:11px 14px 8px!important}header.site-header .site-nav{justify-content:flex-start!important;overflow-x:auto!important;padding:3px 0!important}header.site-header .site-nav a{flex:0 0 auto!important}body.trek-ui main,body.trek-ui main.wrap{padding:20px 14px 42px!important}body.trek-ui .hero,body.trek-ui .pageIntro{padding:25px 21px!important;border-radius:18px!important}body.trek-home .hero{min-height:360px!important;padding:30px 24px!important;border-radius:20px!important}body.trek-home .hero h1{font-size:48px!important}body.trek-home .hero .meta{left:16px!important;right:16px!important;bottom:16px!important;padding:13px 15px!important}body.trek-home .hero .meta>span{padding:0 15px!important}.trek-trip-stats{gap:10px;margin-top:12px}.trek-trip-stats article{min-height:104px;padding:15px;border-radius:15px}.trek-trip-stats strong{font-size:23px}body.trek-home .routeGrid{grid-template-columns:1fr!important}body.trek-home .route .map{min-height:300px!important}body.trek-home .listsApp{grid-template-columns:1fr!important}body.trek-home .listsSidebar{border-right:0!important;border-bottom:1px solid var(--trek-line)!important}body.trek-ui footer{padding:18px 14px 30px!important}}
 @media(max-width:440px){.trek-trip-stats{grid-template-columns:1fr 1fr}.trek-trip-stats article:first-child{grid-column:1/-1}body.trek-home .hero .meta{display:block!important}body.trek-home .hero .meta>span{display:block;padding:4px 0!important;border:0!important}body.trek-home .food .cards,body.trek-home .cards{grid-template-columns:1fr!important}}
 .card-title-link{color:inherit;text-decoration:none;border-bottom:1px solid transparent;transition:border-color .15s,color .15s}.card-title-link:hover,.card-title-link:focus-visible{color:#1b624f;border-bottom-color:currentColor}
+/* Homepage hero: keep the schedule card clear of the city title. */
+body.trek-home .heroCopy{
+  position:static!important;
+  align-self:stretch!important;
+  display:flex!important;
+  flex-direction:column!important;
+  justify-content:flex-end!important;
+  padding:0 0 112px!important;
+}
+@media(max-width:700px){
+  body.trek-home .heroCopy{padding-bottom:108px!important}
+}
+@media(max-width:440px){
+  body.trek-home .heroCopy{padding-bottom:130px!important}
+}
