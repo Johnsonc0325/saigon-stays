@@ -262,3 +262,129 @@ body.trek-home .sidebarStack>.listsPanel{
     gap:16px!important;
   }
 }
+
+
+/* Homepage side rail: every feature is an independent card. */
+body.trek-home .sidebarStack > .listsPanel{
+  display:grid!important;
+  gap:20px!important;
+  padding:0!important;
+  border:0!important;
+  border-radius:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+  overflow:visible!important;
+}
+body.trek-home .sidebarFeature{
+  min-width:0!important;
+  padding:22px!important;
+}
+body.trek-home .sidebarFeatureHead{
+  display:flex!important;
+  align-items:flex-start!important;
+  justify-content:space-between!important;
+  gap:12px!important;
+}
+body.trek-home .sidebarFeatureHead .kicker{margin:0 0 5px!important}
+body.trek-home .sidebarFeatureHead h2{margin:0!important;font-size:20px!important;line-height:1.15!important}
+body.trek-home .sidebarFeatureHead a{
+  flex:none!important;
+  margin-top:3px!important;
+  color:var(--trek-ink)!important;
+  font-size:12px!important;
+  font-weight:750!important;
+  text-decoration:none!important;
+  border-bottom:1px solid currentColor!important;
+}
+body.trek-home .sidebarFeatureIntro{
+  margin:11px 0 16px!important;
+  color:#6f7a7a!important;
+  font-size:12px!important;
+  line-height:1.6!important;
+}
+body.trek-home .sidebarFeatureMetric{
+  display:flex!important;
+  align-items:baseline!important;
+  gap:8px!important;
+  margin:0 0 14px!important;
+}
+body.trek-home .sidebarFeatureMetric strong,
+body.trek-home .packingProgressLine strong{
+  color:#254c40!important;
+  font:700 32px/1 Georgia,"Noto Serif TC",serif!important;
+  letter-spacing:-.04em!important;
+}
+body.trek-home .sidebarFeatureMetric span,
+body.trek-home .packingProgressLine span{
+  color:#737d7b!important;
+  font-size:12px!important;
+}
+body.trek-home .packingProgressLine{
+  display:flex!important;
+  align-items:baseline!important;
+  justify-content:space-between!important;
+  gap:12px!important;
+  margin:13px 0 10px!important;
+}
+body.trek-home .packingProgressTrack{
+  height:6px!important;
+  overflow:hidden!important;
+  border-radius:999px!important;
+  background:#e5eae5!important;
+}
+body.trek-home .packingProgressTrack span{
+  display:block!important;
+  width:0!important;
+  height:100%!important;
+  border-radius:inherit!important;
+  background:#2c5a4d!important;
+  transition:width .2s ease!important;
+}
+body.trek-home .sidebarTaskPreview{
+  display:grid!important;
+  gap:0!important;
+  margin-top:8px!important;
+}
+body.trek-home .sidebarTask{
+  display:flex!important;
+  align-items:center!important;
+  gap:9px!important;
+  min-width:0!important;
+  padding:10px 0!important;
+  border-top:1px solid #e7ebe7!important;
+  color:#26342f!important;
+  cursor:pointer!important;
+  font-size:13px!important;
+  line-height:1.35!important;
+}
+body.trek-home .sidebarTask input{
+  appearance:none!important;
+  flex:none!important;
+  width:17px!important;
+  height:17px!important;
+  margin:0!important;
+  border:1px solid #b7c1b9!important;
+  border-radius:5px!important;
+  background:#fff!important;
+  cursor:pointer!important;
+}
+body.trek-home .sidebarTask input:checked{
+  border-color:#295346!important;
+  background:#295346!important;
+  box-shadow:inset 0 0 0 3px #fff!important;
+}
+body.trek-home .sidebarTask span{min-width:0!important}
+body.trek-home .sidebarTask.done span{color:#89928e!important;text-decoration:line-through!important}
+body.trek-home .sidebarEmpty{
+  margin:3px 0!important;
+  color:#7d8783!important;
+  font-size:12px!important;
+  line-height:1.55!important;
+}
+@media(max-width:1050px){
+  body.trek-home .sidebarStack > .listsPanel{gap:16px!important}
+}
+@media(max-width:440px){
+  body.trek-home .sidebarFeature{padding:18px!important}
+  body.trek-home .sidebarFeatureHead h2{font-size:18px!important}
+}
