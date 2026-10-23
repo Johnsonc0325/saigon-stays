@@ -145,7 +145,7 @@ nav a{color:#636a63;font-size:12px;transition:color .2s}nav a:hover{color:var(--
   .addTaskForm button{grid-column:2;grid-row:1 / span 2}
 }
 </style><style>
-.pageIntro{margin:25px auto 0;padding:30px 38px;background:linear-gradient(110deg,#eef2eb,#fbfaf6 65%);border:1px solid #e2e8df;border-radius:12px}
+.pageIntro{position:relative;margin:25px auto 0;padding:30px 38px;background:linear-gradient(110deg,#eef2eb,#fbfaf6 65%);border:1px solid #e2e8df;border-radius:12px}
 .pageIntro h1{margin:7px 0 9px;font:600 clamp(28px,4vw,42px)/1.2 Georgia,"Songti TC",serif;color:var(--ink)}
 .pageIntro p{margin:0;color:var(--muted);font-size:13px}
 .listPageGrid{margin-top:20px}
@@ -180,17 +180,21 @@ nav a{color:#636a63;font-size:12px;transition:color .2s}nav a:hover{color:var(--
 .taskEditButton{min-width:44px;min-height:44px;background:transparent;color:#6b7a70;font-weight:600}
 .taskEditButton:hover,.taskEditButton:focus-visible{background:#eef2ed;color:var(--ink)}
 @media(max-width:600px){.undoNotice{left:16px;right:16px}.taskDelete{width:44px;height:44px}}
+.syncStatus{position:absolute;right:20px;top:20px;border:1px solid #e2e8df;border-radius:999px;background:#fffdfa;color:#526b5b;padding:6px 10px;cursor:pointer;font:600 11px/1 inherit;display:inline-flex;align-items:center;gap:6px}.syncStatus i{width:8px;height:8px;border-radius:50%;background:#9aa39b}.syncStatus.synced i{background:#3f9b62}.syncStatus.offline i{background:#e58b2c}.syncDialog{position:fixed;z-index:20;inset:0;background:#1A202C55;display:grid;place-items:center;padding:18px}.syncDialog[hidden]{display:none}.syncCard{width:min(440px,100%);background:#fff;border-radius:13px;padding:22px;box-shadow:0 12px 40px #0003}.syncCard h2{margin:0 0 8px;color:var(--ink);font-size:20px}.syncCard p{margin:0 0 14px;color:var(--muted);font-size:12px}.syncCard input{width:100%;padding:10px;border:1px solid var(--line);border-radius:8px}.syncActions{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}.syncActions button{border:0;border-radius:8px;padding:9px 12px;background:#294f43;color:#fff;cursor:pointer}.syncActions button.secondary{background:#eef2ed;color:#294f43}.syncError{color:#b45c35;font-size:12px;margin-top:10px;min-height:18px}
 </style></head><body class="trek-ui trek-lists">
 <header class="site-header"><div class="site-header-inner"><a class="site-logo" href="index.html">SAIGON STAYS<small>HO CHI MINH TRAVEL GUIDE</small></a><nav class="site-nav" aria-label="主選單"><a href="index.html">首頁</a><a href="lists.html" aria-current="page">列表</a><a href="itinerary.html">每日行程</a><a href="attractions.html">景點</a><a href="food.html">美食</a><a href="shopping.html">體驗購物</a><a href="transport.html">住宿交通</a><a href="tips.html">注意事項</a></nav></div></header>
 <main class="wrap">
-<section class="panel pageIntro"><div class="kicker">TRAVEL WORKSPACE</div><h1>列表 <span class="headingEn">/ Lists</span></h1><p>把打包清單、旅程待辦與自訂項目集中管理，資料會在首頁與列表頁同步。</p></section>
+<section class="panel pageIntro"><div class="kicker">TRAVEL WORKSPACE</div><h1>列表 <span class="headingEn">/ Lists</span></h1><p>把打包清單、旅程待辦與自訂項目集中管理，資料會在首頁與列表頁同步。</p><button class="syncStatus" id="syncStatus" type="button"><i></i><span>僅本機</span></button></section>
+<div class="syncDialog" id="syncDialog" hidden><div class="syncCard" role="dialog" aria-modal="true" aria-labelledby="syncDialogTitle"><h2 id="syncDialogTitle">同步設定</h2><p id="syncDialogText"></p><input id="syncTokenInput" type="text" placeholder="貼上分享碼或分享連結" autocomplete="off"><div class="syncActions"><button id="syncPrimary" type="button">連結</button><button class="secondary" id="syncCopy" type="button" hidden>複製連結</button><button class="secondary" id="syncClear" type="button" hidden>解除連結</button><button class="secondary" id="syncClose" type="button">關閉</button></div><div class="syncError" id="syncError" role="status" aria-live="polite"></div></div></div>
 <div class="grid listPageGrid"><section class="panel listsPanel" id="lists"><div class="head"><div><div class="kicker">MY LISTS</div><h2>列表 <span class="headingEn">/ Lists</span></h2><small>自訂清單、待辦事項與打包進度都集中在這裡。</small></div><a href="index.html">回到首頁 →</a></div><div class="listsApp"><aside class="listsSidebar"><div class="listProgressCard"><div class="listProgressTop"><strong id="listProgress">0%</strong><span>目前清單</span></div><div class="listProgressTrack"><span id="listProgressBar"></span></div><small id="listProgressText">0 / 0 已完成</small></div><div class="listsSectionLabel">清單</div><div class="listNav" id="listNav"></div><button class="addListButton" id="showListForm" type="button">＋ 新增清單</button><form class="newListForm" id="newListForm" hidden><input id="newListName" type="text" maxlength="24" placeholder="清單名稱" autocomplete="off"><div><button type="submit">建立</button><button class="formCancel" id="cancelListForm" type="button">取消</button></div></form></aside><div class="listMain"><div class="undoNotice" id="undoNotice" role="status" aria-live="polite" hidden><span id="undoMessage"></span><button id="undoDelete" type="button">復原</button></div><div class="listMainHead"><div class="listTitleArea"><div class="listTitleLine"><strong id="activeListTitle">打包清單</strong><span class="listCount" id="activeListCount">0 項</span><button class="listRenameButton" id="showRenameForm" type="button">修改名稱</button></div><form class="renameListForm" id="renameListForm" hidden><input id="renameListName" type="text" maxlength="24" aria-label="清單名稱"><button type="submit">儲存</button><button class="renameCancel" id="cancelRenameForm" type="button">取消</button></form></div><div class="listFilters" id="listFilters" role="tablist" aria-label="待辦篩選"><button type="button" data-filter="all">全部</button><button type="button" data-filter="open">未完成</button><button type="button" data-filter="done">已完成</button></div></div><div class="taskList" id="taskList" aria-live="polite"></div><form class="addTaskForm" id="addTaskForm"><input id="newTaskTitle" type="text" maxlength="80" placeholder="新增一項待辦…" autocomplete="off" required><select id="newTaskPriority" aria-label="待辦優先級"><option value="normal">一般</option><option value="high">重要</option><option value="low">低優先</option></select><button type="submit">新增待辦</button></form></div></div></section></div>
 </main>
 
 <script src="saigon-lists-store.js?v=1"></script>
+<script src="saigon-sync.js?v=1"></script>
 <script>
 (function(){
   const store=window.SaigonListsStore;
+  const sync=window.SaigonSync;
   if(!store)return;
   const nav=document.querySelector("#listNav"),taskList=document.querySelector("#taskList");
   const titleEl=document.querySelector("#activeListTitle"),countEl=document.querySelector("#activeListCount");
@@ -202,7 +206,17 @@ nav a{color:#636a63;font-size:12px;transition:color .2s}nav a:hover{color:var(--
   if(!nav||!taskList)return;
   let editingTaskId=null;
   let undoTimer=null,undoState=null;
-  let state=store.load();
+  let state=sync.getState();
+  const statusButton=document.querySelector("#syncStatus"),dialog=document.querySelector("#syncDialog"),statusText=statusButton&&statusButton.querySelector("span");
+  const tokenInput=document.querySelector("#syncTokenInput"),syncError=document.querySelector("#syncError"),syncPrimary=document.querySelector("#syncPrimary"),syncCopy=document.querySelector("#syncCopy"),syncClear=document.querySelector("#syncClear");
+  function showSyncStatus(next){const label={synced:"已同步",local:"僅本機",offline:"離線"}[next]||"僅本機";if(statusText)statusText.textContent=label;if(statusButton)statusButton.className="syncStatus "+next;}
+  function syncDialog(){const linked=!!sync.getToken();document.querySelector("#syncDialogText").textContent=linked?(sync.getMode()==="offline"?"目前無法連線，先使用本機快取；恢復網路後會繼續同步。":"這個分享連結可以在其他裝置開啟同一份清單。"):"沒有分享碼時，資料只會保存在這台裝置。";tokenInput.hidden=linked;syncPrimary.hidden=linked;syncCopy.hidden=!linked;syncClear.hidden=!linked;syncError.textContent="";if(linked)tokenInput.value=sync.buildShareUrl();dialog.hidden=false;}
+  statusButton&&statusButton.addEventListener("click",syncDialog);document.querySelector("#syncClose").addEventListener("click",()=>{dialog.hidden=true});
+  syncPrimary&&syncPrimary.addEventListener("click",async()=>{let value=tokenInput.value.trim();try{if(value.includes("?t="))value=new URL(value).searchParams.get("t")||"";}catch(error){}syncError.textContent="驗證中…";if(!await sync.setToken(value))syncError.textContent="分享碼無效或目前無法連線，已保留本機資料。";else{dialog.hidden=true;state=sync.getState();render();}});
+  syncCopy&&syncCopy.addEventListener("click",async()=>{try{await navigator.clipboard.writeText(sync.buildShareUrl());syncError.textContent="已複製分享連結";}catch(error){syncError.textContent="複製失敗，請手動複製上方連結。";}});
+  syncClear&&syncClear.addEventListener("click",()=>{if(confirm("解除連結後，這台裝置仍保留目前本機資料，但不再同步。確定嗎？")){sync.clearToken();dialog.hidden=true;showSyncStatus("local");}});
+  function showSyncError(message){if(undoTimer)clearTimeout(undoTimer);undoState=null;undoButton.hidden=true;undoMessage.textContent="同步失敗："+(message||"已回到真實狀態");undoNotice.hidden=false;undoTimer=setTimeout(clearUndo,5000);}
+  function after(operation){return Promise.resolve(operation).catch(function(error){if(syncError)syncError.textContent=error.message||"同步失敗，已回到本機狀態。";showSyncError(error.message);return null;});}
   function activeList(){let list=state.lists.find(item=>item.id===state.activeListId);if(!list){list=state.lists[0];if(list)state.activeListId=list.id;}return list||null;}
   function field(name,value){const option=document.createElement("option");option.value=value;option.textContent=name;return option;}
   function editForm(task){
@@ -217,11 +231,13 @@ nav a{color:#636a63;font-size:12px;transition:color .2s}nav a:hover{color:var(--
   function clearUndo(){
     if(undoTimer){clearTimeout(undoTimer);undoTimer=null;}
     undoState=null;
+    if(undoButton)undoButton.hidden=false;
     if(undoNotice)undoNotice.hidden=true;
   }
   function showUndo(task,index,listId){
     if(undoTimer)clearTimeout(undoTimer);
     undoState={task,index,listId};
+    undoButton.hidden=false;
     undoMessage.textContent="已刪除「"+task.title+"」";
     undoNotice.hidden=false;
     undoTimer=setTimeout(clearUndo,5000);
@@ -268,26 +284,27 @@ nav a{color:#636a63;font-size:12px;transition:color .2s}nav a:hover{color:var(--
   }
   nav.addEventListener("click",event=>{const button=event.target.closest("button[data-list-id]");if(!button)return;state.activeListId=button.dataset.listId;state.filter="all";editingTaskId=null;clearUndo();state=store.save(state);render();});
   document.querySelector("#listFilters").addEventListener("click",event=>{const button=event.target.closest("button[data-filter]");if(!button)return;state.filter=button.dataset.filter;editingTaskId=null;render();});
-  taskList.addEventListener("change",event=>{if(!event.target.matches(".taskCheck"))return;const task=activeList().tasks.find(item=>item.id===event.target.dataset.taskId);if(!task)return;task.done=event.target.checked;state=store.save(state);render();});
+  taskList.addEventListener("change",event=>{if(!event.target.matches(".taskCheck"))return;const task=activeList().tasks.find(item=>item.id===event.target.dataset.taskId);if(!task)return;after(sync.updateTask(task.id,{done:event.target.checked}));});
   taskList.addEventListener("click",event=>{
     const edit=event.target.closest("button[data-edit-id]");if(edit){editingTaskId=edit.dataset.editId;render();const input=taskList.querySelector(".taskEditForm input");if(input){input.focus();input.select();}return;}
     const cancel=event.target.closest("button[data-cancel-edit]");if(cancel){editingTaskId=null;render();return;}
-    const remove=event.target.closest("button[data-delete-id]");if(!remove)return;const list=activeList(),index=list.tasks.findIndex(task=>task.id===remove.dataset.deleteId);if(index<0)return;const task=list.tasks[index];list.tasks.splice(index,1);editingTaskId=null;state=store.save(state);render();showUndo(task,index,list.id);
+    const remove=event.target.closest("button[data-delete-id]");if(!remove)return;const list=activeList(),index=list.tasks.findIndex(task=>task.id===remove.dataset.deleteId);if(index<0)return;const task=list.tasks[index];after(sync.deleteTask(task.id));editingTaskId=null;showUndo(task,index,list.id);
   });
-  undoButton.addEventListener("click",()=>{if(!undoState)return;const recovery=undoState;const list=state.lists.find(item=>item.id===recovery.listId);if(!list||state.activeListId!==recovery.listId){clearUndo();return;}list.tasks.splice(Math.min(recovery.index,list.tasks.length),0,recovery.task);state=store.save(state);render();});
-  taskList.addEventListener("submit",event=>{const form=event.target.closest(".taskEditForm");if(!form)return;event.preventDefault();const task=activeList().tasks.find(item=>item.id===form.dataset.editId);const title=new FormData(form).get("title").trim();if(!task||!title)return;task.title=title;task.priority=new FormData(form).get("priority");editingTaskId=null;state=store.save(state);render();});
-  document.querySelector("#addTaskForm").addEventListener("submit",event=>{event.preventDefault();const value=taskInput.value.trim();if(!value)return;activeList().tasks.unshift({id:store.makeId("task"),title:value,done:false,priority:priorityInput.value});state=store.save(state);taskInput.value="";render();taskInput.focus();});
+  undoButton.addEventListener("click",()=>{if(!undoState)return;const recovery=undoState;const list=state.lists.find(item=>item.id===recovery.listId);if(!list||state.activeListId!==recovery.listId){clearUndo();return;}after(sync.addTask(recovery.listId,{title:recovery.task.title,priority:recovery.task.priority}));clearUndo();});
+  taskList.addEventListener("submit",event=>{const form=event.target.closest(".taskEditForm");if(!form)return;event.preventDefault();const title=new FormData(form).get("title").trim(),priority=new FormData(form).get("priority"),task=activeList().tasks.find(item=>item.id===form.dataset.editId);if(!task||!title)return;editingTaskId=null;after(sync.updateTask(task.id,{title,priority}));});
+  document.querySelector("#addTaskForm").addEventListener("submit",event=>{event.preventDefault();const value=taskInput.value.trim(),list=activeList();if(!value||!list)return;after(sync.addTask(list.id,{title:value,priority:priorityInput.value}));taskInput.value="";taskInput.focus();});
   document.querySelector("#showListForm").addEventListener("click",()=>{newListForm.hidden=false;newListInput.focus();});
   document.querySelector("#cancelListForm").addEventListener("click",()=>{newListForm.hidden=true;newListInput.value="";});
-  newListForm.addEventListener("submit",event=>{event.preventDefault();const value=newListInput.value.trim();if(!value)return;const list={id:store.makeId("list"),name:value,tasks:[]};state.lists.push(list);state.activeListId=list.id;state.filter="all";state=store.save(state);newListInput.value="";newListForm.hidden=true;render();taskInput.focus();});
+  newListForm.addEventListener("submit",event=>{event.preventDefault();const value=newListInput.value.trim();if(!value)return;after(sync.addList(value));newListInput.value="";newListForm.hidden=true;taskInput.focus();});
   document.querySelector("#showRenameForm").addEventListener("click",()=>{const list=activeList();if(!list)return;renameInput.value=list.name;renameForm.hidden=false;renameInput.focus();renameInput.select();});
   document.querySelector("#cancelRenameForm").addEventListener("click",()=>{renameForm.hidden=true;});
-  renameForm.addEventListener("submit",event=>{event.preventDefault();const list=activeList();if(!list)return;const value=renameInput.value.trim();if(!value)return;list.name=value;renameForm.hidden=true;state=store.save(state);render();});
-  function syncFromStorage(){state=store.load();editingTaskId=null;renameForm.hidden=true;clearUndo();render();}
+  renameForm.addEventListener("submit",event=>{event.preventDefault();const list=activeList();if(!list)return;const value=renameInput.value.trim();if(!value)return;renameForm.hidden=true;after(sync.renameList(list.id,value));});
+  function syncFromStorage(){state=sync.getState();editingTaskId=null;renameForm.hidden=true;render();}
   window.addEventListener("storage",event=>{if(event.key===store.storageKey||event.key===store.legacyKey)syncFromStorage();});
   window.addEventListener("pageshow",syncFromStorage);
   window.addEventListener("focus",syncFromStorage);
-  document.addEventListener("visibilitychange",()=>{if(!document.hidden)syncFromStorage();});
+  document.addEventListener("visibilitychange",()=>{if(!document.hidden)sync.refresh().catch(function(){});});
+  sync.init({onChange:function(next){state=next;render();},onStatus:showSyncStatus});
   render();
 })();
 </script>

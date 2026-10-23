@@ -189,7 +189,7 @@ nav a{color:#636a63;font-size:12px;transition:color .2s}nav a:hover{color:var(--
 </aside>
 <section class="panel reminders"><div class="head"><h2>♟ 重要提醒</h2><a href="tips.html">查看詳情 →</a></div><ul class="list"><li><b>入境文件</b>　護照有效期與簽證資料出發前再確認</li><li><b>待確認預約</b>　Phở Museum、Quang San、Fame Nails、Cửu Vân Long</li><li><b>Waterbus</b>　Day 3 晚間班次出發前再查</li></ul></section>
 </div></main>
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script><script src="saigon-lists-store.js?v=1"></script><script>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script><script src="saigon-lists-store.js?v=1"></script><script src="saigon-sync.js?v=1"></script><script>
 const places={
 airport:[10.8188,106.652],hotel:[10.8393,106.6544],bep:[10.832,106.658],floral:[10.829,106.661],om:[10.833,106.662],
 chau:[10.7939,106.6893],tandinh:[10.7896,106.6908],cong:[10.7894,106.6907],post:[10.7798,106.6999],notre:[10.7797,106.699],book:[10.7803,106.6994],city:[10.7769,106.7009],pho:[10.775,106.701],
@@ -226,7 +226,7 @@ draw()}
 routeDays.forEach((x,i)=>{const b=document.createElement("button");b.className="daybtn";b.dataset.day=String(i);b.setAttribute("role","tab");b.style.setProperty("--day",x.color);b.innerHTML="<b>"+x.d+"</b><span>"+x.date+" · "+x.title+"</span>";b.addEventListener("click",()=>show(i));tabs.appendChild(b)});
 document.querySelector("#allroutes").addEventListener("click",()=>{if(selectedDay===null){show(0);return;}showAll=!showAll;document.querySelector("#allroutes").textContent=showAll?"只顯示選取日期":"顯示全部日期";document.querySelector("#mapday").textContent=showAll?"ALL DAYS":"DAY "+String(selectedDay+1).padStart(2,"0");draw()});
 initMap();showOverview();
-try{const saved=JSON.parse(localStorage.getItem("saigon-packing-v1")||"[]");document.querySelectorAll(".check input").forEach((box,i)=>{box.checked=!!saved[i];box.addEventListener("change",()=>localStorage.setItem("saigon-packing-v1",JSON.stringify([...document.querySelectorAll(".check input")].map(x=>x.checked))))})}catch(e){}
+document.querySelectorAll(".check input").forEach((box,i)=>{box.addEventListener("change",()=>{const list=state.lists.find(item=>item.id==="packing")||state.lists[0],task=list&&list.tasks[i];if(task)SaigonSync.updateTask(task.id,{done:box.checked}).catch(function(){});})});
 </script><script>if("IntersectionObserver" in window){const photos=document.querySelectorAll(".mini .photo[data-photo]");const observer=new IntersectionObserver(entries=>{entries.forEach(entry=>{if(!entry.isIntersecting)return;const el=entry.target;const image=new Image();image.onload=()=>{el.style.backgroundImage='url("'+image.src+'")';el.classList.remove("fallback")};image.onerror=()=>{el.classList.add("fallback");el.textContent="圖片暫時無法載入"};image.src=el.dataset.photo;observer.unobserve(el)})},{rootMargin:"250px"});photos.forEach(el=>observer.observe(el))}else{document.querySelectorAll(".mini .photo[data-photo]").forEach(el=>el.style.backgroundImage='url("'+el.dataset.photo+'")')}</script><script>document.querySelectorAll(".toolIcon[data-fallback]").forEach(icon=>{const svg=icon.querySelector("svg");if(!svg)return;svg.addEventListener("error",()=>{icon.classList.add("fallback");icon.textContent=icon.dataset.fallback},{once:true})});</script><script></script>
 <script>
 (function(){
@@ -280,7 +280,7 @@ try{const saved=JSON.parse(localStorage.getItem("saigon-packing-v1")||"[]");docu
 (function(){
   const store=window.SaigonListsStore;
   if(!store)return;
-  let state=store.load();
+  let state=SaigonSync.getState();
   const stats=store.progress;
   function row(list,task){
     const label=document.createElement("label");label.className="sidebarTask"+(task.done?" done":"");
@@ -290,7 +290,7 @@ try{const saved=JSON.parse(localStorage.getItem("saigon-packing-v1")||"[]");docu
   }
   function empty(text){const el=document.createElement("p");el.className="sidebarEmpty";el.textContent=text;return el;}
   function render(){
-    const packing=state.lists.find(list=>list.id==="packing")||state.lists[0];
+    const packing=state.lists.find(list=>list.id==="packing")||state.lists[0]||{id:"",name:"",tasks:[]};
     const todoLists=state.lists.filter(list=>list.id!=="packing");
     const todoTasks=todoLists.flatMap(list=>list.tasks.map(task=>({list,task})));
     const todoOpen=todoTasks.filter(item=>!item.task.done);
@@ -310,13 +310,14 @@ try{const saved=JSON.parse(localStorage.getItem("saigon-packing-v1")||"[]");docu
     const list=state.lists.find(item=>item.id===target.dataset.listId);
     const task=list&&list.tasks.find(item=>item.id===target.dataset.taskId);
     if(!task)return;
-    task.done=target.checked;state=store.save(state);render();
+    SaigonSync.updateTask(task.id,{done:target.checked}).catch(function(){});
   });
-  function syncFromStorage(){state=store.load();render();}
+  function syncFromStorage(){state=SaigonSync.getState();render();}
   window.addEventListener("storage",event=>{if(event.key===store.storageKey||event.key===store.legacyKey)syncFromStorage();});
   window.addEventListener("pageshow",syncFromStorage);
   window.addEventListener("focus",syncFromStorage);
-  document.addEventListener("visibilitychange",()=>{if(!document.hidden)syncFromStorage();});
+  document.addEventListener("visibilitychange",()=>{if(!document.hidden)SaigonSync.refresh().catch(function(){});});
+  SaigonSync.init({onChange:function(next){state=next;render();},onStatus:function(){}});
   render();
 })();
 </script></body></html>
