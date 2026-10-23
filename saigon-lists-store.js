@@ -50,6 +50,6 @@
   function switchProfile(profileId){if(!profiles.some(profile=>profile.id===profileId))return load();const data=readProfiles();data.profiles[activeProfileId]=normalize(data.profiles[activeProfileId],activeProfileId==="johnson"?defaultState():emptyState());activeProfileId=profileId;data.activeProfileId=profileId;writeProfiles(data);return normalize(data.profiles[profileId],profileId==="johnson"?defaultState():emptyState());}
   function progress(list){const total=list.tasks.length,done=list.tasks.filter(task=>task.done).length;return {total,done,open:total-done,percent:total?Math.round(done/total*100):0};}
   function priorityText(priority){return priority==="high"?"重要":priority==="low"?"低優先":"一般";}
-  function sortByPriority(tasks){const rank={high:0,normal:1,low:2};return tasks.map((task,index)=>({task,index})).sort((a,b)=>(rank[a.task.priority]??1)-(rank[b.task.priority]??1)||a.index-b.index).map(item=>item.task);}
+  function sortByPriority(tasks){const rank={high:0,normal:1,low:2};return tasks.map((task,index)=>({task,index})).sort((a,b)=>{const da=a.task.done?1:0,db=b.task.done?1:0;if(da!==db)return da-db;return (rank[a.task.priority]??1)-(rank[b.task.priority]??1)||a.index-b.index;}).map(item=>item.task);}
   window.SaigonListsStore=Object.freeze({storageKey,legacyKey,profileStorageKey,profiles,load,save,switchProfile,currentProfileId:()=>activeProfileId,makeId,progress,priorityText,sortByPriority});
 })(window);
