@@ -238,3 +238,27 @@ body.trek-home .listsPanel .listMain{
     grid-row:auto!important;
   }
 }
+
+/* A single sidebar track keeps separate feature cards vertically adjacent. */
+body.trek-home .sidebarStack{
+  grid-column:9 / -1!important;
+  grid-row:1 / span 4!important;
+  display:grid!important;
+  align-content:start!important;
+  gap:20px!important;
+  min-width:0!important;
+}
+body.trek-home .sidebarStack>.currencyPanel,
+body.trek-home .sidebarStack>.listsPanel{
+  grid-column:auto!important;
+  grid-row:auto!important;
+  min-width:0!important;
+  margin:0!important;
+}
+@media(max-width:1050px){
+  body.trek-home .sidebarStack{
+    grid-column:1 / -1!important;
+    grid-row:auto!important;
+    gap:16px!important;
+  }
+}
