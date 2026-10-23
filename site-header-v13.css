@@ -307,9 +307,61 @@ body.trek-home .listNavBar{
 body.trek-home .listNavItem.is-active .listNavBar{background:#2a3547!important}
 body.trek-home .listNavBar>span{
   display:block!important;height:100%!important;border-radius:2px!important;
-  background:var(--trek-green)!important;transition:width .3s ease!important;
+  background:#254c40!important;transition:width .3s ease!important;
 }
 body.trek-home .listNavItem.is-active .listNavBar>span{background:#5ec9a8!important}
+/* 全部完成的清單：隱藏進度條，改成打勾 */
+body.trek-home .listNavItem.is-complete .listNavBar{display:none!important}
+body.trek-home .listNavItem.is-complete .listNavMeta{color:var(--trek-green)!important}
+body.trek-home .listNavItem.is-complete .listNavMeta::after{content:" ✓";font-weight:800}
+body.trek-home .listNavItem.is-complete.is-active .listNavMeta{color:#5ec9a8!important}
+/* 快速新增項目 */
+body.trek-home .quickAdd{display:grid!important;grid-template-columns:minmax(0,1fr) auto!important;gap:6px!important;margin-top:12px!important}
+body.trek-home .quickAdd input{
+  min-width:0!important;padding:9px 11px!important;border:1px solid var(--trek-line)!important;
+  border-radius:8px!important;background:#fff!important;color:var(--trek-ink)!important;font:inherit!important;font-size:12.5px!important;
+}
+body.trek-home .quickAdd input::placeholder{color:#9aa4b0!important}
+body.trek-home .quickAdd input:focus{outline:none!important;border-color:var(--trek-green)!important;box-shadow:0 0 0 3px rgba(27,98,79,.09)!important}
+body.trek-home .quickAdd select{
+  padding:0 8px!important;border:1px solid var(--trek-line)!important;border-radius:8px!important;
+  background:#fff!important;color:var(--trek-muted)!important;
+  font:650 11.5px/1.3 Inter,"Noto Sans TC",sans-serif!important;cursor:pointer!important;
+}
+body.trek-home .quickAdd select:focus{outline:none!important;border-color:var(--trek-green)!important}
+/* 對方的清單（唯讀） */
+body.trek-home .watchedRefresh{
+  flex:none!important;width:30px!important;height:30px!important;margin-top:1px!important;
+  border:1px solid var(--trek-line)!important;border-radius:8px!important;background:#fff!important;
+  color:var(--trek-muted)!important;font-size:14px!important;line-height:1!important;cursor:pointer!important;
+  transition:border-color .16s,color .16s!important;
+}
+body.trek-home .watchedRefresh:hover{border-color:var(--trek-green)!important;color:var(--trek-green)!important}
+body.trek-home .watchedRefresh:focus-visible{outline:2px solid var(--trek-green)!important;outline-offset:2px!important}
+body.trek-home .watchedBody{margin-top:6px!important}
+body.trek-home .watchedLine{display:flex!important;align-items:baseline!important;justify-content:space-between!important;gap:10px!important;margin-bottom:7px!important}
+body.trek-home .watchedLine strong{color:var(--trek-ink)!important;font:650 13px/1.35 Inter,"Noto Sans TC",sans-serif!important}
+body.trek-home .watchedLine span{color:var(--trek-muted)!important;font:600 11px/1.2 Inter,sans-serif!important;font-variant-numeric:tabular-nums!important;white-space:nowrap!important}
+body.trek-home .watchedTrack{display:block!important;height:4px!important;border-radius:2px!important;background:var(--trek-soft)!important;overflow:hidden!important;margin-bottom:10px!important}
+body.trek-home .watchedTrack>span{display:block!important;height:100%!important;border-radius:2px!important;background:#254c40!important;transition:width .3s ease!important}
+body.trek-home .watchedTask{
+  margin:0 0 5px!important;color:#5d6a75!important;font-size:12px!important;line-height:1.5!important;
+  overflow:hidden!important;text-overflow:ellipsis!important;white-space:nowrap!important;
+}
+body.trek-home .watchedSetup{margin-top:4px!important}
+body.trek-home .watchedSetup[hidden]{display:none!important}
+body.trek-home .watchedHint{margin:0 0 9px!important;color:var(--trek-muted)!important;font-size:11.5px!important;line-height:1.6!important}
+body.trek-home .watchedSetupRow{display:grid!important;grid-template-columns:minmax(0,1fr) auto auto!important;gap:6px!important}
+body.trek-home .watchedSetupRow input{
+  min-width:0!important;padding:8px 10px!important;border:1px solid var(--trek-line)!important;
+  border-radius:8px!important;background:#fff!important;color:var(--trek-ink)!important;font:inherit!important;font-size:12px!important;
+}
+body.trek-home .watchedSetupRow input:focus{outline:none!important;border-color:var(--trek-green)!important}
+body.trek-home .watchedSetupRow button{
+  padding:0 11px!important;border:0!important;border-radius:8px!important;background:var(--trek-accent)!important;
+  color:#fff!important;font:650 11px/1.3 Inter,"Noto Sans TC",sans-serif!important;cursor:pointer!important;
+}
+body.trek-home .watchedSetupRow .watchedUnlink{background:var(--trek-soft)!important;color:var(--trek-ink)!important}
 body.trek-home .listNavAdd{
   width:100%!important;margin-top:9px!important;padding:9px!important;
   border:1px dashed #c9d1db!important;border-radius:9px!important;background:transparent!important;
