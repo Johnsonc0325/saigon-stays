@@ -203,7 +203,7 @@ nav a{color:#636a63;font-size:12px;transition:color .2s}nav a:hover{color:var(--
   let editingTaskId=null;
   let undoTimer=null,undoState=null;
   let state=store.load();
-  function activeList(){let list=state.lists.find(item=>item.id===state.activeListId);if(!list){list=state.lists[0];state.activeListId=list.id;}return list;}
+  function activeList(){let list=state.lists.find(item=>item.id===state.activeListId);if(!list){list=state.lists[0];if(list)state.activeListId=list.id;}return list||null;}
   function field(name,value){const option=document.createElement("option");option.value=value;option.textContent=name;return option;}
   function editForm(task){
     const form=document.createElement("form");form.className="taskEditForm";form.dataset.editId=task.id;
@@ -227,8 +227,23 @@ nav a{color:#636a63;font-size:12px;transition:color .2s}nav a:hover{color:var(--
     undoTimer=setTimeout(clearUndo,5000);
   }
   function render(){
-    clearUndo();
-    const list=activeList(),stats=store.progress(list);
+    const list=activeList();
+    const addForm=document.querySelector("#addTaskForm");
+    const setFormEnabled=enabled=>{if(addForm)addForm.querySelectorAll("input,select,button").forEach(el=>{el.disabled=!enabled;});};
+    if(!list){
+      // 零清單狀態：使用者刻意刪光所有清單，不要擅自重建預設清單
+      progressEl.textContent="0%";progressBar.style.width="0%";progressText.textContent="0 / 0 已完成";
+      titleEl.textContent="還沒有清單";countEl.textContent="0 項";
+      nav.innerHTML="";taskList.innerHTML="";
+      const empty=document.createElement("div");empty.className="taskEmpty";
+      empty.textContent="還沒有任何清單。按左邊的「＋ 新增清單」建立第一個吧。";
+      taskList.appendChild(empty);
+      setFormEnabled(false);
+      document.querySelectorAll("#listFilters button").forEach(button=>button.classList.remove("active"));
+      return;
+    }
+    setFormEnabled(true);
+    const stats=store.progress(list);
     progressEl.textContent=stats.percent+"%";progressBar.style.width=stats.percent+"%";progressText.textContent=stats.done+" / "+stats.total+" 已完成";
     titleEl.textContent=list.name;countEl.textContent=list.tasks.length+" 項";
     nav.innerHTML="";
@@ -251,7 +266,7 @@ nav a{color:#636a63;font-size:12px;transition:color .2s}nav a:hover{color:var(--
       taskList.appendChild(row);
     });
   }
-  nav.addEventListener("click",event=>{const button=event.target.closest("button[data-list-id]");if(!button)return;state.activeListId=button.dataset.listId;state.filter="all";editingTaskId=null;state=store.save(state);render();});
+  nav.addEventListener("click",event=>{const button=event.target.closest("button[data-list-id]");if(!button)return;state.activeListId=button.dataset.listId;state.filter="all";editingTaskId=null;clearUndo();state=store.save(state);render();});
   document.querySelector("#listFilters").addEventListener("click",event=>{const button=event.target.closest("button[data-filter]");if(!button)return;state.filter=button.dataset.filter;editingTaskId=null;render();});
   taskList.addEventListener("change",event=>{if(!event.target.matches(".taskCheck"))return;const task=activeList().tasks.find(item=>item.id===event.target.dataset.taskId);if(!task)return;task.done=event.target.checked;state=store.save(state);render();});
   taskList.addEventListener("click",event=>{
@@ -265,10 +280,10 @@ nav a{color:#636a63;font-size:12px;transition:color .2s}nav a:hover{color:var(--
   document.querySelector("#showListForm").addEventListener("click",()=>{newListForm.hidden=false;newListInput.focus();});
   document.querySelector("#cancelListForm").addEventListener("click",()=>{newListForm.hidden=true;newListInput.value="";});
   newListForm.addEventListener("submit",event=>{event.preventDefault();const value=newListInput.value.trim();if(!value)return;const list={id:store.makeId("list"),name:value,tasks:[]};state.lists.push(list);state.activeListId=list.id;state.filter="all";state=store.save(state);newListInput.value="";newListForm.hidden=true;render();taskInput.focus();});
-  document.querySelector("#showRenameForm").addEventListener("click",()=>{renameInput.value=activeList().name;renameForm.hidden=false;renameInput.focus();renameInput.select();});
+  document.querySelector("#showRenameForm").addEventListener("click",()=>{const list=activeList();if(!list)return;renameInput.value=list.name;renameForm.hidden=false;renameInput.focus();renameInput.select();});
   document.querySelector("#cancelRenameForm").addEventListener("click",()=>{renameForm.hidden=true;});
-  renameForm.addEventListener("submit",event=>{event.preventDefault();const value=renameInput.value.trim();if(!value)return;activeList().name=value;renameForm.hidden=true;state=store.save(state);render();});
-  function syncFromStorage(){state=store.load();editingTaskId=null;renameForm.hidden=true;render();}
+  renameForm.addEventListener("submit",event=>{event.preventDefault();const list=activeList();if(!list)return;const value=renameInput.value.trim();if(!value)return;list.name=value;renameForm.hidden=true;state=store.save(state);render();});
+  function syncFromStorage(){state=store.load();editingTaskId=null;renameForm.hidden=true;clearUndo();render();}
   window.addEventListener("storage",event=>{if(event.key===store.storageKey||event.key===store.legacyKey)syncFromStorage();});
   window.addEventListener("pageshow",syncFromStorage);
   window.addEventListener("focus",syncFromStorage);

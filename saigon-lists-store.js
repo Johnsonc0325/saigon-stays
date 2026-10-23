@@ -28,7 +28,9 @@
     };
   }
   function normalize(state){
-    if(!state||!Array.isArray(state.lists)||!state.lists.length)return defaultState();
+    // 注意：lists 是空陣列是「合法狀態」——使用者可能刻意刪光所有清單。
+    // 只有在「完全沒有 state」或「lists 不是陣列」時才回到預設。
+    if(!state||!Array.isArray(state.lists))return defaultState();
     const lists=state.lists.map((list,index)=>{
       const id=typeof list?.id==="string"&&list.id?list.id:"list-"+index;
       return {
@@ -37,7 +39,7 @@
         tasks:Array.isArray(list?.tasks)?list.tasks.map((task,taskIndex)=>normalizeTask(task,taskIndex,id)):[]
       };
     });
-    const activeListId=lists.some(list=>list.id===state.activeListId)?state.activeListId:lists[0].id;
+    const activeListId=lists.length?(lists.some(list=>list.id===state.activeListId)?state.activeListId:lists[0].id):null;
     return {activeListId,filter:["all","open","done"].includes(state.filter)?state.filter:"all",lists};
   }
   function load(){
