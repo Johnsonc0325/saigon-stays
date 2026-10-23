@@ -16,7 +16,7 @@
     try{const saved=JSON.parse(localStorage.getItem(legacyKey)||"[]");return Array.isArray(saved)?saved:[];}catch(error){return [];}
   }
   function makeId(prefix){return prefix+"-"+Date.now().toString(36)+"-"+Math.random().toString(36).slice(2,7);}
-  function emptyState(){return {activeListId:"packing",filter:"all",lists:[{id:"packing",name:"打包清單",tasks:[]} ]};}
+  function emptyState(){return {activeListId:null,filter:"all",lists:[]};}
   function defaultState(){
     const saved=readLegacy();
     return {activeListId:"packing",filter:"all",lists:[{id:"packing",name:"打包清單",tasks:legacyTitles.map((title,index)=>({id:"packing-"+index,title,done:!!saved[index],priority:"normal"}))}]};
