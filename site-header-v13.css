@@ -140,3 +140,11 @@ body.trek-home .hero>.meta{
 @media(max-width:440px){
   body.trek-home .hero>.heroCopy{bottom:137px!important}
 }
+
+/* Route action and compact homepage list rows. */
+body.trek-home #directions,body.trek-home #directions:visited,body.trek-home #directions:hover,body.trek-home #directions:focus-visible{color:#fff!important}
+body.trek-home .taskRow{grid-template-columns:22px minmax(0,1fr) auto 22px!important;align-items:start!important}
+body.trek-home .taskRow .taskBody{min-width:0!important;overflow:visible!important}
+body.trek-home .taskRow .taskTitle{display:block!important;min-width:0!important;overflow:visible!important;text-overflow:clip!important;white-space:normal!important;overflow-wrap:anywhere!important;line-height:1.35!important}
+body.trek-home .taskRow .taskPriority{white-space:nowrap!important}
+body.trek-home .taskRow .taskDelete{justify-self:end!important}
