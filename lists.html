@@ -314,7 +314,7 @@ nav a{color:#636a63;font-size:12px;transition:color .2s}nav a:hover{color:var(--
   document.querySelector("#cancelRenameForm").addEventListener("click",()=>{renameForm.hidden=true;});
   renameForm.addEventListener("submit",event=>{event.preventDefault();const list=activeList();if(!list)return;const value=renameInput.value.trim();if(!value)return;renameForm.hidden=true;after(sync.renameList(list.id,value));});
   function syncFromStorage(){state=sync.getState();editingTaskId=null;renameForm.hidden=true;render();}
-  window.addEventListener("storage",event=>{if(event.key===store.storageKey||event.key===store.legacyKey)syncFromStorage();});
+  window.addEventListener("storage",event=>{if(event.key===store.storageKey||event.key===store.legacyKey||event.key===store.profileStorageKey)syncFromStorage();});
   window.addEventListener("pageshow",syncFromStorage);
   window.addEventListener("focus",syncFromStorage);
   document.addEventListener("visibilitychange",()=>{if(!document.hidden)sync.refresh().catch(function(){});});
