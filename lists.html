@@ -252,6 +252,11 @@ nav a{color:#636a63;font-size:12px;transition:color .2s}nav a:hover{color:var(--
   document.querySelector("#showRenameForm").addEventListener("click",()=>{renameInput.value=activeList().name;renameForm.hidden=false;renameInput.focus();renameInput.select();});
   document.querySelector("#cancelRenameForm").addEventListener("click",()=>{renameForm.hidden=true;});
   renameForm.addEventListener("submit",event=>{event.preventDefault();const value=renameInput.value.trim();if(!value)return;activeList().name=value;renameForm.hidden=true;save();render();});
+  function syncFromStorage(){state=loadState();editingTaskId=null;renameForm.hidden=true;render();}
+  window.addEventListener("storage",event=>{if(event.key===storageKey||event.key===legacyKey)syncFromStorage();});
+  window.addEventListener("pageshow",syncFromStorage);
+  window.addEventListener("focus",syncFromStorage);
+  document.addEventListener("visibilitychange",()=>{if(!document.hidden)syncFromStorage();});
   render();
 })();
 </script>
