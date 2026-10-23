@@ -139,7 +139,7 @@
   }
   async function setToken(next){
     const value=String(next||"").trim();if(!value)return false;token=value;
-    try{localStorage.setItem(TOKEN_KEY,token);}catch(error){}
+    try{localStorage.setItem(tokenKey(),token);}catch(error){}
     queue=[];try{await refresh();return mode==="synced";}catch(error){setMode("offline");return false;}
   }
   function clearToken(){token=null;queue=[];serverVersion=null;try{localStorage.removeItem(tokenKey());}catch(error){}setMode("local");}
