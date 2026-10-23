@@ -150,11 +150,33 @@ nav a{color:#636a63;font-size:12px;transition:color .2s}nav a:hover{color:var(--
 .pageIntro p{margin:0;color:var(--muted);font-size:13px}
 .listPageGrid{margin-top:20px}
 @media(max-width:600px){.pageIntro{margin-top:20px;padding:24px 22px}.listPageGrid{margin-top:14px}}
+</style><style>
+/* Inline editing keeps every list item and its packing details user-editable. */
+.listTitleLine{display:flex;align-items:center;flex-wrap:wrap;gap:7px}
+.listRenameButton,.taskEditButton{border:0;border-radius:6px;background:#eef2ed;color:#486154;cursor:pointer;font:600 10px/1 inherit;padding:6px 8px}
+.listRenameButton:hover,.taskEditButton:hover{background:#dfeadf;color:var(--ink)}
+.renameListForm{display:flex;gap:7px;margin-top:9px}
+.renameListForm[hidden]{display:none}
+.renameListForm input,.taskEditForm input,.taskEditForm select{min-width:0;border:1px solid #dce4da;border-radius:7px;background:#fff;color:var(--text);font:inherit;padding:8px 9px;outline:none}
+.renameListForm input:focus,.taskEditForm input:focus,.taskEditForm select:focus{border-color:#789681;box-shadow:0 0 0 3px #78968118}
+.renameListForm input{flex:1}
+.renameListForm button,.taskEditForm button{border:0;border-radius:7px;background:var(--ink);color:#fff;padding:0 10px;cursor:pointer;font-size:11px}
+.renameListForm .renameCancel,.taskEditForm .taskEditCancel{background:#e9eee8;color:var(--ink)}
+.taskRow{grid-template-columns:17px 23px minmax(0,1fr) auto auto 28px}
+.taskEditForm{grid-column:3 / 6;display:grid;grid-template-columns:minmax(0,1fr) 76px auto auto;gap:6px;min-width:0}
+.taskEditForm input{min-width:0}
+@media(max-width:600px){
+  .taskRow{grid-template-columns:17px 22px minmax(0,1fr) auto 28px}
+  .taskEditButton{padding:6px}
+  .taskEditForm{grid-column:3 / 5;grid-template-columns:minmax(0,1fr) auto auto}
+  .taskEditForm select{display:none}
+  .renameListForm{flex-wrap:wrap}
+}
 </style></head><body class="trek-ui trek-lists">
 <header class="site-header"><div class="site-header-inner"><a class="site-logo" href="index.html">SAIGON STAYS<small>HO CHI MINH TRAVEL GUIDE</small></a><nav class="site-nav" aria-label="主選單"><a href="index.html">首頁</a><a href="lists.html" aria-current="page">列表</a><a href="itinerary.html">每日行程</a><a href="attractions.html">景點</a><a href="food.html">美食</a><a href="shopping.html">體驗購物</a><a href="transport.html">住宿交通</a><a href="tips.html">注意事項</a></nav></div></header>
 <main class="wrap">
 <section class="panel pageIntro"><div class="kicker">TRAVEL WORKSPACE</div><h1>列表 <span class="headingEn">/ Lists</span></h1><p>把打包清單、旅程待辦與自訂項目集中管理，資料會在首頁與列表頁同步。</p></section>
-<div class="grid listPageGrid"><section class="panel listsPanel" id="lists"><div class="head"><div><div class="kicker">MY LISTS</div><h2>列表 <span class="headingEn">/ Lists</span></h2><small>自訂清單、待辦事項與打包進度都集中在這裡。</small></div><a href="index.html">回到首頁 →</a></div><div class="listsApp"><aside class="listsSidebar"><div class="listProgressCard"><div class="listProgressTop"><strong id="listProgress">0%</strong><span>目前清單</span></div><div class="listProgressTrack"><span id="listProgressBar"></span></div><small id="listProgressText">0 / 0 已完成</small></div><div class="listsSectionLabel">清單</div><div class="listNav" id="listNav"></div><button class="addListButton" id="showListForm" type="button">＋ 新增清單</button><form class="newListForm" id="newListForm" hidden><input id="newListName" type="text" maxlength="24" placeholder="清單名稱" autocomplete="off"><div><button type="submit">建立</button><button class="formCancel" id="cancelListForm" type="button">取消</button></div></form></aside><div class="listMain"><div class="listMainHead"><div><strong id="activeListTitle">打包清單</strong><span class="listCount" id="activeListCount">0 項</span></div><div class="listFilters" id="listFilters" role="tablist" aria-label="待辦篩選"><button type="button" data-filter="all">全部</button><button type="button" data-filter="open">未完成</button><button type="button" data-filter="done">已完成</button></div></div><div class="taskList" id="taskList" aria-live="polite"></div><form class="addTaskForm" id="addTaskForm"><input id="newTaskTitle" type="text" maxlength="80" placeholder="新增一項待辦…" autocomplete="off" required><select id="newTaskPriority" aria-label="待辦優先級"><option value="normal">一般</option><option value="high">重要</option><option value="low">低優先</option></select><button type="submit">新增待辦</button></form></div></div></section></div>
+<div class="grid listPageGrid"><section class="panel listsPanel" id="lists"><div class="head"><div><div class="kicker">MY LISTS</div><h2>列表 <span class="headingEn">/ Lists</span></h2><small>自訂清單、待辦事項與打包進度都集中在這裡。</small></div><a href="index.html">回到首頁 →</a></div><div class="listsApp"><aside class="listsSidebar"><div class="listProgressCard"><div class="listProgressTop"><strong id="listProgress">0%</strong><span>目前清單</span></div><div class="listProgressTrack"><span id="listProgressBar"></span></div><small id="listProgressText">0 / 0 已完成</small></div><div class="listsSectionLabel">清單</div><div class="listNav" id="listNav"></div><button class="addListButton" id="showListForm" type="button">＋ 新增清單</button><form class="newListForm" id="newListForm" hidden><input id="newListName" type="text" maxlength="24" placeholder="清單名稱" autocomplete="off"><div><button type="submit">建立</button><button class="formCancel" id="cancelListForm" type="button">取消</button></div></form></aside><div class="listMain"><div class="listMainHead"><div class="listTitleArea"><div class="listTitleLine"><strong id="activeListTitle">打包清單</strong><span class="listCount" id="activeListCount">0 項</span><button class="listRenameButton" id="showRenameForm" type="button">修改名稱</button></div><form class="renameListForm" id="renameListForm" hidden><input id="renameListName" type="text" maxlength="24" aria-label="清單名稱"><button type="submit">儲存</button><button class="renameCancel" id="cancelRenameForm" type="button">取消</button></form></div><div class="listFilters" id="listFilters" role="tablist" aria-label="待辦篩選"><button type="button" data-filter="all">全部</button><button type="button" data-filter="open">未完成</button><button type="button" data-filter="done">已完成</button></div></div><div class="taskList" id="taskList" aria-live="polite"></div><form class="addTaskForm" id="addTaskForm"><input id="newTaskTitle" type="text" maxlength="80" placeholder="新增一項待辦…" autocomplete="off" required><select id="newTaskPriority" aria-label="待辦優先級"><option value="normal">一般</option><option value="high">重要</option><option value="low">低優先</option></select><button type="submit">新增待辦</button></form></div></div></section></div>
 </main>
 
 <script>
@@ -162,117 +184,73 @@ nav a{color:#636a63;font-size:12px;transition:color .2s}nav a:hover{color:var(--
   const storageKey="saigon-lists-v1";
   const legacyKey="saigon-packing-v1";
   const legacyTitles=["護照 / 簽證資料","手機 / 充電器 / 行動電源","轉換插頭","常用藥品","輕便雨具"];
-  const nav=document.querySelector("#listNav");
-  const taskList=document.querySelector("#taskList");
-  const titleEl=document.querySelector("#activeListTitle");
-  const countEl=document.querySelector("#activeListCount");
-  const progressEl=document.querySelector("#listProgress");
-  const progressBar=document.querySelector("#listProgressBar");
-  const progressText=document.querySelector("#listProgressText");
-  const taskInput=document.querySelector("#newTaskTitle");
-  const priorityInput=document.querySelector("#newTaskPriority");
-  const newListForm=document.querySelector("#newListForm");
-  const newListInput=document.querySelector("#newListName");
+  const nav=document.querySelector("#listNav"),taskList=document.querySelector("#taskList");
+  const titleEl=document.querySelector("#activeListTitle"),countEl=document.querySelector("#activeListCount");
+  const progressEl=document.querySelector("#listProgress"),progressBar=document.querySelector("#listProgressBar"),progressText=document.querySelector("#listProgressText");
+  const taskInput=document.querySelector("#newTaskTitle"),priorityInput=document.querySelector("#newTaskPriority");
+  const newListForm=document.querySelector("#newListForm"),newListInput=document.querySelector("#newListName");
+  const renameForm=document.querySelector("#renameListForm"),renameInput=document.querySelector("#renameListName");
   if(!nav||!taskList)return;
+  let editingTaskId=null;
   const makeId=prefix=>prefix+"-"+Date.now().toString(36)+"-"+Math.random().toString(36).slice(2,7);
-  function readLegacy(){
-    try{const saved=JSON.parse(localStorage.getItem(legacyKey)||"[]");return Array.isArray(saved)?saved:[];}catch(e){return [];}
-  }
-  function defaultState(){
-    const saved=readLegacy();
-    return {activeListId:"packing",filter:"all",lists:[{id:"packing",name:"打包清單",tasks:legacyTitles.map((title,i)=>({id:"packing-"+i,title,done:!!saved[i],priority:"normal"}))}]};
-  }
-  function loadState(){
-    try{
-      const parsed=JSON.parse(localStorage.getItem(storageKey)||"null");
-      if(parsed&&Array.isArray(parsed.lists)&&parsed.lists.length)return parsed;
-    }catch(e){}
-    return defaultState();
-  }
+  function readLegacy(){try{const saved=JSON.parse(localStorage.getItem(legacyKey)||"[]");return Array.isArray(saved)?saved:[];}catch(error){return [];}}
+  function defaultState(){const saved=readLegacy();return {activeListId:"packing",filter:"all",lists:[{id:"packing",name:"打包清單",tasks:legacyTitles.map((title,index)=>({id:"packing-"+index,title,done:!!saved[index],priority:"normal"}))}]};}
+  function loadState(){try{const parsed=JSON.parse(localStorage.getItem(storageKey)||"null");if(parsed&&Array.isArray(parsed.lists)&&parsed.lists.length)return parsed;}catch(error){}return defaultState();}
   let state=loadState();
-  function activeList(){
-    let list=state.lists.find(item=>item.id===state.activeListId);
-    if(!list){list=state.lists[0];state.activeListId=list.id;}
-    return list;
-  }
-  function save(){
-    try{
-      localStorage.setItem(storageKey,JSON.stringify(state));
-      const packing=state.lists.find(item=>item.id==="packing");
-      if(packing)localStorage.setItem(legacyKey,JSON.stringify(packing.tasks.map(task=>!!task.done)));
-    }catch(e){}
-  }
-  function progress(list){
-    const total=list.tasks.length,done=list.tasks.filter(task=>task.done).length;
-    return {total,done,percent:total?Math.round(done/total*100):0};
-  }
-  function priorityText(priority){
-    return priority==="high"?"重要":priority==="low"?"低優先":"一般";
+  function activeList(){let list=state.lists.find(item=>item.id===state.activeListId);if(!list){list=state.lists[0];state.activeListId=list.id;}return list;}
+  function save(){try{localStorage.setItem(storageKey,JSON.stringify(state));const packing=state.lists.find(item=>item.id==="packing");if(packing)localStorage.setItem(legacyKey,JSON.stringify(packing.tasks.map(task=>!!task.done)));}catch(error){}}
+  function progress(list){const total=list.tasks.length,done=list.tasks.filter(task=>task.done).length;return {total,done,percent:total?Math.round(done/total*100):0};}
+  function priorityText(priority){return priority==="high"?"重要":priority==="low"?"低優先":"一般";}
+  function field(name,value){const option=document.createElement("option");option.value=value;option.textContent=name;return option;}
+  function editForm(task){
+    const form=document.createElement("form");form.className="taskEditForm";form.dataset.editId=task.id;
+    const input=document.createElement("input");input.name="title";input.maxLength=80;input.required=true;input.value=task.title;input.setAttribute("aria-label","待辦名稱");
+    const select=document.createElement("select");select.name="priority";select.setAttribute("aria-label","待辦優先級");
+    [["一般","normal"],["重要","high"],["低優先","low"]].forEach(([name,value])=>{const option=field(name,value);option.selected=value===task.priority;select.appendChild(option);});
+    const saveButton=document.createElement("button");saveButton.type="submit";saveButton.textContent="儲存";
+    const cancelButton=document.createElement("button");cancelButton.type="button";cancelButton.className="taskEditCancel";cancelButton.dataset.cancelEdit=task.id;cancelButton.textContent="取消";
+    form.append(input,select,saveButton,cancelButton);return form;
   }
   function render(){
     const list=activeList(),stats=progress(list);
-    progressEl.textContent=stats.percent+"%";
-    progressBar.style.width=stats.percent+"%";
-    progressText.textContent=stats.done+" / "+stats.total+" 已完成";
-    titleEl.textContent=list.name;
-    countEl.textContent=list.tasks.length+" 項";
+    progressEl.textContent=stats.percent+"%";progressBar.style.width=stats.percent+"%";progressText.textContent=stats.done+" / "+stats.total+" 已完成";
+    titleEl.textContent=list.name;countEl.textContent=list.tasks.length+" 項";
     nav.innerHTML="";
-    state.lists.forEach(item=>{
-      const button=document.createElement("button");
-      button.type="button";button.dataset.listId=item.id;button.className=item.id===state.activeListId?"active":"";
-      const name=document.createElement("span");name.textContent=item.name;
-      const count=document.createElement("span");count.textContent=item.tasks.length;
-      button.append(name,count);nav.appendChild(button);
-    });
+    state.lists.forEach(item=>{const button=document.createElement("button");button.type="button";button.dataset.listId=item.id;button.className=item.id===state.activeListId?"active":"";const name=document.createElement("span");name.textContent=item.name;const count=document.createElement("span");count.textContent=item.tasks.length;button.append(name,count);nav.appendChild(button);});
     document.querySelectorAll("#listFilters button").forEach(button=>button.classList.toggle("active",button.dataset.filter===state.filter));
     taskList.innerHTML="";
     const filtered=list.tasks.filter(task=>state.filter==="done"?task.done:state.filter==="open"?!task.done:true);
-    if(!filtered.length){
-      const empty=document.createElement("div");empty.className="taskEmpty";empty.textContent=state.filter==="done"?"目前沒有已完成待辦":state.filter==="open"?"太好了，這份清單已完成。":"這份清單還沒有待辦，先新增一項吧。";taskList.appendChild(empty);
-    }else{
-      filtered.forEach(task=>{
-        const row=document.createElement("div");row.className="taskRow"+(task.done?" done":"");
-        const grip=document.createElement("span");grip.className="taskGrip";grip.textContent="⋮⋮";
-        const checkbox=document.createElement("input");checkbox.type="checkbox";checkbox.className="taskCheck";checkbox.checked=!!task.done;checkbox.dataset.taskId=task.id;checkbox.setAttribute("aria-label","完成 "+task.title);
-        const body=document.createElement("div");body.className="taskBody";
-        const taskTitle=document.createElement("span");taskTitle.className="taskTitle";taskTitle.textContent=task.title;body.appendChild(taskTitle);
+    if(!filtered.length){const empty=document.createElement("div");empty.className="taskEmpty";empty.textContent=state.filter==="done"?"目前沒有已完成待辦":state.filter==="open"?"太好了，這份清單已完成。":"這份清單還沒有待辦，先新增一項吧。";taskList.appendChild(empty);return;}
+    filtered.forEach(task=>{
+      const row=document.createElement("div");row.className="taskRow"+(task.done?" done":"");
+      const grip=document.createElement("span");grip.className="taskGrip";grip.textContent="⋮⋮";
+      const checkbox=document.createElement("input");checkbox.type="checkbox";checkbox.className="taskCheck";checkbox.checked=!!task.done;checkbox.dataset.taskId=task.id;checkbox.setAttribute("aria-label","完成 "+task.title);
+      const remove=document.createElement("button");remove.type="button";remove.className="taskDelete";remove.dataset.deleteId=task.id;remove.setAttribute("aria-label","刪除 "+task.title);remove.textContent="×";
+      if(editingTaskId===task.id){row.append(grip,checkbox,editForm(task),remove);}else{
+        const body=document.createElement("div");body.className="taskBody";const taskTitle=document.createElement("span");taskTitle.className="taskTitle";taskTitle.textContent=task.title;body.appendChild(taskTitle);
         const priority=document.createElement("span");priority.className="taskPriority "+task.priority;priority.textContent=priorityText(task.priority);
-        const remove=document.createElement("button");remove.type="button";remove.className="taskDelete";remove.dataset.deleteId=task.id;remove.setAttribute("aria-label","刪除 "+task.title);remove.textContent="×";
-        row.append(grip,checkbox,body,priority,remove);taskList.appendChild(row);
-      });
-    }
+        const edit=document.createElement("button");edit.type="button";edit.className="taskEditButton";edit.dataset.editId=task.id;edit.setAttribute("aria-label","修改 "+task.title);edit.textContent="修改";
+        row.append(grip,checkbox,body,priority,edit,remove);
+      }
+      taskList.appendChild(row);
+    });
   }
-  nav.addEventListener("click",event=>{
-    const button=event.target.closest("button[data-list-id]");if(!button)return;
-    state.activeListId=button.dataset.listId;state.filter="all";save();render();
-  });
-  document.querySelector("#listFilters").addEventListener("click",event=>{
-    const button=event.target.closest("button[data-filter]");if(!button)return;
-    state.filter=button.dataset.filter;render();
-  });
-  taskList.addEventListener("change",event=>{
-    if(!event.target.matches(".taskCheck"))return;
-    const list=activeList(),task=list.tasks.find(item=>item.id===event.target.dataset.taskId);if(!task)return;
-    task.done=event.target.checked;save();render();
-  });
+  nav.addEventListener("click",event=>{const button=event.target.closest("button[data-list-id]");if(!button)return;state.activeListId=button.dataset.listId;state.filter="all";editingTaskId=null;save();render();});
+  document.querySelector("#listFilters").addEventListener("click",event=>{const button=event.target.closest("button[data-filter]");if(!button)return;state.filter=button.dataset.filter;editingTaskId=null;render();});
+  taskList.addEventListener("change",event=>{if(!event.target.matches(".taskCheck"))return;const task=activeList().tasks.find(item=>item.id===event.target.dataset.taskId);if(!task)return;task.done=event.target.checked;save();render();});
   taskList.addEventListener("click",event=>{
-    const button=event.target.closest("button[data-delete-id]");if(!button)return;
-    const list=activeList();list.tasks=list.tasks.filter(task=>task.id!==button.dataset.deleteId);save();render();
+    const edit=event.target.closest("button[data-edit-id]");if(edit){editingTaskId=edit.dataset.editId;render();const input=taskList.querySelector(".taskEditForm input");if(input){input.focus();input.select();}return;}
+    const cancel=event.target.closest("button[data-cancel-edit]");if(cancel){editingTaskId=null;render();return;}
+    const remove=event.target.closest("button[data-delete-id]");if(!remove)return;activeList().tasks=activeList().tasks.filter(task=>task.id!==remove.dataset.deleteId);editingTaskId=null;save();render();
   });
-  document.querySelector("#addTaskForm").addEventListener("submit",event=>{
-    event.preventDefault();const value=taskInput.value.trim();if(!value)return;
-    activeList().tasks.unshift({id:makeId("task"),title:value,done:false,priority:priorityInput.value});save();taskInput.value="";render();taskInput.focus();
-  });
-  document.querySelector("#showListForm").addEventListener("click",()=>{
-    newListForm.hidden=false;newListInput.focus();
-  });
-  document.querySelector("#cancelListForm").addEventListener("click",()=>{
-    newListForm.hidden=true;newListInput.value="";
-  });
-  newListForm.addEventListener("submit",event=>{
-    event.preventDefault();const value=newListInput.value.trim();if(!value)return;
-    const list={id:makeId("list"),name:value,tasks:[]};state.lists.push(list);state.activeListId=list.id;state.filter="all";save();newListInput.value="";newListForm.hidden=true;render();taskInput.focus();
-  });
+  taskList.addEventListener("submit",event=>{const form=event.target.closest(".taskEditForm");if(!form)return;event.preventDefault();const task=activeList().tasks.find(item=>item.id===form.dataset.editId);const title=new FormData(form).get("title").trim();if(!task||!title)return;task.title=title;task.priority=new FormData(form).get("priority");editingTaskId=null;save();render();});
+  document.querySelector("#addTaskForm").addEventListener("submit",event=>{event.preventDefault();const value=taskInput.value.trim();if(!value)return;activeList().tasks.unshift({id:makeId("task"),title:value,done:false,priority:priorityInput.value});save();taskInput.value="";render();taskInput.focus();});
+  document.querySelector("#showListForm").addEventListener("click",()=>{newListForm.hidden=false;newListInput.focus();});
+  document.querySelector("#cancelListForm").addEventListener("click",()=>{newListForm.hidden=true;newListInput.value="";});
+  newListForm.addEventListener("submit",event=>{event.preventDefault();const value=newListInput.value.trim();if(!value)return;const list={id:makeId("list"),name:value,tasks:[]};state.lists.push(list);state.activeListId=list.id;state.filter="all";save();newListInput.value="";newListForm.hidden=true;render();taskInput.focus();});
+  document.querySelector("#showRenameForm").addEventListener("click",()=>{renameInput.value=activeList().name;renameForm.hidden=false;renameInput.focus();renameInput.select();});
+  document.querySelector("#cancelRenameForm").addEventListener("click",()=>{renameForm.hidden=true;});
+  renameForm.addEventListener("submit",event=>{event.preventDefault();const value=renameInput.value.trim();if(!value)return;activeList().name=value;renameForm.hidden=true;save();render();});
   render();
 })();
 </script>
