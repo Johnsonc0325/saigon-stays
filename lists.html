@@ -166,10 +166,23 @@ nav a{color:#636a63;font-size:12px;transition:color .2s}nav a:hover{color:var(--
 .taskEditForm{grid-column:3 / 6;display:grid;grid-template-columns:minmax(0,1fr) 76px auto auto;gap:6px;min-width:0}
 .taskEditForm input{min-width:0}
 @media(max-width:600px){
-  .taskRow{grid-template-columns:17px 22px minmax(0,1fr) auto 44px}
-  .taskEditButton{padding:6px}
-  .taskEditForm{grid-column:3 / 5;grid-template-columns:minmax(0,1fr) auto auto}
-  .taskEditForm select{display:none}
+  /* ⋮⋮ 沒有拖拽功能、只是裝飾 → 手機隱藏，17px 空間讓給優先級色條 */
+  .taskGrip{display:none}
+  .taskRow{grid-template-columns:7px 22px minmax(0,1fr) auto 44px}
+  .taskCheck{grid-column:2}
+  .taskBody{grid-column:3}
+  /* 優先級：5px 色條（重要=赭紅、低優先=淡金、一般=極淡灰），不佔文字空間 */
+  .taskPriority{display:block;grid-column:1;grid-row:1;width:7px;height:28px;padding:0;border-radius:3px;font-size:0;overflow:hidden;background:#dfe4df}
+  .taskPriority.high{background:#a95f50}
+  .taskPriority.low{background:#c9bd97}
+  /* 已完成的項目：色條也跟著淡化，避免跟「未完成的重要事項」混淆 */
+  .taskRow.done .taskPriority{opacity:.4}
+  .taskEditButton{grid-column:4;padding:6px}
+  .taskDelete{grid-column:5}
+  /* 編輯時可以改優先級（原本被 display:none 藏掉） */
+  .taskEditForm{grid-column:3 / 5;grid-template-columns:minmax(0,1fr) auto auto;gap:6px}
+  .taskEditForm input{grid-column:1/-1}
+  .taskEditForm select{display:block;grid-column:1;min-width:0}
   .renameListForm{flex-wrap:wrap}
 }
 </style><style>
@@ -197,8 +210,8 @@ nav a{color:#636a63;font-size:12px;transition:color .2s}nav a:hover{color:var(--
 <div class="grid listPageGrid"><section class="panel listsPanel" id="lists"><div class="head"><div><div class="kicker">MY LISTS</div><h2>列表 <span class="headingEn">/ Lists</span></h2><small>自訂清單、待辦事項與打包進度都集中在這裡。</small></div><a href="index.html">回到首頁 →</a></div><div class="listsApp"><aside class="listsSidebar"><div class="listProgressCard"><div class="listProgressTop"><strong id="listProgress">0%</strong><span>目前清單</span></div><div class="listProgressTrack"><span id="listProgressBar"></span></div><small id="listProgressText">0 / 0 已完成</small></div><div class="listsSectionLabel">清單</div><div class="listNav" id="listNav"></div><button class="addListButton" id="showListForm" type="button">＋ 新增清單</button><form class="newListForm" id="newListForm" hidden><input id="newListName" type="text" maxlength="24" placeholder="清單名稱" autocomplete="off"><div><button type="submit">建立</button><button class="formCancel" id="cancelListForm" type="button">取消</button></div></form></aside><div class="listMain"><div class="undoNotice" id="undoNotice" role="status" aria-live="polite" hidden><span id="undoMessage"></span><button id="undoDelete" type="button">復原</button></div><div class="listMainHead"><div class="listTitleArea"><div class="listTitleLine"><strong id="activeListTitle">打包清單</strong><span class="listCount" id="activeListCount">0 項</span><button class="listRenameButton" id="showRenameForm" type="button">修改名稱</button></div><form class="renameListForm" id="renameListForm" hidden><input id="renameListName" type="text" maxlength="24" aria-label="清單名稱"><button type="submit">儲存</button><button class="renameCancel" id="cancelRenameForm" type="button">取消</button></form></div><div class="listFilters" id="listFilters" role="tablist" aria-label="待辦篩選"><button type="button" data-filter="all">全部</button><button type="button" data-filter="open">未完成</button><button type="button" data-filter="done">已完成</button></div></div><div class="taskList" id="taskList" aria-live="polite"></div><form class="addTaskForm" id="addTaskForm"><input id="newTaskTitle" type="text" maxlength="80" placeholder="新增一項待辦…" autocomplete="off" required><select id="newTaskPriority" aria-label="待辦優先級"><option value="normal">一般</option><option value="high">重要</option><option value="low">低優先</option></select><button type="submit">新增待辦</button></form></div></div></section></div>
 </main>
 
-<script src="saigon-lists-store.js?v=3"></script>
-<script src="saigon-sync.js?v=3"></script>
+<script src="saigon-lists-store.js?v=4"></script>
+<script src="saigon-sync.js?v=4"></script>
 <script>
 (function(){
   const store=window.SaigonListsStore;
