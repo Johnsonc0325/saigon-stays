@@ -1,2 +1,7 @@
 胡志明住宿精選（單檔分享）.html
 images/booking_*.jpg
+
+# Wrangler 本機暫存（不進版控）
+.wrangler/
+api/.wrangler/
+node_modules/
