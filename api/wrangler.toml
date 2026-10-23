@@ -5,4 +5,4 @@ compatibility_date = "2026-09-01"
 [[d1_databases]]
 binding = "DB"
 database_name = "saigon-db"
-database_id = "REPLACE_WITH_D1_ID"
+database_id = "ab848bed-5854-4bfd-8525-3fd43f35518b"
