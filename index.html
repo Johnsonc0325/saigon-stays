@@ -189,7 +189,7 @@ nav a{color:#636a63;font-size:12px;transition:color .2s}nav a:hover{color:var(--
 </aside>
 <section class="panel reminders"><div class="head"><h2>♟ 重要提醒</h2><a href="tips.html">查看詳情 →</a></div><ul class="list"><li><b>入境文件</b>　護照有效期與簽證資料出發前再確認</li><li><b>待確認預約</b>　Phở Museum、Quang San、Fame Nails、Cửu Vân Long</li><li><b>Waterbus</b>　Day 3 晚間班次出發前再查</li></ul></section>
 </div></main>
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script><script>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script><script src="saigon-lists-store.js?v=1"></script><script>
 const places={
 airport:[10.8188,106.652],hotel:[10.8393,106.6544],bep:[10.832,106.658],floral:[10.829,106.661],om:[10.833,106.662],
 chau:[10.7939,106.6893],tandinh:[10.7896,106.6908],cong:[10.7894,106.6907],post:[10.7798,106.6999],notre:[10.7797,106.699],book:[10.7803,106.6994],city:[10.7769,106.7009],pho:[10.775,106.701],
@@ -227,125 +227,7 @@ routeDays.forEach((x,i)=>{const b=document.createElement("button");b.className="
 document.querySelector("#allroutes").addEventListener("click",()=>{if(selectedDay===null){show(0);return;}showAll=!showAll;document.querySelector("#allroutes").textContent=showAll?"只顯示選取日期":"顯示全部日期";document.querySelector("#mapday").textContent=showAll?"ALL DAYS":"DAY "+String(selectedDay+1).padStart(2,"0");draw()});
 initMap();showOverview();
 try{const saved=JSON.parse(localStorage.getItem("saigon-packing-v1")||"[]");document.querySelectorAll(".check input").forEach((box,i)=>{box.checked=!!saved[i];box.addEventListener("change",()=>localStorage.setItem("saigon-packing-v1",JSON.stringify([...document.querySelectorAll(".check input")].map(x=>x.checked))))})}catch(e){}
-</script><script>if("IntersectionObserver" in window){const photos=document.querySelectorAll(".mini .photo[data-photo]");const observer=new IntersectionObserver(entries=>{entries.forEach(entry=>{if(!entry.isIntersecting)return;const el=entry.target;const image=new Image();image.onload=()=>{el.style.backgroundImage='url("'+image.src+'")';el.classList.remove("fallback")};image.onerror=()=>{el.classList.add("fallback");el.textContent="圖片暫時無法載入"};image.src=el.dataset.photo;observer.unobserve(el)})},{rootMargin:"250px"});photos.forEach(el=>observer.observe(el))}else{document.querySelectorAll(".mini .photo[data-photo]").forEach(el=>el.style.backgroundImage='url("'+el.dataset.photo+'")')}</script><script>document.querySelectorAll(".toolIcon[data-fallback]").forEach(icon=>{const svg=icon.querySelector("svg");if(!svg)return;svg.addEventListener("error",()=>{icon.classList.add("fallback");icon.textContent=icon.dataset.fallback},{once:true})});</script><script>
-(function(){
-  const storageKey="saigon-lists-v1";
-  const legacyKey="saigon-packing-v1";
-  const legacyTitles=["護照 / 簽證資料","手機 / 充電器 / 行動電源","轉換插頭","常用藥品","輕便雨具"];
-  const nav=document.querySelector("#listNav");
-  const taskList=document.querySelector("#taskList");
-  const titleEl=document.querySelector("#activeListTitle");
-  const countEl=document.querySelector("#activeListCount");
-  const progressEl=document.querySelector("#listProgress");
-  const progressBar=document.querySelector("#listProgressBar");
-  const progressText=document.querySelector("#listProgressText");
-  const taskInput=document.querySelector("#newTaskTitle");
-  const priorityInput=document.querySelector("#newTaskPriority");
-  const newListForm=document.querySelector("#newListForm");
-  const newListInput=document.querySelector("#newListName");
-  if(!nav||!taskList)return;
-  const makeId=prefix=>prefix+"-"+Date.now().toString(36)+"-"+Math.random().toString(36).slice(2,7);
-  function readLegacy(){
-    try{const saved=JSON.parse(localStorage.getItem(legacyKey)||"[]");return Array.isArray(saved)?saved:[];}catch(e){return [];}
-  }
-  function defaultState(){
-    const saved=readLegacy();
-    return {activeListId:"packing",filter:"all",lists:[{id:"packing",name:"打包清單",tasks:legacyTitles.map((title,i)=>({id:"packing-"+i,title,done:!!saved[i],priority:"normal"}))}]};
-  }
-  function loadState(){
-    try{
-      const parsed=JSON.parse(localStorage.getItem(storageKey)||"null");
-      if(parsed&&Array.isArray(parsed.lists)&&parsed.lists.length)return parsed;
-    }catch(e){}
-    return defaultState();
-  }
-  let state=loadState();
-  function activeList(){
-    let list=state.lists.find(item=>item.id===state.activeListId);
-    if(!list){list=state.lists[0];state.activeListId=list.id;}
-    return list;
-  }
-  function save(){
-    try{
-      localStorage.setItem(storageKey,JSON.stringify(state));
-      const packing=state.lists.find(item=>item.id==="packing");
-      if(packing)localStorage.setItem(legacyKey,JSON.stringify(packing.tasks.map(task=>!!task.done)));
-    }catch(e){}
-  }
-  function progress(list){
-    const total=list.tasks.length,done=list.tasks.filter(task=>task.done).length;
-    return {total,done,percent:total?Math.round(done/total*100):0};
-  }
-  function priorityText(priority){
-    return priority==="high"?"重要":priority==="low"?"低優先":"一般";
-  }
-  function render(){
-    const list=activeList(),stats=progress(list);
-    progressEl.textContent=stats.percent+"%";
-    progressBar.style.width=stats.percent+"%";
-    progressText.textContent=stats.done+" / "+stats.total+" 已完成";
-    titleEl.textContent=list.name;
-    countEl.textContent=list.tasks.length+" 項";
-    nav.innerHTML="";
-    state.lists.forEach(item=>{
-      const button=document.createElement("button");
-      button.type="button";button.dataset.listId=item.id;button.className=item.id===state.activeListId?"active":"";
-      const name=document.createElement("span");name.textContent=item.name;
-      const count=document.createElement("span");count.textContent=item.tasks.length;
-      button.append(name,count);nav.appendChild(button);
-    });
-    document.querySelectorAll("#listFilters button").forEach(button=>button.classList.toggle("active",button.dataset.filter===state.filter));
-    taskList.innerHTML="";
-    const filtered=list.tasks.filter(task=>state.filter==="done"?task.done:state.filter==="open"?!task.done:true);
-    if(!filtered.length){
-      const empty=document.createElement("div");empty.className="taskEmpty";empty.textContent=state.filter==="done"?"目前沒有已完成待辦":state.filter==="open"?"太好了，這份清單已完成。":"這份清單還沒有待辦，先新增一項吧。";taskList.appendChild(empty);
-    }else{
-      filtered.forEach(task=>{
-        const row=document.createElement("div");row.className="taskRow"+(task.done?" done":"");
-        const grip=document.createElement("span");grip.className="taskGrip";grip.textContent="⋮⋮";
-        const checkbox=document.createElement("input");checkbox.type="checkbox";checkbox.className="taskCheck";checkbox.checked=!!task.done;checkbox.dataset.taskId=task.id;checkbox.setAttribute("aria-label","完成 "+task.title);
-        const body=document.createElement("div");body.className="taskBody";
-        const taskTitle=document.createElement("span");taskTitle.className="taskTitle";taskTitle.textContent=task.title;body.appendChild(taskTitle);
-        const priority=document.createElement("span");priority.className="taskPriority "+task.priority;priority.textContent=priorityText(task.priority);
-        const remove=document.createElement("button");remove.type="button";remove.className="taskDelete";remove.dataset.deleteId=task.id;remove.setAttribute("aria-label","刪除 "+task.title);remove.textContent="×";
-        row.append(grip,checkbox,body,priority,remove);taskList.appendChild(row);
-      });
-    }
-  }
-  nav.addEventListener("click",event=>{
-    const button=event.target.closest("button[data-list-id]");if(!button)return;
-    state.activeListId=button.dataset.listId;state.filter="all";save();render();
-  });
-  document.querySelector("#listFilters").addEventListener("click",event=>{
-    const button=event.target.closest("button[data-filter]");if(!button)return;
-    state.filter=button.dataset.filter;render();
-  });
-  taskList.addEventListener("change",event=>{
-    if(!event.target.matches(".taskCheck"))return;
-    const list=activeList(),task=list.tasks.find(item=>item.id===event.target.dataset.taskId);if(!task)return;
-    task.done=event.target.checked;save();render();
-  });
-  taskList.addEventListener("click",event=>{
-    const button=event.target.closest("button[data-delete-id]");if(!button)return;
-    const list=activeList();list.tasks=list.tasks.filter(task=>task.id!==button.dataset.deleteId);save();render();
-  });
-  document.querySelector("#addTaskForm").addEventListener("submit",event=>{
-    event.preventDefault();const value=taskInput.value.trim();if(!value)return;
-    activeList().tasks.unshift({id:makeId("task"),title:value,done:false,priority:priorityInput.value});save();taskInput.value="";render();taskInput.focus();
-  });
-  document.querySelector("#showListForm").addEventListener("click",()=>{
-    newListForm.hidden=false;newListInput.focus();
-  });
-  document.querySelector("#cancelListForm").addEventListener("click",()=>{
-    newListForm.hidden=true;newListInput.value="";
-  });
-  newListForm.addEventListener("submit",event=>{
-    event.preventDefault();const value=newListInput.value.trim();if(!value)return;
-    const list={id:makeId("list"),name:value,tasks:[]};state.lists.push(list);state.activeListId=list.id;state.filter="all";save();newListInput.value="";newListForm.hidden=true;render();taskInput.focus();
-  });
-  render();
-})();
-</script>
+</script><script>if("IntersectionObserver" in window){const photos=document.querySelectorAll(".mini .photo[data-photo]");const observer=new IntersectionObserver(entries=>{entries.forEach(entry=>{if(!entry.isIntersecting)return;const el=entry.target;const image=new Image();image.onload=()=>{el.style.backgroundImage='url("'+image.src+'")';el.classList.remove("fallback")};image.onerror=()=>{el.classList.add("fallback");el.textContent="圖片暫時無法載入"};image.src=el.dataset.photo;observer.unobserve(el)})},{rootMargin:"250px"});photos.forEach(el=>observer.observe(el))}else{document.querySelectorAll(".mini .photo[data-photo]").forEach(el=>el.style.backgroundImage='url("'+el.dataset.photo+'")')}</script><script>document.querySelectorAll(".toolIcon[data-fallback]").forEach(icon=>{const svg=icon.querySelector("svg");if(!svg)return;svg.addEventListener("error",()=>{icon.classList.add("fallback");icon.textContent=icon.dataset.fallback},{once:true})});</script><script></script>
 <script>
 (function(){
   const amount=document.querySelector("#currencyAmount");
@@ -396,27 +278,10 @@ try{const saved=JSON.parse(localStorage.getItem("saigon-packing-v1")||"[]");docu
 })();
 </script><script>
 (function(){
-  const storageKey="saigon-lists-v1";
-  const legacyKey="saigon-packing-v1";
-  const legacyTitles=["護照 / 簽證資料","手機 / 充電器 / 行動電源","轉換插頭","常用藥品","輕便雨具"];
-  const todoPreview=document.querySelector("#todoPreview");
-  const packingPreview=document.querySelector("#packingPreview");
-  if(!todoPreview||!packingPreview)return;
-  const readLegacy=()=>{try{const value=JSON.parse(localStorage.getItem(legacyKey)||"[]");return Array.isArray(value)?value:[];}catch(error){return [];}};
-  const defaultState=()=>({activeListId:"packing",filter:"all",lists:[{id:"packing",name:"打包清單",tasks:legacyTitles.map((title,index)=>({id:"packing-"+index,title,done:!!readLegacy()[index],priority:"normal"}))}]});
-  function loadState(){
-    try{const value=JSON.parse(localStorage.getItem(storageKey)||"null");if(value&&Array.isArray(value.lists)&&value.lists.length)return value;}catch(error){}
-    return defaultState();
-  }
-  let state=loadState();
-  function save(){
-    try{
-      localStorage.setItem(storageKey,JSON.stringify(state));
-      const packing=state.lists.find(list=>list.id==="packing");
-      if(packing)localStorage.setItem(legacyKey,JSON.stringify(packing.tasks.map(task=>!!task.done)));
-    }catch(error){}
-  }
-  const stats=list=>{const total=list.tasks.length,done=list.tasks.filter(task=>task.done).length;return {total,done,open:total-done,percent:total?Math.round(done/total*100):0};};
+  const store=window.SaigonListsStore;
+  if(!store)return;
+  let state=store.load();
+  const stats=store.progress;
   function row(list,task){
     const label=document.createElement("label");label.className="sidebarTask"+(task.done?" done":"");
     const input=document.createElement("input");input.type="checkbox";input.checked=!!task.done;input.dataset.listId=list.id;input.dataset.taskId=task.id;input.setAttribute("aria-label","完成 "+task.title);
@@ -445,10 +310,10 @@ try{const saved=JSON.parse(localStorage.getItem("saigon-packing-v1")||"[]");docu
     const list=state.lists.find(item=>item.id===target.dataset.listId);
     const task=list&&list.tasks.find(item=>item.id===target.dataset.taskId);
     if(!task)return;
-    task.done=target.checked;save();render();
+    task.done=target.checked;state=store.save(state);render();
   });
-  function syncFromStorage(){state=loadState();render();}
-  window.addEventListener("storage",event=>{if(event.key===storageKey||event.key===legacyKey)syncFromStorage();});
+  function syncFromStorage(){state=store.load();render();}
+  window.addEventListener("storage",event=>{if(event.key===store.storageKey||event.key===store.legacyKey)syncFromStorage();});
   window.addEventListener("pageshow",syncFromStorage);
   window.addEventListener("focus",syncFromStorage);
   document.addEventListener("visibilitychange",()=>{if(!document.hidden)syncFromStorage();});
