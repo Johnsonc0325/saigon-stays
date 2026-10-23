@@ -3,7 +3,8 @@
   "use strict";
 
   const API_BASE = window.SAIGON_API_BASE || "https://saigon-api.johnsonc0325.workers.dev";
-  const TOKEN_KEY = "saigon-share-token";
+  const TOKEN_PREFIX = "saigon-share-token-";
+  function tokenKey(){return TOKEN_PREFIX+(store&&store.currentProfileId?store.currentProfileId():"johnson");}
   const POLL_MS = 8000;
   const REQUEST_TIMEOUT = 8000;
   const store = window.SaigonListsStore;
@@ -28,14 +29,14 @@
     if(!urlToken)return;
     token=urlToken.trim()||null;
     try{
-      if(token)localStorage.setItem(TOKEN_KEY,token);
+      if(token)localStorage.setItem(tokenKey(),token);
       const url=new URL(window.location.href);url.searchParams.delete("t");
       history.replaceState(null,"",url.pathname+(url.search?url.search:"")+(url.hash||""));
     }catch(error){}
   }
   function readToken(){
     adoptUrlToken();
-    if(token===null){try{token=localStorage.getItem(TOKEN_KEY)||null;}catch(error){token=null;}}
+    if(token===null){try{token=localStorage.getItem(tokenKey())||null;}catch(error){token=null;}}
     return token;
   }
   function request(path, options){
@@ -141,8 +142,16 @@
     try{localStorage.setItem(TOKEN_KEY,token);}catch(error){}
     queue=[];try{await refresh();return mode==="synced";}catch(error){setMode("offline");return false;}
   }
-  function clearToken(){token=null;queue=[];serverVersion=null;try{localStorage.removeItem(TOKEN_KEY);}catch(error){}setMode("local");}
+  function clearToken(){token=null;queue=[];serverVersion=null;try{localStorage.removeItem(tokenKey());}catch(error){}setMode("local");}
+  function switchProfile(profileId){
+    if(!store||!store.switchProfile)return state;
+    token=null;queue=[];serverVersion=null;
+    state=store.switchProfile(profileId);
+    readToken();setMode(token?"offline":"local");notify();
+    if(token)refresh().catch(function(){});
+    return state;
+  }
   function buildShareUrl(){return token?window.location.origin+window.location.pathname+"?t="+encodeURIComponent(token):window.location.origin+window.location.pathname;}
   function destroy(){destroyed=true;if(pollTimer)clearInterval(pollTimer);pollTimer=null;}
-  window.SaigonSync={init,getState:function(){return state;},getMode:function(){return mode;},getToken:function(){return token;},setToken,clearToken,buildShareUrl,addTask,updateTask,deleteTask,addList,renameList,deleteList,refresh,destroy};
+  window.SaigonSync={init,getState:function(){return state;},getMode:function(){return mode;},getToken:function(){return token;},setToken,clearToken,buildShareUrl,switchProfile,addTask,updateTask,deleteTask,addList,renameList,deleteList,refresh,destroy};
 })(window,document);
