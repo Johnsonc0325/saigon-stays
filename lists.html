@@ -118,7 +118,7 @@ nav a{color:#636a63;font-size:12px;transition:color .2s}nav a:hover{color:var(--
 .taskPriority{padding:3px 7px;border-radius:5px;background:#f0f3ef;color:#758278;font-size:10px;white-space:nowrap}
 .taskPriority.high{background:#faece8;color:#a95f50}
 .taskPriority.low{background:#f3f1e8;color:#9b8756}
-.taskDelete{width:26px;height:26px;border:0;border-radius:7px;background:transparent;color:#a2aaa3;cursor:pointer;font-size:16px;line-height:1}
+.taskDelete{width:44px;height:44px;border:0;border-radius:7px;background:transparent;color:#a2aaa3;cursor:pointer;font-size:16px;line-height:1}
 .taskDelete:hover{background:#f7e9e7;color:#a95f50}
 .taskEmpty{padding:28px 10px;text-align:center;color:#8a938b;font-size:12px}
 .addTaskForm{display:grid;grid-template-columns:minmax(0,1fr) 90px auto;gap:8px;margin-top:14px;padding-top:14px;border-top:1px solid var(--line)}
@@ -162,21 +162,29 @@ nav a{color:#636a63;font-size:12px;transition:color .2s}nav a:hover{color:var(--
 .renameListForm input{flex:1}
 .renameListForm button,.taskEditForm button{border:0;border-radius:7px;background:var(--ink);color:#fff;padding:0 10px;cursor:pointer;font-size:11px}
 .renameListForm .renameCancel,.taskEditForm .taskEditCancel{background:#e9eee8;color:var(--ink)}
-.taskRow{grid-template-columns:17px 23px minmax(0,1fr) auto auto 28px}
+.taskRow{grid-template-columns:17px 23px minmax(0,1fr) auto auto 44px}
 .taskEditForm{grid-column:3 / 6;display:grid;grid-template-columns:minmax(0,1fr) 76px auto auto;gap:6px;min-width:0}
 .taskEditForm input{min-width:0}
 @media(max-width:600px){
-  .taskRow{grid-template-columns:17px 22px minmax(0,1fr) auto 28px}
+  .taskRow{grid-template-columns:17px 22px minmax(0,1fr) auto 44px}
   .taskEditButton{padding:6px}
   .taskEditForm{grid-column:3 / 5;grid-template-columns:minmax(0,1fr) auto auto}
   .taskEditForm select{display:none}
   .renameListForm{flex-wrap:wrap}
 }
+</style><style>
+.listMain{position:relative}
+.undoNotice{position:absolute;z-index:2;top:10px;left:22px;right:22px;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 12px;border-radius:8px;background:#1A202C;color:#fff;font-size:12px;box-shadow:0 5px 16px #0002}
+.undoNotice[hidden]{display:none}
+.undoNotice button{border:0;background:transparent;color:#F59E0B;cursor:pointer;font:700 12px/1.4 inherit;padding:4px 2px;white-space:nowrap}
+.taskEditButton{min-width:44px;min-height:44px;background:transparent;color:#6b7a70;font-weight:600}
+.taskEditButton:hover,.taskEditButton:focus-visible{background:#eef2ed;color:var(--ink)}
+@media(max-width:600px){.undoNotice{left:16px;right:16px}.taskDelete{width:44px;height:44px}}
 </style></head><body class="trek-ui trek-lists">
 <header class="site-header"><div class="site-header-inner"><a class="site-logo" href="index.html">SAIGON STAYS<small>HO CHI MINH TRAVEL GUIDE</small></a><nav class="site-nav" aria-label="主選單"><a href="index.html">首頁</a><a href="lists.html" aria-current="page">列表</a><a href="itinerary.html">每日行程</a><a href="attractions.html">景點</a><a href="food.html">美食</a><a href="shopping.html">體驗購物</a><a href="transport.html">住宿交通</a><a href="tips.html">注意事項</a></nav></div></header>
 <main class="wrap">
 <section class="panel pageIntro"><div class="kicker">TRAVEL WORKSPACE</div><h1>列表 <span class="headingEn">/ Lists</span></h1><p>把打包清單、旅程待辦與自訂項目集中管理，資料會在首頁與列表頁同步。</p></section>
-<div class="grid listPageGrid"><section class="panel listsPanel" id="lists"><div class="head"><div><div class="kicker">MY LISTS</div><h2>列表 <span class="headingEn">/ Lists</span></h2><small>自訂清單、待辦事項與打包進度都集中在這裡。</small></div><a href="index.html">回到首頁 →</a></div><div class="listsApp"><aside class="listsSidebar"><div class="listProgressCard"><div class="listProgressTop"><strong id="listProgress">0%</strong><span>目前清單</span></div><div class="listProgressTrack"><span id="listProgressBar"></span></div><small id="listProgressText">0 / 0 已完成</small></div><div class="listsSectionLabel">清單</div><div class="listNav" id="listNav"></div><button class="addListButton" id="showListForm" type="button">＋ 新增清單</button><form class="newListForm" id="newListForm" hidden><input id="newListName" type="text" maxlength="24" placeholder="清單名稱" autocomplete="off"><div><button type="submit">建立</button><button class="formCancel" id="cancelListForm" type="button">取消</button></div></form></aside><div class="listMain"><div class="listMainHead"><div class="listTitleArea"><div class="listTitleLine"><strong id="activeListTitle">打包清單</strong><span class="listCount" id="activeListCount">0 項</span><button class="listRenameButton" id="showRenameForm" type="button">修改名稱</button></div><form class="renameListForm" id="renameListForm" hidden><input id="renameListName" type="text" maxlength="24" aria-label="清單名稱"><button type="submit">儲存</button><button class="renameCancel" id="cancelRenameForm" type="button">取消</button></form></div><div class="listFilters" id="listFilters" role="tablist" aria-label="待辦篩選"><button type="button" data-filter="all">全部</button><button type="button" data-filter="open">未完成</button><button type="button" data-filter="done">已完成</button></div></div><div class="taskList" id="taskList" aria-live="polite"></div><form class="addTaskForm" id="addTaskForm"><input id="newTaskTitle" type="text" maxlength="80" placeholder="新增一項待辦…" autocomplete="off" required><select id="newTaskPriority" aria-label="待辦優先級"><option value="normal">一般</option><option value="high">重要</option><option value="low">低優先</option></select><button type="submit">新增待辦</button></form></div></div></section></div>
+<div class="grid listPageGrid"><section class="panel listsPanel" id="lists"><div class="head"><div><div class="kicker">MY LISTS</div><h2>列表 <span class="headingEn">/ Lists</span></h2><small>自訂清單、待辦事項與打包進度都集中在這裡。</small></div><a href="index.html">回到首頁 →</a></div><div class="listsApp"><aside class="listsSidebar"><div class="listProgressCard"><div class="listProgressTop"><strong id="listProgress">0%</strong><span>目前清單</span></div><div class="listProgressTrack"><span id="listProgressBar"></span></div><small id="listProgressText">0 / 0 已完成</small></div><div class="listsSectionLabel">清單</div><div class="listNav" id="listNav"></div><button class="addListButton" id="showListForm" type="button">＋ 新增清單</button><form class="newListForm" id="newListForm" hidden><input id="newListName" type="text" maxlength="24" placeholder="清單名稱" autocomplete="off"><div><button type="submit">建立</button><button class="formCancel" id="cancelListForm" type="button">取消</button></div></form></aside><div class="listMain"><div class="undoNotice" id="undoNotice" role="status" aria-live="polite" hidden><span id="undoMessage"></span><button id="undoDelete" type="button">復原</button></div><div class="listMainHead"><div class="listTitleArea"><div class="listTitleLine"><strong id="activeListTitle">打包清單</strong><span class="listCount" id="activeListCount">0 項</span><button class="listRenameButton" id="showRenameForm" type="button">修改名稱</button></div><form class="renameListForm" id="renameListForm" hidden><input id="renameListName" type="text" maxlength="24" aria-label="清單名稱"><button type="submit">儲存</button><button class="renameCancel" id="cancelRenameForm" type="button">取消</button></form></div><div class="listFilters" id="listFilters" role="tablist" aria-label="待辦篩選"><button type="button" data-filter="all">全部</button><button type="button" data-filter="open">未完成</button><button type="button" data-filter="done">已完成</button></div></div><div class="taskList" id="taskList" aria-live="polite"></div><form class="addTaskForm" id="addTaskForm"><input id="newTaskTitle" type="text" maxlength="80" placeholder="新增一項待辦…" autocomplete="off" required><select id="newTaskPriority" aria-label="待辦優先級"><option value="normal">一般</option><option value="high">重要</option><option value="low">低優先</option></select><button type="submit">新增待辦</button></form></div></div></section></div>
 </main>
 
 <script src="saigon-lists-store.js?v=1"></script>
@@ -190,8 +198,10 @@ nav a{color:#636a63;font-size:12px;transition:color .2s}nav a:hover{color:var(--
   const taskInput=document.querySelector("#newTaskTitle"),priorityInput=document.querySelector("#newTaskPriority");
   const newListForm=document.querySelector("#newListForm"),newListInput=document.querySelector("#newListName");
   const renameForm=document.querySelector("#renameListForm"),renameInput=document.querySelector("#renameListName");
+  const undoNotice=document.querySelector("#undoNotice"),undoMessage=document.querySelector("#undoMessage"),undoButton=document.querySelector("#undoDelete");
   if(!nav||!taskList)return;
   let editingTaskId=null;
+  let undoTimer=null,undoState=null;
   let state=store.load();
   function activeList(){let list=state.lists.find(item=>item.id===state.activeListId);if(!list){list=state.lists[0];state.activeListId=list.id;}return list;}
   function field(name,value){const option=document.createElement("option");option.value=value;option.textContent=name;return option;}
@@ -204,7 +214,20 @@ nav a{color:#636a63;font-size:12px;transition:color .2s}nav a:hover{color:var(--
     const cancelButton=document.createElement("button");cancelButton.type="button";cancelButton.className="taskEditCancel";cancelButton.dataset.cancelEdit=task.id;cancelButton.textContent="取消";
     form.append(input,select,saveButton,cancelButton);return form;
   }
+  function clearUndo(){
+    if(undoTimer){clearTimeout(undoTimer);undoTimer=null;}
+    undoState=null;
+    if(undoNotice)undoNotice.hidden=true;
+  }
+  function showUndo(task,index,listId){
+    if(undoTimer)clearTimeout(undoTimer);
+    undoState={task,index,listId};
+    undoMessage.textContent="已刪除「"+task.title+"」";
+    undoNotice.hidden=false;
+    undoTimer=setTimeout(clearUndo,5000);
+  }
   function render(){
+    clearUndo();
     const list=activeList(),stats=store.progress(list);
     progressEl.textContent=stats.percent+"%";progressBar.style.width=stats.percent+"%";progressText.textContent=stats.done+" / "+stats.total+" 已完成";
     titleEl.textContent=list.name;countEl.textContent=list.tasks.length+" 項";
@@ -234,8 +257,9 @@ nav a{color:#636a63;font-size:12px;transition:color .2s}nav a:hover{color:var(--
   taskList.addEventListener("click",event=>{
     const edit=event.target.closest("button[data-edit-id]");if(edit){editingTaskId=edit.dataset.editId;render();const input=taskList.querySelector(".taskEditForm input");if(input){input.focus();input.select();}return;}
     const cancel=event.target.closest("button[data-cancel-edit]");if(cancel){editingTaskId=null;render();return;}
-    const remove=event.target.closest("button[data-delete-id]");if(!remove)return;activeList().tasks=activeList().tasks.filter(task=>task.id!==remove.dataset.deleteId);editingTaskId=null;state=store.save(state);render();
+    const remove=event.target.closest("button[data-delete-id]");if(!remove)return;const list=activeList(),index=list.tasks.findIndex(task=>task.id===remove.dataset.deleteId);if(index<0)return;const task=list.tasks[index];list.tasks.splice(index,1);editingTaskId=null;state=store.save(state);render();showUndo(task,index,list.id);
   });
+  undoButton.addEventListener("click",()=>{if(!undoState)return;const recovery=undoState;const list=state.lists.find(item=>item.id===recovery.listId);if(!list||state.activeListId!==recovery.listId){clearUndo();return;}list.tasks.splice(Math.min(recovery.index,list.tasks.length),0,recovery.task);state=store.save(state);render();});
   taskList.addEventListener("submit",event=>{const form=event.target.closest(".taskEditForm");if(!form)return;event.preventDefault();const task=activeList().tasks.find(item=>item.id===form.dataset.editId);const title=new FormData(form).get("title").trim();if(!task||!title)return;task.title=title;task.priority=new FormData(form).get("priority");editingTaskId=null;state=store.save(state);render();});
   document.querySelector("#addTaskForm").addEventListener("submit",event=>{event.preventDefault();const value=taskInput.value.trim();if(!value)return;activeList().tasks.unshift({id:store.makeId("task"),title:value,done:false,priority:priorityInput.value});state=store.save(state);taskInput.value="";render();taskInput.focus();});
   document.querySelector("#showListForm").addEventListener("click",()=>{newListForm.hidden=false;newListInput.focus();});
