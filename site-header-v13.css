@@ -388,3 +388,60 @@ body.trek-home .sidebarEmpty{
   body.trek-home .sidebarFeature{padding:18px!important}
   body.trek-home .sidebarFeatureHead h2{font-size:18px!important}
 }
+
+
+/* A compact itinerary dashboard keeps the map visible alongside the dates. */
+@media(min-width:1051px){
+  body.trek-home .routeGrid{
+    grid-template-columns:minmax(0,1fr) minmax(0,1.18fr)!important;
+    gap:16px!important;
+    align-items:start!important;
+  }
+  body.trek-home .route .tabs{
+    grid-column:1 / -1!important;
+    display:grid!important;
+    grid-template-columns:repeat(3,minmax(0,1fr))!important;
+    gap:8px!important;
+  }
+  body.trek-home .route .daybtn{min-width:0!important;padding:10px!important}
+  body.trek-home .route .daydetail{
+    grid-column:1!important;
+    grid-row:2!important;
+    padding:4px 2px 0!important;
+  }
+  body.trek-home .route .map{
+    grid-column:2!important;
+    grid-row:2!important;
+    min-height:390px!important;
+  }
+}
+/* Tools belongs to the same right-rail card system as currency and lists. */
+body.trek-home .sidebarStack > .sidebarTools{
+  grid-column:auto!important;
+  grid-row:auto!important;
+  min-width:0!important;
+}
+body.trek-home .sidebarTools .toolsGrid{
+  grid-template-columns:repeat(2,minmax(0,1fr))!important;
+  gap:8px!important;
+  margin-top:15px!important;
+}
+body.trek-home .sidebarTools .tool{
+  display:flex!important;
+  align-items:center!important;
+  gap:8px!important;
+  min-height:64px!important;
+  padding:10px!important;
+  text-align:left!important;
+}
+body.trek-home .sidebarTools .toolIcon{
+  width:30px!important;
+  height:30px!important;
+  border-radius:9px!important;
+}
+body.trek-home .sidebarTools .toolIcon svg{width:17px!important;height:17px!important}
+body.trek-home .sidebarTools .tool b{font-size:11px!important}
+body.trek-home .sidebarTools .tool small{font-size:9px!important}
+@media(max-width:440px){
+  body.trek-home .sidebarTools .toolsGrid{grid-template-columns:1fr!important}
+}
