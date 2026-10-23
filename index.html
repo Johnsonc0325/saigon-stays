@@ -28,7 +28,7 @@ nav a{color:#636a63;font-size:12px;transition:color .2s}nav a:hover{color:var(--
 .routeGrid{grid-template-columns:140px minmax(0,.85fr) minmax(0,1.4fr)}.map{min-height:435px}.mapline,.river,#pins{display:none}.routeActions{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}.routeActions a,.routeActions button{display:inline-block;background:#29463c;color:#fff;border:0;border-radius:7px;text-decoration:none;padding:9px 12px;font-size:11px;cursor:pointer}.routeActions .secondary{background:#f0f3ed;color:#29463c}.mapHint{font-size:10px;color:#7d847e;margin-top:8px}.mini .photo{position:relative}.mini .photo:after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,#273b3424,transparent 65%)}.mini .photo{background-size:cover;background-position:center}.mini .in{min-height:113px}.mini:focus-visible,.daybtn:focus-visible{outline:2px solid #526e5e;outline-offset:2px}.tool{cursor:pointer}.statusline{font-size:11px;color:#748077;padding-top:8px}.photo.fallback{display:grid;place-items:center;color:#64796a;font:italic 12px Georgia,serif}.mobileMapLabel{display:none}
 @media(max-width:950px){.routeGrid{grid-template-columns:1fr}.map{min-height:350px}.mobileMapLabel{display:block;font-size:11px;color:#7b847c;margin-bottom:5px}}
 @media(max-width:600px){.hero{background:linear-gradient(90deg,#ebeee8f5,#ebeee8cf),url("https://images.unsplash.com/photo-1583417319070-4a69db38a482?auto=format&fit=crop&w=900&q=80") center/cover!important}.map{min-height:320px}.mini .in{min-height:120px}.head{align-items:center}.routeActions a,.routeActions button{flex:1;text-align:center}.mapcaption{z-index:600}}
-</style><link rel="stylesheet" href="site-header-v13.css?v=25"><style>
+</style><link rel="stylesheet" href="site-header-v13.css?v=26"><style>
 /* Restaurant cards: give the food panel breathing room and a stable image source. */
 .food .cards{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;align-items:stretch}
 .food .mini{display:flex;flex-direction:column;min-width:0}
@@ -161,18 +161,22 @@ nav a{color:#636a63;font-size:12px;transition:color .2s}nav a:hover{color:var(--
 <section class="panel hotel" id="hotel"><div class="head"><h2>⌂ 住宿資訊</h2><small>已訂</small></div><div class="hotelbox"><div class="hotelpic"></div><div class="info"><h3>Centoria Hotel By Urban B</h3><p>Gò Vấp · 4 晚<br>656/52 Đường Quang Trung</p><div class="quick"><span>位置優勢</span><span>周邊美食</span><span>房型資訊</span></div></div></div></section>
 <section class="panel transport"><div class="head"><h2>▣ 交通指南</h2></div><ul class="list"><li><b>機場交通</b><br><small>SGN → Gò Vấp</small></li><li><b>市內交通</b><br><small>Grab · Metro · Waterbus · 步行</small></li><li><b>交通卡與票券</b><br><small>出發前再核對最新規則</small></li></ul></section>
 <aside class="sidebarStack" aria-label="旅行工具側欄"><section class="panel currencyPanel" id="currency"><section class="currencyCard" aria-labelledby="currencyTitle"><div class="currencyHead"><div><div class="kicker">LIVE REFERENCE RATE</div><h3 id="currencyTitle">↻ 貨幣</h3></div><button class="currencyRefresh" id="currencyRefresh" type="button" aria-label="更新匯率" title="更新匯率">↻</button></div><div class="currencyGrid"><label class="currencyField"><span>從</span><input id="currencyAmount" type="number" inputmode="decimal" min="0" step="any" value="100" aria-label="換算金額"><select id="currencyFrom" aria-label="從哪種貨幣"><option value="MYR" selected>MYR</option><option value="TWD">TWD</option><option value="USD">USD</option><option value="SGD">SGD</option><option value="EUR">EUR</option><option value="THB">THB</option><option value="VND">VND</option></select></label><button class="currencySwap" id="currencySwap" type="button" aria-label="交換兩種貨幣" title="交換兩種貨幣">⇄</button><label class="currencyField"><span>到</span><output class="currencyOutput" id="currencyOutput" aria-live="polite">—</output><select id="currencyTo" aria-label="換成哪種貨幣"><option value="VND" selected>VND</option><option value="MYR">MYR</option><option value="TWD">TWD</option><option value="USD">USD</option><option value="SGD">SGD</option><option value="EUR">EUR</option><option value="THB">THB</option></select></label></div><p class="currencyRate" id="currencyRate" aria-live="polite">正在取得最新參考匯率…</p><p class="currencyStatus" id="currencyStatus">資料來源：Frankfurter</p></section></section><div class="listsPanel" id="lists" aria-label="列表工具">
-<section class="panel sidebarFeature todoFeature" aria-labelledby="todoFeatureTitle">
+<section class="panel sidebarFeature listNavFeature" aria-labelledby="listNavTitle">
   <div class="sidebarFeatureHead">
-    <div><div class="kicker">MY LISTS</div><h2 id="todoFeatureTitle">待辦列表 <span class="headingEn">/ Todos</span></h2></div>
+    <div><div class="kicker">MY LISTS</div><h2 id="listNavTitle">我的清單 <span class="headingEn">/ My Lists</span></h2></div>
     <a href="lists.html">完整列表 →</a>
   </div>
-  <p class="sidebarFeatureIntro">把行程待辦與自訂清單收在一起。</p>
-  <div class="sidebarFeatureMetric"><strong id="todoOpenCount">0</strong><span>項待辦未完成</span></div>
-  <div class="sidebarTaskPreview" id="todoPreview" aria-live="polite"></div>
+  <div class="listNav" id="listNav" aria-live="polite"></div>
+  <button class="listNavAdd" id="listNavAdd" type="button">＋ 新增清單</button>
+  <form class="listNavAddForm" id="listNavAddForm" hidden>
+    <input id="newListName" type="text" placeholder="清單名稱" maxlength="40" aria-label="新清單名稱" autocomplete="off">
+    <button type="submit">建立</button>
+    <button type="button" class="listNavAddCancel">取消</button>
+  </form>
 </section>
 <section class="panel sidebarFeature packingFeature" aria-labelledby="packingFeatureTitle">
   <div class="sidebarFeatureHead">
-    <div><div class="kicker">PACKING</div><h2 id="packingFeatureTitle">打包清單 <span class="headingEn">/ Packing</span></h2></div>
+    <div><div class="kicker">CURRENT LIST</div><h2 id="packingFeatureTitle">打包清單 <span class="headingEn">/ Checklist</span></h2></div>
     <a href="lists.html">編輯 →</a>
   </div>
   <div class="packingProgressLine"><strong id="packingPercent">0%</strong><span id="packingCount">0 / 0 已完成</span></div>
@@ -289,20 +293,48 @@ document.querySelectorAll(".check input").forEach((box,i)=>{box.addEventListener
     label.append(input,text);return label;
   }
   function empty(text){const el=document.createElement("p");el.className="sidebarEmpty";el.textContent=text;return el;}
+  function activeList(){return state.lists.find(list=>list.id===state.activeListId)||state.lists[0]||{id:"",name:"",tasks:[]};}
+  function switchList(listId){if(!state.lists.some(list=>list.id===listId))return;state.activeListId=listId;store.save(state);render();}
+  function renderListNav(){
+    const nav=document.querySelector("#listNav");if(!nav)return;
+    nav.replaceChildren();
+    const current=activeList();
+    state.lists.forEach(list=>{
+      const listStats=stats(list);
+      const btn=document.createElement("button");btn.type="button";btn.dataset.listId=list.id;
+      btn.className="listNavItem"+(list.id===current.id?" is-active":"");
+      const name=document.createElement("span");name.className="listNavName";name.textContent=list.name;
+      const meta=document.createElement("span");meta.className="listNavMeta";meta.textContent=listStats.open+" / "+listStats.total;
+      const bar=document.createElement("span");bar.className="listNavBar";
+      const fill=document.createElement("span");fill.style.width=listStats.percent+"%";bar.append(fill);
+      btn.append(name,meta,bar);
+      btn.addEventListener("click",function(){switchList(list.id);});
+      nav.append(btn);
+    });
+    if(!state.lists.length){nav.append(empty("還沒有清單，點下面新增"));}
+  }
   function render(){
-    const packing=state.lists.find(list=>list.id==="packing")||state.lists[0]||{id:"",name:"",tasks:[]};
-    const todoLists=state.lists.filter(list=>list.id!=="packing");
-    const todoTasks=todoLists.flatMap(list=>list.tasks.map(task=>({list,task})));
-    const todoOpen=todoTasks.filter(item=>!item.task.done);
-    document.querySelector("#todoOpenCount").textContent=todoOpen.length;
-    todoPreview.replaceChildren();
-    (todoOpen.length?todoOpen.slice(0,3).map(item=>row(item.list,item.task)):[empty("目前沒有行程待辦，可到完整列表新增。")]).forEach(el=>todoPreview.append(el));
-    const packingStats=stats(packing);
-    document.querySelector("#packingPercent").textContent=packingStats.percent+"%";
-    document.querySelector("#packingCount").textContent=packingStats.done+" / "+packingStats.total+" 已完成";
-    document.querySelector("#packingProgressBar").style.width=packingStats.percent+"%";
-    packingPreview.replaceChildren();
-    (packing.tasks.length?packing.tasks.slice(0,5).map(task=>row(packing,task)):[empty("目前還沒有打包項目。")]).forEach(el=>packingPreview.append(el));
+    renderListNav();
+    const current=activeList();
+    const currentStats=stats(current);
+    document.querySelector("#packingFeatureTitle").innerHTML=String(current.name||"").replace(/[&<>]/g,function(c){return c==="&"?"&amp;":c==="<"?"&lt;":"&gt;";})+' <span class="headingEn">/ Checklist</span>';
+    document.querySelector("#packingPercent").textContent=currentStats.percent+"%";
+    document.querySelector("#packingCount").textContent=currentStats.done+" / "+currentStats.total+" 已完成";
+    document.querySelector("#packingProgressBar").style.width=currentStats.percent+"%";
+    const preview=document.querySelector("#packingPreview");preview.replaceChildren();
+    (current.tasks.length?current.tasks.slice(0,5).map(task=>row(current,task)):[empty("這份清單還沒有項目。")]).forEach(el=>preview.append(el));
+  }
+  const addToggle=document.querySelector("#listNavAdd"),addForm=document.querySelector("#listNavAddForm"),newListNameInput=document.querySelector("#newListName");
+  if(addToggle&&addForm){
+    addToggle.addEventListener("click",function(){addForm.hidden=!addForm.hidden;if(!addForm.hidden&&newListNameInput)newListNameInput.focus();});
+    addForm.addEventListener("submit",function(event){
+      event.preventDefault();
+      const name=newListNameInput?newListNameInput.value.trim():"";
+      if(!name)return;
+      SaigonSync.addList(name).then(function(){if(newListNameInput)newListNameInput.value="";addForm.hidden=true;render();}).catch(function(){});
+    });
+    const cancelButton=addForm.querySelector(".listNavAddCancel");
+    if(cancelButton)cancelButton.addEventListener("click",function(){addForm.hidden=true;});
   }
   document.querySelector("#lists").addEventListener("change",event=>{
     const target=event.target;

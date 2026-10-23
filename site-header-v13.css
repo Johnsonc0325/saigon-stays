@@ -279,6 +279,57 @@ body.trek-home .sidebarFeature{
   min-width:0!important;
   padding:22px!important;
 }
+/* ── 我的清單（清單總覽） ── */
+body.trek-home .listNav{display:grid!important;gap:6px!important;margin-top:4px!important}
+body.trek-home .listNavItem{
+  display:grid!important;grid-template-columns:minmax(0,1fr) auto!important;gap:5px 10px!important;
+  align-items:center!important;width:100%!important;padding:10px 12px!important;
+  border:1px solid var(--trek-line)!important;border-radius:10px!important;background:var(--trek-card)!important;
+  cursor:pointer!important;text-align:left!important;font:inherit!important;
+  transition:border-color .16s,background .16s,box-shadow .16s!important;
+}
+body.trek-home .listNavItem:hover{border-color:#cbd3dd!important;box-shadow:var(--trek-shadow)!important}
+body.trek-home .listNavItem:focus-visible{outline:2px solid var(--trek-green)!important;outline-offset:2px!important}
+body.trek-home .listNavItem.is-active{border-color:var(--trek-accent)!important;background:var(--trek-accent)!important}
+body.trek-home .listNavName{
+  overflow:hidden!important;text-overflow:ellipsis!important;white-space:nowrap!important;
+  color:var(--trek-ink)!important;font:650 13px/1.35 Inter,"Noto Sans TC",sans-serif!important;
+}
+body.trek-home .listNavItem.is-active .listNavName{color:#fff!important}
+body.trek-home .listNavMeta{
+  color:var(--trek-muted)!important;font:650 11px/1.2 Inter,sans-serif!important;font-variant-numeric:tabular-nums!important;
+}
+body.trek-home .listNavItem.is-active .listNavMeta{color:#9fb0c4!important}
+body.trek-home .listNavBar{
+  grid-column:1 / -1!important;display:block!important;height:3px!important;
+  border-radius:2px!important;background:var(--trek-soft)!important;overflow:hidden!important;
+}
+body.trek-home .listNavItem.is-active .listNavBar{background:#2a3547!important}
+body.trek-home .listNavBar>span{
+  display:block!important;height:100%!important;border-radius:2px!important;
+  background:var(--trek-green)!important;transition:width .3s ease!important;
+}
+body.trek-home .listNavItem.is-active .listNavBar>span{background:#5ec9a8!important}
+body.trek-home .listNavAdd{
+  width:100%!important;margin-top:9px!important;padding:9px!important;
+  border:1px dashed #c9d1db!important;border-radius:9px!important;background:transparent!important;
+  color:var(--trek-muted)!important;font:650 12px/1.3 Inter,"Noto Sans TC",sans-serif!important;
+  cursor:pointer!important;transition:border-color .16s,color .16s,background .16s!important;
+}
+body.trek-home .listNavAdd:hover{border-color:var(--trek-green)!important;color:var(--trek-green)!important;background:rgba(27,98,79,.04)!important}
+body.trek-home .listNavAdd:focus-visible{outline:2px solid var(--trek-green)!important;outline-offset:2px!important}
+body.trek-home .listNavAddForm{display:grid!important;grid-template-columns:minmax(0,1fr) auto auto!important;gap:6px!important;margin-top:9px!important}
+body.trek-home .listNavAddForm[hidden]{display:none!important}
+body.trek-home .listNavAddForm input{
+  min-width:0!important;padding:8px 10px!important;border:1px solid var(--trek-line)!important;
+  border-radius:8px!important;background:#fff!important;color:var(--trek-ink)!important;font:inherit!important;font-size:12px!important;
+}
+body.trek-home .listNavAddForm input:focus{outline:none!important;border-color:var(--trek-green)!important}
+body.trek-home .listNavAddForm button{
+  padding:0 11px!important;border:0!important;border-radius:8px!important;background:var(--trek-accent)!important;
+  color:#fff!important;font:650 11px/1.3 Inter,"Noto Sans TC",sans-serif!important;cursor:pointer!important;
+}
+body.trek-home .listNavAddForm .listNavAddCancel{background:var(--trek-soft)!important;color:var(--trek-ink)!important}
 body.trek-home .sidebarFeatureHead{
   display:flex!important;
   align-items:flex-start!important;
