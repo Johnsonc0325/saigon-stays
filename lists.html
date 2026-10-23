@@ -28,7 +28,7 @@ nav a{color:#636a63;font-size:12px;transition:color .2s}nav a:hover{color:var(--
 .routeGrid{grid-template-columns:140px minmax(0,.85fr) minmax(0,1.4fr)}.map{min-height:435px}.mapline,.river,#pins{display:none}.routeActions{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}.routeActions a,.routeActions button{display:inline-block;background:#29463c;color:#fff;border:0;border-radius:7px;text-decoration:none;padding:9px 12px;font-size:11px;cursor:pointer}.routeActions .secondary{background:#f0f3ed;color:#29463c}.mapHint{font-size:10px;color:#7d847e;margin-top:8px}.mini .photo{position:relative}.mini .photo:after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,#273b3424,transparent 65%)}.mini .photo{background-size:cover;background-position:center}.mini .in{min-height:113px}.mini:focus-visible,.daybtn:focus-visible{outline:2px solid #526e5e;outline-offset:2px}.tool{cursor:pointer}.statusline{font-size:11px;color:#748077;padding-top:8px}.photo.fallback{display:grid;place-items:center;color:#64796a;font:italic 12px Georgia,serif}.mobileMapLabel{display:none}
 @media(max-width:950px){.routeGrid{grid-template-columns:1fr}.map{min-height:350px}.mobileMapLabel{display:block;font-size:11px;color:#7b847c;margin-bottom:5px}}
 @media(max-width:600px){.hero{background:linear-gradient(90deg,#ebeee8f5,#ebeee8cf),url("https://images.unsplash.com/photo-1583417319070-4a69db38a482?auto=format&fit=crop&w=900&q=80") center/cover!important}.map{min-height:320px}.mini .in{min-height:120px}.head{align-items:center}.routeActions a,.routeActions button{flex:1;text-align:center}.mapcaption{z-index:600}}
-</style><link rel="stylesheet" href="site-header-v13.css?v=25"><style>
+</style><link rel="stylesheet" href="site-header-v13.css?v=28"><style>
 /* Restaurant cards: give the food panel breathing room and a stable image source. */
 .food .cards{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;align-items:stretch}
 .food .mini{display:flex;flex-direction:column;min-width:0}
@@ -93,6 +93,9 @@ nav a{color:#636a63;font-size:12px;transition:color .2s}nav a:hover{color:var(--
 .listNav button:hover{background:#e9efe8;color:var(--ink)}
 .listNav button.active{background:#fff;color:var(--ink);box-shadow:0 2px 10px rgba(41,70,60,.07);font-weight:700}
 .listNav button span:last-child{min-width:22px;padding:2px 6px;border-radius:99px;background:#e8ede7;text-align:center;font-size:10px;color:#7a847b}
+.listNav .listNavName{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.listNavOwner{padding:2px 6px;border-radius:999px;background:#eef1f5;color:#7b8695;font:700 9px/1.5 Inter,"Noto Sans TC",sans-serif;letter-spacing:.03em;text-transform:uppercase;white-space:nowrap;flex:none}
+.listNav button.active .listNavOwner{background:#dfe8e2;color:#4d6b5f}
 .addListButton{width:100%;margin-top:12px;padding:10px;border:1px dashed #bdcbbd;border-radius:9px;background:transparent;color:#597060;cursor:pointer;font:inherit}
 .addListButton:hover{background:#e9f0e8}
 .newListForm{display:grid;gap:8px;margin-top:10px}.newListForm[hidden]{display:none}
@@ -210,8 +213,8 @@ nav a{color:#636a63;font-size:12px;transition:color .2s}nav a:hover{color:var(--
 <div class="grid listPageGrid"><section class="panel listsPanel" id="lists"><div class="head"><div><div class="kicker">MY LISTS</div><h2>列表 <span class="headingEn">/ Lists</span></h2><small>自訂清單、待辦事項與打包進度都集中在這裡。</small></div><a href="index.html">回到首頁 →</a></div><div class="listsApp"><aside class="listsSidebar"><div class="listProgressCard"><div class="listProgressTop"><strong id="listProgress">0%</strong><span>目前清單</span></div><div class="listProgressTrack"><span id="listProgressBar"></span></div><small id="listProgressText">0 / 0 已完成</small></div><div class="listsSectionLabel">清單</div><div class="listNav" id="listNav"></div><button class="addListButton" id="showListForm" type="button">＋ 新增清單</button><form class="newListForm" id="newListForm" hidden><input id="newListName" type="text" maxlength="24" placeholder="清單名稱" autocomplete="off"><div><button type="submit">建立</button><button class="formCancel" id="cancelListForm" type="button">取消</button></div></form></aside><div class="listMain"><div class="undoNotice" id="undoNotice" role="status" aria-live="polite" hidden><span id="undoMessage"></span><button id="undoDelete" type="button">復原</button></div><div class="listMainHead"><div class="listTitleArea"><div class="listTitleLine"><strong id="activeListTitle">打包清單</strong><span class="listCount" id="activeListCount">0 項</span><button class="listRenameButton" id="showRenameForm" type="button">修改名稱</button></div><form class="renameListForm" id="renameListForm" hidden><input id="renameListName" type="text" maxlength="24" aria-label="清單名稱"><button type="submit">儲存</button><button class="renameCancel" id="cancelRenameForm" type="button">取消</button></form></div><div class="listFilters" id="listFilters" role="tablist" aria-label="待辦篩選"><button type="button" data-filter="all">全部</button><button type="button" data-filter="open">未完成</button><button type="button" data-filter="done">已完成</button></div></div><div class="taskList" id="taskList" aria-live="polite"></div><form class="addTaskForm" id="addTaskForm"><input id="newTaskTitle" type="text" maxlength="80" placeholder="新增一項待辦…" autocomplete="off" required><select id="newTaskPriority" aria-label="待辦優先級"><option value="normal">一般</option><option value="high">重要</option><option value="low">低優先</option></select><button type="submit">新增待辦</button></form></div></div></section></div>
 </main>
 
-<script src="saigon-lists-store.js?v=5"></script>
-<script src="saigon-sync.js?v=5"></script>
+<script src="saigon-lists-store.js?v=7"></script>
+<script src="saigon-sync.js?v=7"></script>
 <script>
 (function(){
   const store=window.SaigonListsStore;
@@ -298,7 +301,19 @@ nav a{color:#636a63;font-size:12px;transition:color .2s}nav a:hover{color:var(--
     progressEl.textContent=stats.percent+"%";progressBar.style.width=stats.percent+"%";progressText.textContent=stats.done+" / "+stats.total+" 已完成";
     titleEl.textContent=list.name;countEl.textContent=list.tasks.length+" 項";
     nav.innerHTML="";
-    state.lists.forEach(item=>{const button=document.createElement("button");button.type="button";button.dataset.listId=item.id;button.className=item.id===state.activeListId?"active":"";const name=document.createElement("span");name.textContent=item.name;const count=document.createElement("span");count.textContent=item.tasks.length;button.append(name,count);nav.appendChild(button);});
+    state.lists.forEach(item=>{
+      const button=document.createElement("button");button.type="button";button.dataset.listId=item.id;
+      button.className=item.id===state.activeListId?"active":"";
+      const name=document.createElement("span");name.className="listNavName";name.textContent=item.name;
+      const count=document.createElement("span");count.textContent=item.tasks.length;
+      button.append(name);
+      const mine=item.owner===store.currentProfileId()||item.owner==="shared";
+      if(!mine&&item.owner){
+        const badge=document.createElement("span");badge.className="listNavOwner";
+        badge.textContent=store.profileInfo(item.owner).name;button.append(badge);
+      }
+      button.append(count);nav.appendChild(button);
+    });
     document.querySelectorAll("#listFilters button").forEach(button=>button.classList.toggle("active",button.dataset.filter===state.filter));
     taskList.innerHTML="";
     const filtered=store.sortByPriority(list.tasks.filter(task=>state.filter==="done"?task.done:state.filter==="open"?!task.done:true));

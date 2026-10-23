@@ -2,6 +2,7 @@ CREATE TABLE IF NOT EXISTS lists (
   id          TEXT PRIMARY KEY,
   name        TEXT NOT NULL,
   share_token TEXT NOT NULL,
+  owner       TEXT NOT NULL DEFAULT 'shared',
   deleted     INTEGER NOT NULL DEFAULT 0,
   created_at  TEXT NOT NULL,
   updated_at  TEXT NOT NULL

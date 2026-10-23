@@ -91,7 +91,7 @@ function taskResponse(row) {
 
 async function getLists(env, shareToken) {
   const lists = await env.DB.prepare(
-    "SELECT id, name FROM lists WHERE share_token = ? AND deleted = 0 ORDER BY created_at, id",
+    "SELECT id, name, owner FROM lists WHERE share_token = ? AND deleted = 0 ORDER BY created_at, id",
   ).bind(shareToken).all();
   const result = [];
   for (const list of lists.results) {
@@ -99,7 +99,7 @@ async function getLists(env, shareToken) {
       "SELECT id, title, done, priority, note, position, updated_at, updated_by " +
       "FROM tasks WHERE list_id = ? AND deleted = 0 ORDER BY position, updated_at, id",
     ).bind(list.id).all();
-    result.push({ id: list.id, name: list.name, tasks: tasks.results.map(taskResponse) });
+    result.push({ id: list.id, name: list.name, owner: list.owner || "shared", tasks: tasks.results.map(taskResponse) });
   }
   return result;
 }
@@ -141,12 +141,28 @@ async function handle(request, env, origin) {
     if (typeof input.name !== "string" || !input.name.trim()) return error("name_required", 400, origin);
     const name = input.name.trim();
     if (name.length > MAX_NAME) return error("name_too_long", 400, origin);
+    const owner = typeof input.owner === "string" && input.owner.trim()
+      ? input.owner.trim().slice(0, 40)
+      : "shared";
+    // 採用客戶端提供的 id（讓本地與伺服器一致，否則剛建立的清單無法立刻加待辦）
+    const providedId = typeof input.id === "string" && input.id.trim()
+      ? input.id.trim().slice(0, 64)
+      : "";
     const ts = now();
-    const listId = crypto.randomUUID();
-    await env.DB.prepare(
-      "INSERT INTO lists (id, name, share_token, created_at, updated_at) VALUES (?, ?, ?, ?, ?)",
-    ).bind(listId, name, shareToken, ts, ts).run();
-    return json({ ok: true, list: { id: listId, name, tasks: [] } }, 201, origin);
+    const listId = providedId || crypto.randomUUID();
+    try {
+      await env.DB.prepare(
+        "INSERT INTO lists (id, name, share_token, owner, created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?)",
+      ).bind(listId, name, shareToken, owner, ts, ts).run();
+    } catch (insertError) {
+      // id 已存在（重送請求）→ 視為成功，回傳現況
+      const existing = await env.DB.prepare(
+        "SELECT id, name, owner FROM lists WHERE id = ? AND share_token = ? AND deleted = 0",
+      ).bind(listId, shareToken).first();
+      if (existing) return json({ ok: true, list: { id: existing.id, name: existing.name, owner: existing.owner, tasks: [] } }, 200, origin);
+      return error("create_failed", 500, origin);
+    }
+    return json({ ok: true, list: { id: listId, name, owner, tasks: [] } }, 201, origin);
   }
 
   // ── 建立待辦 ───────────────────────────────────────────────

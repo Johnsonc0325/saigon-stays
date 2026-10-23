@@ -28,7 +28,7 @@ nav a{color:#636a63;font-size:12px;transition:color .2s}nav a:hover{color:var(--
 .routeGrid{grid-template-columns:140px minmax(0,.85fr) minmax(0,1.4fr)}.map{min-height:435px}.mapline,.river,#pins{display:none}.routeActions{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}.routeActions a,.routeActions button{display:inline-block;background:#29463c;color:#fff;border:0;border-radius:7px;text-decoration:none;padding:9px 12px;font-size:11px;cursor:pointer}.routeActions .secondary{background:#f0f3ed;color:#29463c}.mapHint{font-size:10px;color:#7d847e;margin-top:8px}.mini .photo{position:relative}.mini .photo:after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,#273b3424,transparent 65%)}.mini .photo{background-size:cover;background-position:center}.mini .in{min-height:113px}.mini:focus-visible,.daybtn:focus-visible{outline:2px solid #526e5e;outline-offset:2px}.tool{cursor:pointer}.statusline{font-size:11px;color:#748077;padding-top:8px}.photo.fallback{display:grid;place-items:center;color:#64796a;font:italic 12px Georgia,serif}.mobileMapLabel{display:none}
 @media(max-width:950px){.routeGrid{grid-template-columns:1fr}.map{min-height:350px}.mobileMapLabel{display:block;font-size:11px;color:#7b847c;margin-bottom:5px}}
 @media(max-width:600px){.hero{background:linear-gradient(90deg,#ebeee8f5,#ebeee8cf),url("https://images.unsplash.com/photo-1583417319070-4a69db38a482?auto=format&fit=crop&w=900&q=80") center/cover!important}.map{min-height:320px}.mini .in{min-height:120px}.head{align-items:center}.routeActions a,.routeActions button{flex:1;text-align:center}.mapcaption{z-index:600}}
-</style><link rel="stylesheet" href="site-header-v13.css?v=27"><style>
+</style><link rel="stylesheet" href="site-header-v13.css?v=28"><style>
 /* Restaurant cards: give the food panel breathing room and a stable image source. */
 .food .cards{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;align-items:stretch}
 .food .mini{display:flex;flex-direction:column;min-width:0}
@@ -191,21 +191,6 @@ nav a{color:#636a63;font-size:12px;transition:color .2s}nav a:hover{color:var(--
     </select>
   </form>
 </section>
-<section class="panel sidebarFeature watchedFeature" aria-labelledby="watchedTitle">
-  <div class="sidebarFeatureHead">
-    <div><div class="kicker">SHARED WITH</div><h2 id="watchedTitle">對方的清單 <span class="headingEn">/ Partner</span></h2></div>
-    <button class="watchedRefresh" id="watchedRefresh" type="button" aria-label="重新取得對方清單" title="重新取得">↻</button>
-  </div>
-  <div class="watchedBody" id="watchedBody" aria-live="polite"></div>
-  <form class="watchedSetup" id="watchedSetup" hidden>
-    <p class="watchedHint">貼上對方的分享碼，就能看到對方清單的最新狀態（唯讀）。</p>
-    <div class="watchedSetupRow">
-      <input id="watchTokenInput" type="text" placeholder="對方的分享碼" maxlength="40" aria-label="對方的分享碼" autocomplete="off">
-      <button type="submit">連結</button>
-      <button type="button" class="watchedUnlink" id="watchedUnlink">解除</button>
-    </div>
-  </form>
-</section>
 </div>
 <section class="panel sidebarFeature tools sidebarTools" aria-labelledby="toolsTitle">
   <div class="sidebarFeatureHead">
@@ -216,7 +201,7 @@ nav a{color:#636a63;font-size:12px;transition:color .2s}nav a:hover{color:var(--
 </aside>
 <section class="panel reminders"><div class="head"><h2>♟ 重要提醒</h2><a href="tips.html">查看詳情 →</a></div><ul class="list"><li><b>入境文件</b>　護照有效期與簽證資料出發前再確認</li><li><b>待確認預約</b>　Phở Museum、Quang San、Fame Nails、Cửu Vân Long</li><li><b>Waterbus</b>　Day 3 晚間班次出發前再查</li></ul></section>
 </div></main>
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script><script src="saigon-lists-store.js?v=5"></script><script src="saigon-sync.js?v=5"></script><script>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script><script src="saigon-lists-store.js?v=7"></script><script src="saigon-sync.js?v=7"></script><script>
 const places={
 airport:[10.8188,106.652],hotel:[10.8393,106.6544],bep:[10.832,106.658],floral:[10.829,106.661],om:[10.833,106.662],
 chau:[10.7939,106.6893],tandinh:[10.7896,106.6908],cong:[10.7894,106.6907],post:[10.7798,106.6999],notre:[10.7797,106.699],book:[10.7803,106.6994],city:[10.7769,106.7009],pho:[10.775,106.701],
@@ -330,7 +315,14 @@ document.querySelectorAll(".check input").forEach((box,i)=>{box.addEventListener
       const meta=document.createElement("span");meta.className="listNavMeta";meta.textContent=listStats.open+" / "+listStats.total;
       const bar=document.createElement("span");bar.className="listNavBar";
       const fill=document.createElement("span");fill.style.width=listStats.percent+"%";bar.append(fill);
-      btn.append(name,meta,bar);
+      const sharesMyProfile=list.owner===store.currentProfileId()||list.owner==="shared";
+      btn.append(name);
+      if(!sharesMyProfile){
+        const badge=document.createElement("span");badge.className="listNavOwner";
+        badge.textContent=store.profileInfo(list.owner).name;
+        btn.append(badge);
+      }
+      btn.append(meta,bar);
       btn.addEventListener("click",function(){switchList(list.id);});
       nav.append(btn);
     });
@@ -372,59 +364,6 @@ document.querySelectorAll(".check input").forEach((box,i)=>{box.addEventListener
       SaigonSync.addTask(list.id,{title:title,priority:priority?priority.value:"normal"}).then(function(){if(input)input.value="";render();}).catch(function(){});
     });
   }
-  /* ── 對方的清單（唯讀，靠對方分享碼） ── */
-  const WATCH_API=window.SAIGON_API_BASE||"https://saigon-api.johnsonc0325.workers.dev";
-  const WATCH_KEY="saigon-watch-token";
-  let watchedToken=null,watchedState={mode:"off",list:null};
-  function watchKey(){return WATCH_KEY+"-"+(store.currentProfileId?store.currentProfileId():"johnson");}
-  function readWatchedToken(){try{watchedToken=localStorage.getItem(watchKey())||null;}catch(error){watchedToken=null;}return watchedToken;}
-  function renderWatched(){
-    const body=document.querySelector("#watchedBody"),setup=document.querySelector("#watchedSetup");
-    if(!body||!setup)return;
-    body.replaceChildren();
-    if(!watchedToken){setup.hidden=false;body.append(empty("還沒連結對方的清單。"));return;}
-    setup.hidden=true;
-    if(watchedState.mode==="loading"){body.append(empty("正在取得對方清單…"));return;}
-    if(watchedState.mode==="error"){body.append(empty("取不到對方清單，分享碼可能已失效。"));return;}
-    const list=watchedState.list;
-    if(!list){body.append(empty("對方還沒有清單。"));return;}
-    const watchedStats=stats(list);
-    const line=document.createElement("div");line.className="watchedLine";
-    const nameEl=document.createElement("strong");nameEl.textContent=list.name;
-    const metaEl=document.createElement("span");metaEl.textContent=watchedStats.done+" / "+watchedStats.total+" 已完成";
-    line.append(nameEl,metaEl);
-    const track=document.createElement("div");track.className="watchedTrack";
-    const fill=document.createElement("span");fill.style.width=watchedStats.percent+"%";track.append(fill);
-    body.append(line,track);
-    const openTasks=list.tasks.filter(function(task){return !task.done;}).slice(0,3);
-    (openTasks.length?openTasks.map(function(task){const p=document.createElement("p");p.className="watchedTask";p.textContent="○ "+task.title;return p;}):[empty("對方清單已全部完成 🎉")]).forEach(function(el){body.append(el);});
-  }
-  async function fetchWatched(){
-    if(!readWatchedToken()){renderWatched();return;}
-    watchedState={mode:"loading",list:watchedState.list};renderWatched();
-    try{
-      const response=await fetch(WATCH_API+"/api/lists",{headers:{"X-Share-Token":watchedToken},cache:"no-store"});
-      if(!response.ok)throw new Error("HTTP "+response.status);
-      const data=await response.json();
-      watchedState={mode:"ok",list:(data.lists||[])[0]||null};
-    }catch(error){watchedState={mode:"error",list:null};}
-    renderWatched();
-  }
-  const watchedForm=document.querySelector("#watchedSetup"),watchInput=document.querySelector("#watchTokenInput"),watchedRefreshBtn=document.querySelector("#watchedRefresh"),watchedUnlinkBtn=document.querySelector("#watchedUnlink");
-  if(watchedForm){
-    watchedForm.addEventListener("submit",function(event){
-      event.preventDefault();
-      const value=watchInput?watchInput.value.trim():"";
-      if(!value)return;
-      try{localStorage.setItem(watchKey(),value);}catch(error){}
-      if(watchInput)watchInput.value="";
-      fetchWatched();
-    });
-    if(watchedUnlinkBtn)watchedUnlinkBtn.addEventListener("click",function(){try{localStorage.removeItem(watchKey());}catch(error){}watchedToken=null;watchedState={mode:"off",list:null};renderWatched();});
-    if(watchedRefreshBtn)watchedRefreshBtn.addEventListener("click",function(){fetchWatched();});
-  }
-  renderWatched();
-  fetchWatched();
   document.querySelector("#lists").addEventListener("change",event=>{
     const target=event.target;
     if(!target.matches("input[type=checkbox][data-task-id]"))return;

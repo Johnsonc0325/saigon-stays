@@ -4,7 +4,9 @@
 
   const API_BASE = window.SAIGON_API_BASE || "https://saigon-api.johnsonc0325.workers.dev";
   const TOKEN_PREFIX = "saigon-share-token-";
-  function tokenKey(){return TOKEN_PREFIX+(store&&store.currentProfileId?store.currentProfileId():"johnson");}
+  const TOKEN_KEY = "saigon-share-token";           // 共用一把鑰匙（兩人共用同一份資料）
+  const OLD_TOKEN_KEY = "saigon-share-token-johnson"; // 舊版（遷移用）
+  function tokenKey(){return TOKEN_KEY;}
   const POLL_MS = 8000;
   const REQUEST_TIMEOUT = 8000;
   const store = window.SaigonListsStore;
@@ -36,7 +38,13 @@
   }
   function readToken(){
     adoptUrlToken();
-    if(token===null){try{token=localStorage.getItem(tokenKey())||null;}catch(error){token=null;}}
+    if(token===null){
+      try{
+        token=localStorage.getItem(tokenKey())||localStorage.getItem(OLD_TOKEN_KEY)||null;
+        // 舊版的 key 遷移到共用的 key
+        if(token&&!localStorage.getItem(tokenKey()))localStorage.setItem(tokenKey(),token);
+      }catch(error){token=null;}
+    }
     return token;
   }
   function request(path, options){
@@ -52,13 +60,21 @@
   }
   function fromApi(data){
     const lists=Array.isArray(data&&data.lists)?data.lists.map(function(list){return {
-      id:String(list.id),name:String(list.name||"未命名清單"),tasks:Array.isArray(list.tasks)?list.tasks.map(function(task){return {
+      id:String(list.id),name:String(list.name||"未命名清單"),owner:String(list.owner||"shared"),tasks:Array.isArray(list.tasks)?list.tasks.map(function(task){return {
         id:String(task.id),title:String(task.title||"未命名待辦").trim()||"未命名待辦",done:task.done===true||task.done===1,
         priority:["high","normal","low"].includes(task.priority)?task.priority:"normal"
       };}):[]
     };}):[];
     const current=state.activeListId;
-    return {activeListId:lists.some(function(list){return list.id===current;})?current:(lists[0]&&lists[0].id)||null,filter:state.filter||"all",lists};
+    let activeListId;
+    if(lists.some(function(list){return list.id===current;})){activeListId=current;}
+    else{
+      // 沒有有效的當前清單時，優先選「自己的」（owner 符合當前 profile）
+      const myId=store&&store.currentProfileId?store.currentProfileId():"johnson";
+      const mine=lists.find(function(list){return list.owner===myId;});
+      activeListId=(mine&&mine.id)||(lists[0]&&lists[0].id)||null;
+    }
+    return {activeListId,filter:state.filter||"all",lists};
   }
   function validateTask(input){
     const title=String(input&&input.title||"").trim();
@@ -76,7 +92,7 @@
     if(op.type==="addTask")return request("/api/tasks",{method:"POST",body:JSON.stringify({listId:op.listId,title:op.title,priority:op.priority,note:""})});
     if(op.type==="updateTask")return request("/api/tasks/"+encodeURIComponent(op.taskId),{method:"PATCH",body:JSON.stringify(op.patch)});
     if(op.type==="deleteTask")return request("/api/tasks/"+encodeURIComponent(op.taskId),{method:"DELETE"});
-    if(op.type==="addList")return request("/api/lists",{method:"POST",body:JSON.stringify({name:op.name})});
+    if(op.type==="addList")return request("/api/lists",{method:"POST",body:JSON.stringify({id:op.listId,name:op.name,owner:op.owner||"shared"})});
     if(op.type==="renameList")return request("/api/lists/"+encodeURIComponent(op.listId),{method:"PATCH",body:JSON.stringify({name:op.name})});
     if(op.type==="deleteList")return request("/api/lists/"+encodeURIComponent(op.listId),{method:"DELETE"});
     return Promise.resolve();
@@ -129,7 +145,19 @@
     let found=null;state.lists.some(function(list){const index=list.tasks.findIndex(function(task){return task.id===taskId;});if(index<0)return false;found=list.tasks.splice(index,1)[0];return true;});
     if(!found)return Promise.reject(new Error("找不到待辦"));save(state);return send({type:"deleteTask",taskId});
   }
-  function addList(name){const value=validateName(name),list={id:store.makeId("list"),name:value,tasks:[]};state.lists.push(list);state.activeListId=list.id;state.filter="all";save(state);return send({type:"addList",name:value});}
+  function addList(name){
+    const value=validateName(name),
+      owner=store&&store.currentProfileId?store.currentProfileId():"johnson",
+      list={id:store.makeId("list"),name:value,owner:owner,tasks:[]};
+    state.lists.push(list);state.activeListId=list.id;state.filter="all";save(state);notify();
+    return send({type:"addList",listId:list.id,name:value,owner:owner}).then(function(result){
+      // 輪詢或 fetch 可能在 POST 完成前把 activeListId 換掉，這裡再確認一次
+      if(state.lists.some(function(item){return item.id===list.id;})){
+        state.activeListId=list.id;save(state);notify();
+      }
+      return result;
+    });
+  }
   function renameList(listId,name){const value=validateName(name),list=state.lists.find(function(item){return item.id===listId;});if(!list)return Promise.reject(new Error("找不到清單"));list.name=value;save(state);return send({type:"renameList",listId,name:value});}
   function deleteList(listId){const index=state.lists.findIndex(function(list){return list.id===listId;});if(index<0)return Promise.reject(new Error("找不到清單"));state.lists.splice(index,1);state.activeListId=state.lists[0]&&state.lists[0].id||null;save(state);return send({type:"deleteList",listId});}
   async function init(opts){

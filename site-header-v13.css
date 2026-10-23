@@ -282,12 +282,18 @@ body.trek-home .sidebarFeature{
 /* ── 我的清單（清單總覽） ── */
 body.trek-home .listNav{display:grid!important;gap:6px!important;margin-top:4px!important}
 body.trek-home .listNavItem{
-  display:grid!important;grid-template-columns:minmax(0,1fr) auto!important;gap:5px 10px!important;
+  display:grid!important;grid-template-columns:minmax(0,1fr) auto auto!important;gap:5px 8px!important;
   align-items:center!important;width:100%!important;padding:10px 12px!important;
   border:1px solid var(--trek-line)!important;border-radius:10px!important;background:var(--trek-card)!important;
   cursor:pointer!important;text-align:left!important;font:inherit!important;
   transition:border-color .16s,background .16s,box-shadow .16s!important;
 }
+body.trek-home .listNavOwner{
+  padding:2px 7px!important;border-radius:999px!important;background:#eef1f5!important;
+  color:#7b8695!important;font:700 9.5px/1.5 Inter,"Noto Sans TC",sans-serif!important;
+  letter-spacing:.04em!important;text-transform:uppercase!important;white-space:nowrap!important;
+}
+body.trek-home .listNavItem.is-active .listNavOwner{background:#2a3547!important;color:#9fb0c4!important}
 body.trek-home .listNavItem:hover{border-color:#cbd3dd!important;box-shadow:var(--trek-shadow)!important}
 body.trek-home .listNavItem:focus-visible{outline:2px solid var(--trek-green)!important;outline-offset:2px!important}
 body.trek-home .listNavItem.is-active{border-color:var(--trek-accent)!important;background:var(--trek-accent)!important}
