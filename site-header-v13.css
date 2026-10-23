@@ -179,3 +179,26 @@ body.trek-home .hero>.meta small{font-size:11px!important}
 @media(max-width:700px){
   body.trek-home .hero>.meta{left:24px!important;right:24px!important;bottom:20px!important}
 }
+
+/* Live currency converter in the homepage sidebar. */
+body.trek-home .currencyCard{margin:0 0 18px!important;padding:20px 22px!important;border-bottom:1px solid var(--trek-line)!important;background:#fff!important}
+body.trek-home .currencyHead{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:15px}
+body.trek-home .currencyHead .kicker{margin-bottom:5px!important}
+body.trek-home .currencyHead h3{margin:0!important;font-size:20px!important;line-height:1.1!important}
+body.trek-home .currencyRefresh,.currencySwap{border:0!important;cursor:pointer!important}
+body.trek-home .currencyRefresh{display:grid!important;place-items:center!important;width:32px!important;height:32px!important;border-radius:50%!important;background:#f2f4f6!important;color:#465264!important;font-size:18px!important;line-height:1!important;transition:transform .15s,background .15s!important}
+body.trek-home .currencyRefresh:hover{background:#e6eaee!important;transform:rotate(45deg)}
+body.trek-home .currencyRefresh:disabled{opacity:.5!important;cursor:wait!important}
+body.trek-home .currencyGrid{display:grid!important;grid-template-columns:minmax(0,1fr) 38px minmax(0,1fr)!important;gap:8px!important;align-items:center!important}
+body.trek-home .currencyField{display:block!important;min-width:0!important;padding:12px!important;border-radius:13px!important;background:#f8f8f6!important}
+body.trek-home .currencyField>span{display:block!important;color:#858d99!important;font-size:11px!important;font-weight:700!important}
+body.trek-home .currencyField input,.currencyField select{width:100%!important;border:0!important;background:transparent!important;color:#172033!important;font:700 20px/1.2 Inter,"PingFang TC",sans-serif!important;outline:none!important}
+body.trek-home .currencyField input{padding:6px 0!important}
+body.trek-home .currencyField select{padding:5px 0 0!important;font-size:12px!important;font-weight:700!important;cursor:pointer!important}
+body.trek-home .currencyOutput{display:block!important;min-height:30px!important;padding:6px 0!important;color:#172033!important;font:700 20px/1.2 Inter,"PingFang TC",sans-serif!important;letter-spacing:-.04em!important}
+body.trek-home .currencySwap{display:grid!important;place-items:center!important;width:38px!important;height:38px!important;border-radius:50%!important;background:#172033!important;color:#fff!important;font-size:21px!important;transition:transform .15s!important}
+body.trek-home .currencySwap:hover{transform:rotate(180deg)}
+body.trek-home .currencyRate{margin:14px 0 2px!important;color:#485364!important;font-size:11px!important;font-weight:700!important}
+body.trek-home .currencyStatus{margin:0!important;color:#8a929f!important;font-size:10px!important;line-height:1.5!important}
+@media(max-width:1050px){body.trek-home .currencyCard{margin-bottom:0!important;border-bottom:1px solid var(--trek-line)!important}}
+@media(max-width:440px){body.trek-home .currencyCard{padding:18px!important}body.trek-home .currencyGrid{grid-template-columns:minmax(0,1fr) 34px minmax(0,1fr)!important;gap:6px!important}body.trek-home .currencySwap{width:34px!important;height:34px!important;font-size:18px!important}body.trek-home .currencyField{padding:10px!important}}
