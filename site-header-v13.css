@@ -581,3 +581,22 @@ body.trek-home .listsPanel>.packingFeature{
   min-height:0!important;
 }
 body.trek-home .listsPanel>.packingFeature>.sidebarTaskPreview{flex:1 1 auto!important;overflow:auto!important}
+
+/* ── 景點卡片共用：照片 / 資訊列 / 歷史（attractions + place-* 共用）── */
+.spotPhoto{margin:10px 0 10px;border-radius:12px;overflow:hidden;background:#eef1ee}
+.spotPhoto img{display:block;width:100%;height:auto;max-height:260px;object-fit:cover}
+.spotFacts{display:flex;flex-wrap:wrap;gap:6px 10px;margin:8px 0 10px;font-size:12.5px;line-height:1.6}
+.spotFacts>span{display:inline-block;max-width:100%;padding:4px 9px;border-radius:999px;background:#f1f4f1;color:#3f4a42;overflow-wrap:anywhere}
+.spotFacts b{font-size:11px;letter-spacing:.04em;color:#6b7a72;font-weight:700;white-space:nowrap;margin-right:5px}
+.spotFacts a{color:#254c40;text-decoration:underline}
+.spotHistory{margin-top:8px;font-size:13.5px;line-height:1.7}
+.spotHistory summary{cursor:pointer;font-weight:700;color:#254c40;padding:4px 0}
+.spotHistory summary:hover{color:#F59E0B}
+.spotHistory p{margin:6px 0 0;color:#4d5a52}
+@media(max-width:600px){
+  .spotPhoto img{max-height:200px}
+  .spotFacts{font-size:12px;gap:5px 8px}
+  .spotFacts>span{padding:3px 8px}
+}
+/* ── header 盒模型修正（place-*.html 沒有全域 box-sizing 導致 28px 溢出）── */
+header.site-header,header.site-header *{box-sizing:border-box}
