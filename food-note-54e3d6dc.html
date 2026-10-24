@@ -42,7 +42,7 @@
 
 <div class="spotFacts"><span><b>類型</b>Bò Kho（越南牛肉燉鍋）</span><span><b>營業</b>每日 10:00–22:00</span><span><b>評分</b>⭐ 4.1（1527）</span><span><b>電話</b><a href="tel:0933844688">0933 844 688</a></span><span><b>價格</b>- 牛腩＋牛筋｜70K VND</span></div>
 
-<div class="actions"><a class="btn primary" href="https://www.google.com/maps/dir/?api=1&amp;destination=10.7617974,106.6730176&amp;travelmode=walking" target="_blank" rel="noopener">導航到這裡</a><a class="btn" href="https://www.google.com/maps/search/?api=1&amp;query=%E7%B1%B3%E5%85%B6%E6%9E%97%E7%89%9B%E8%82%89%E7%87%89%E9%8D%8B%EF%BD%9CB%C3%B2%20Kho%20G%C3%A1nh%20S%C3%A0i%20G%C3%B2n" target="_blank" rel="noopener">Google Maps ↗</a><a class="btn xhs" href="https://www.rednote.com/discovery/item/6abfb3310000000019033063" target="_blank" rel="noopener">小紅書原文 ↗</a></div>
+<div class="actions"><a class="btn primary" href="https://www.google.com/maps/dir/?api=1&amp;destination=10.7617974,106.6730176&amp;travelmode=walking" target="_blank" rel="noopener">導航到這裡</a><a class="btn" href="https://www.google.com/maps/search/?api=1&amp;query=%E7%B1%B3%E5%85%B6%E6%9E%97%E7%89%9B%E8%82%89%E7%87%89%E9%8D%8B%EF%BD%9CB%C3%B2%20Kho%20G%C3%A1nh%20S%C3%A0i%20G%C3%B2n" target="_blank" rel="noopener">Google Maps ↗</a><a class="btn xhs" href="xhsdiscover://item/6abfb3310000000019033063" onclick="return openXhs(event, '6abfb3310000000019033063')" title="點擊用手機小紅書 App 開啟；沒裝 App 會自動開網頁版">📱 在小紅書開啟</a><a class="btn" href="javascript:void(0)" onclick="copyXhsId(this, '6abfb3310000000019033063')" title="複製筆記 ID，可貼到小紅書搜尋欄">🔗 筆記 ID</a></div>
 
 <section class="panel">
 <p><b>食物</b>：Bò Kho（越南牛肉燉鍋）</p>
@@ -76,6 +76,34 @@
 
 </main>
 <footer><div class="wrap">SAIGON STAYS · PERSONAL TRAVEL JOURNAL</div></footer>
+<script>
+function openXhs(e, id) {
+  e.preventDefault();
+  var web = 'https://www.xiaohongshu.com/explore/' + id;
+  var t = Date.now();
+  // 嘗試開 App
+  window.location.href = 'xhsdiscover://item/' + id;
+  // 1.2 秒內沒切走（代表沒裝 App 或不支援）→ 開網頁版
+  setTimeout(function () {
+    if (Date.now() - t < 1500 && !document.hidden) {
+      window.open(web, '_blank', 'noopener');
+    }
+  }, 1200);
+  return false;
+}
+function copyXhsId(btn, id) {
+  var done = function () {
+    var old = btn.textContent;
+    btn.textContent = '已複製：' + id;
+    setTimeout(function () { btn.textContent = old; }, 1800);
+  };
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(id).then(done).catch(function () { prompt('複製這個 ID，到小紅書搜尋：', id); });
+  } else {
+    prompt('複製這個 ID，到小紅書搜尋：', id);
+  }
+}
+</script>
 <script src="image-lightbox.js?v=2" defer></script>
 </body>
 </html>

@@ -42,7 +42,7 @@
 
 <div class="spotFacts"><span><b>類型</b>越南法棍（香腸、肉醬、青瓜）</span><span><b>營業</b>每日 05:00 – 21:00</span></div>
 
-<div class="actions"><a class="btn primary" href="https://www.google.com/maps/dir/?api=1&amp;destination=10.7709871,106.691729&amp;travelmode=walking" target="_blank" rel="noopener">導航到這裡</a><a class="btn" href="https://www.google.com/maps/search/?api=1&amp;query=%E8%B7%AF%E9%82%8A%E6%94%A4%E6%B3%95%E6%A3%8D%EF%BD%9CB%C3%A1nh%20M%C3%AC%20H%C3%B2a%20M%C3%A3" target="_blank" rel="noopener">Google Maps ↗</a><a class="btn xhs" href="https://www.rednote.com/discovery/item/6a7497f7000000002701f05b?xsec_token=AB1O8DBVwn0sScuNNmvyvrwjcRb56GKxC_BsLW2bI0kOY=&xsec_source=&m_source=pwa" target="_blank" rel="noopener">小紅書原文 ↗</a></div>
+<div class="actions"><a class="btn primary" href="https://www.google.com/maps/dir/?api=1&amp;destination=10.7709871,106.691729&amp;travelmode=walking" target="_blank" rel="noopener">導航到這裡</a><a class="btn" href="https://www.google.com/maps/search/?api=1&amp;query=%E8%B7%AF%E9%82%8A%E6%94%A4%E6%B3%95%E6%A3%8D%EF%BD%9CB%C3%A1nh%20M%C3%AC%20H%C3%B2a%20M%C3%A3" target="_blank" rel="noopener">Google Maps ↗</a><a class="btn xhs" href="xhsdiscover://item/6a7497f7000000002701f05b" onclick="return openXhs(event, '6a7497f7000000002701f05b')" title="點擊用手機小紅書 App 開啟；沒裝 App 會自動開網頁版">📱 在小紅書開啟</a><a class="btn" href="javascript:void(0)" onclick="copyXhsId(this, '6a7497f7000000002701f05b')" title="複製筆記 ID，可貼到小紅書搜尋欄">🔗 筆記 ID</a></div>
 
 <section class="panel">
 <p><b>食物</b>：越南法棍（香腸、肉醬、青瓜）</p>
@@ -62,6 +62,34 @@
 
 </main>
 <footer><div class="wrap">SAIGON STAYS · PERSONAL TRAVEL JOURNAL</div></footer>
+<script>
+function openXhs(e, id) {
+  e.preventDefault();
+  var web = 'https://www.xiaohongshu.com/explore/' + id;
+  var t = Date.now();
+  // 嘗試開 App
+  window.location.href = 'xhsdiscover://item/' + id;
+  // 1.2 秒內沒切走（代表沒裝 App 或不支援）→ 開網頁版
+  setTimeout(function () {
+    if (Date.now() - t < 1500 && !document.hidden) {
+      window.open(web, '_blank', 'noopener');
+    }
+  }, 1200);
+  return false;
+}
+function copyXhsId(btn, id) {
+  var done = function () {
+    var old = btn.textContent;
+    btn.textContent = '已複製：' + id;
+    setTimeout(function () { btn.textContent = old; }, 1800);
+  };
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(id).then(done).catch(function () { prompt('複製這個 ID，到小紅書搜尋：', id); });
+  } else {
+    prompt('複製這個 ID，到小紅書搜尋：', id);
+  }
+}
+</script>
 <script src="image-lightbox.js?v=2" defer></script>
 </body>
 </html>

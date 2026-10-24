@@ -40,7 +40,7 @@
 
 <figure class="spotPhoto"><img src="images/note-tip-45fe4157-1.jpg" alt="🇻🇳越南旅游出行必备🧳" loading="eager" decoding="async"></figure>
 
-<div class="actions"><a class="btn xhs" href="https://www.rednote.com/discovery/item/6a7fe715000000002702301a?xsec_token=ABcA6Ndaffqanvl7mkPvFMGKnlE5Tbrtt7o0WFmV1H9t4=&xsec_source=pc_feed&m_source=pwa" target="_blank" rel="noopener">小紅書原文 ↗</a></div>
+<div class="actions"><a class="btn xhs" href="xhsdiscover://item/6a7fe715000000002702301a" onclick="return openXhs(event, '6a7fe715000000002702301a')" title="點擊用手機小紅書 App 開啟；沒裝 App 會自動開網頁版">📱 在小紅書開啟</a><a class="btn" href="javascript:void(0)" onclick="copyXhsId(this, '6a7fe715000000002702301a')" title="複製筆記 ID，可貼到小紅書搜尋欄">🔗 筆記 ID</a></div>
 
 <section class="panel">
 <p>刚从越南回来，整理了一份超全出行必备清单，大家照着收行李就行啦~越南玩得开心</p>
@@ -95,6 +95,34 @@
 
 </main>
 <footer><div class="wrap">SAIGON STAYS · PERSONAL TRAVEL JOURNAL</div></footer>
+<script>
+function openXhs(e, id) {
+  e.preventDefault();
+  var web = 'https://www.xiaohongshu.com/explore/' + id;
+  var t = Date.now();
+  // 嘗試開 App
+  window.location.href = 'xhsdiscover://item/' + id;
+  // 1.2 秒內沒切走（代表沒裝 App 或不支援）→ 開網頁版
+  setTimeout(function () {
+    if (Date.now() - t < 1500 && !document.hidden) {
+      window.open(web, '_blank', 'noopener');
+    }
+  }, 1200);
+  return false;
+}
+function copyXhsId(btn, id) {
+  var done = function () {
+    var old = btn.textContent;
+    btn.textContent = '已複製：' + id;
+    setTimeout(function () { btn.textContent = old; }, 1800);
+  };
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(id).then(done).catch(function () { prompt('複製這個 ID，到小紅書搜尋：', id); });
+  } else {
+    prompt('複製這個 ID，到小紅書搜尋：', id);
+  }
+}
+</script>
 <script src="image-lightbox.js?v=2" defer></script>
 </body>
 </html>

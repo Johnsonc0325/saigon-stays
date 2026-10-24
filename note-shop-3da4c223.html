@@ -25,7 +25,7 @@
 <a href="shopping.html">← 返回體驗購物</a>
 <p class="eyebrow">購物筆記 · 來自 Obsidian</p>
 <h1>胡志明市逛超市｜越南超市到底都卖什么？</h1>
-<figure class="spotPhoto"><img src="images/note-shop-3da4c223-1.jpg" alt="胡志明市逛超市｜越南超市到底都卖什么？" loading="eager"></figure><div class="actions"><a class="btn xhs" href="https://www.rednote.com/discovery/item/6a83244000000000220331b7?xsec_token=ABbQbHrO3fxqnOYfA2ot5J9nHKMdkYx0XrqmiNUElBLx4=&xsec_source=pc_feed&m_source=pwa" target="_blank" rel="noopener">小紅書原文 ↗</a></div>
+<figure class="spotPhoto"><img src="images/note-shop-3da4c223-1.jpg" alt="胡志明市逛超市｜越南超市到底都卖什么？" loading="eager"></figure><div class="actions"><a class="btn xhs" href="xhsdiscover://item/6a83244000000000220331b7" onclick="return openXhs(event, '6a83244000000000220331b7')" title="點擊用手機小紅書 App 開啟；沒裝 App 會自動開網頁版">📱 在小紅書開啟</a><a class="btn" href="javascript:void(0)" onclick="copyXhsId(this, '6a83244000000000220331b7')" title="複製筆記 ID，可貼到小紅書搜尋欄">🔗 筆記 ID</a></div>
 <section class="panel"><p>来胡志明市，除了逛景点和吃美食，也很推荐去逛逛当地超市。</p>
 <p>这次去的是 Tops Market，进去以后真的很容易越逛越久😂</p>
 <ul>
@@ -53,5 +53,33 @@
 <div class="note">📌 <b>資料來源：</b>內容與全部 2 張照片來自小紅書實地帖文（Pebble 擷取至 Obsidian）。<b>出發前請以現場資訊為準。</b></div>
 </main>
 <footer><div class="wrap">SAIGON STAYS · PERSONAL TRAVEL JOURNAL</div></footer>
+<script>
+function openXhs(e, id) {
+  e.preventDefault();
+  var web = 'https://www.xiaohongshu.com/explore/' + id;
+  var t = Date.now();
+  // 嘗試開 App
+  window.location.href = 'xhsdiscover://item/' + id;
+  // 1.2 秒內沒切走（代表沒裝 App 或不支援）→ 開網頁版
+  setTimeout(function () {
+    if (Date.now() - t < 1500 && !document.hidden) {
+      window.open(web, '_blank', 'noopener');
+    }
+  }, 1200);
+  return false;
+}
+function copyXhsId(btn, id) {
+  var done = function () {
+    var old = btn.textContent;
+    btn.textContent = '已複製：' + id;
+    setTimeout(function () { btn.textContent = old; }, 1800);
+  };
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(id).then(done).catch(function () { prompt('複製這個 ID，到小紅書搜尋：', id); });
+  } else {
+    prompt('複製這個 ID，到小紅書搜尋：', id);
+  }
+}
+</script>
 <script src="image-lightbox.js?v=2" defer></script>
 </body></html>

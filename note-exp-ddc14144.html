@@ -25,7 +25,7 @@
 <a href="shopping.html">← 返回體驗購物</a>
 <p class="eyebrow">購物筆記 · 來自 Obsidian</p>
 <h1>6天美食漫遊｜胡志明市區吃喝全集</h1>
-<figure class="spotPhoto"><img src="images/note-exp-ddc14144-1.jpg" alt="6天美食漫遊｜胡志明市區吃喝全集" loading="eager"></figure><div class="actions"><a class="btn xhs" href="https://www.rednote.com/discovery/item/6ac27a39000000000a021e60" target="_blank" rel="noopener">小紅書原文 ↗</a></div>
+<figure class="spotPhoto"><img src="images/note-exp-ddc14144-1.jpg" alt="6天美食漫遊｜胡志明市區吃喝全集" loading="eager"></figure><div class="actions"><a class="btn xhs" href="xhsdiscover://item/6ac27a39000000000a021e60" onclick="return openXhs(event, '6ac27a39000000000a021e60')" title="點擊用手機小紅書 App 開啟；沒裝 App 會自動開網頁版">📱 在小紅書開啟</a><a class="btn" href="javascript:void(0)" onclick="copyXhsId(this, '6ac27a39000000000a021e60')" title="複製筆記 ID，可貼到小紅書搜尋欄">🔗 筆記 ID</a></div>
 <section class="panel"><p>6 天泡在胡志明，沒有趕行程，一頭扎進這座城市的煙火裡，把本地美食挨個打卡，從街邊小攤到特色餐廳。</p>
 <p>超火的本地夜宵大排檔，傳統炭爐烤肉，新鮮醃好的牛肉、海鮮、秋葵，食材豐富，圍爐烤肉氛圍感拉滿，<b>人均 130 吃到撐</b>。</p>
 <p>> ⚠️ vault 已有「日式炭火燒肉｜5KU Station」，可能為同一家</p>
@@ -64,5 +64,33 @@
 <div class="note">📌 <b>資料來源：</b>內容與全部 18 張照片來自小紅書實地帖文（Pebble 擷取至 Obsidian）。<b>出發前請以現場資訊為準。</b></div>
 </main>
 <footer><div class="wrap">SAIGON STAYS · PERSONAL TRAVEL JOURNAL</div></footer>
+<script>
+function openXhs(e, id) {
+  e.preventDefault();
+  var web = 'https://www.xiaohongshu.com/explore/' + id;
+  var t = Date.now();
+  // 嘗試開 App
+  window.location.href = 'xhsdiscover://item/' + id;
+  // 1.2 秒內沒切走（代表沒裝 App 或不支援）→ 開網頁版
+  setTimeout(function () {
+    if (Date.now() - t < 1500 && !document.hidden) {
+      window.open(web, '_blank', 'noopener');
+    }
+  }, 1200);
+  return false;
+}
+function copyXhsId(btn, id) {
+  var done = function () {
+    var old = btn.textContent;
+    btn.textContent = '已複製：' + id;
+    setTimeout(function () { btn.textContent = old; }, 1800);
+  };
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(id).then(done).catch(function () { prompt('複製這個 ID，到小紅書搜尋：', id); });
+  } else {
+    prompt('複製這個 ID，到小紅書搜尋：', id);
+  }
+}
+</script>
 <script src="image-lightbox.js?v=2" defer></script>
 </body></html>

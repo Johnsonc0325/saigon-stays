@@ -42,7 +42,7 @@
 
 <div class="spotFacts"><span><b>類型</b>蟹肉粉</span><span><b>營業</b>週一/二/五/六/日 11:00–21:00，週三/四休息</span><span><b>評分</b>⭐ 4.4（1238）</span><span><b>電話</b><a href="tel:0768950878">0768 950 878</a></span></div>
 
-<div class="actions"><a class="btn primary" href="https://www.google.com/maps/dir/?api=1&amp;destination=10.7947157,106.6908364&amp;travelmode=walking" target="_blank" rel="noopener">導航到這裡</a><a class="btn" href="https://www.google.com/maps/search/?api=1&amp;query=%E8%9F%B9%E8%82%89%E7%B2%89%EF%BD%9CB%C3%A1nh%20Canh%20Cua%2087" target="_blank" rel="noopener">Google Maps ↗</a><a class="btn xhs" href="https://www.xiaohongshu.com/discovery/item/6a9409c10000000020032564" target="_blank" rel="noopener">小紅書原文 ↗</a></div>
+<div class="actions"><a class="btn primary" href="https://www.google.com/maps/dir/?api=1&amp;destination=10.7947157,106.6908364&amp;travelmode=walking" target="_blank" rel="noopener">導航到這裡</a><a class="btn" href="https://www.google.com/maps/search/?api=1&amp;query=%E8%9F%B9%E8%82%89%E7%B2%89%EF%BD%9CB%C3%A1nh%20Canh%20Cua%2087" target="_blank" rel="noopener">Google Maps ↗</a><a class="btn xhs" href="xhsdiscover://item/6a9409c10000000020032564" onclick="return openXhs(event, '6a9409c10000000020032564')" title="點擊用手機小紅書 App 開啟；沒裝 App 會自動開網頁版">📱 在小紅書開啟</a><a class="btn" href="javascript:void(0)" onclick="copyXhsId(this, '6a9409c10000000020032564')" title="複製筆記 ID，可貼到小紅書搜尋欄">🔗 筆記 ID</a></div>
 
 <section class="panel">
 <p><b>食物</b>：蟹肉粉</p>
@@ -60,6 +60,34 @@
 
 </main>
 <footer><div class="wrap">SAIGON STAYS · PERSONAL TRAVEL JOURNAL</div></footer>
+<script>
+function openXhs(e, id) {
+  e.preventDefault();
+  var web = 'https://www.xiaohongshu.com/explore/' + id;
+  var t = Date.now();
+  // 嘗試開 App
+  window.location.href = 'xhsdiscover://item/' + id;
+  // 1.2 秒內沒切走（代表沒裝 App 或不支援）→ 開網頁版
+  setTimeout(function () {
+    if (Date.now() - t < 1500 && !document.hidden) {
+      window.open(web, '_blank', 'noopener');
+    }
+  }, 1200);
+  return false;
+}
+function copyXhsId(btn, id) {
+  var done = function () {
+    var old = btn.textContent;
+    btn.textContent = '已複製：' + id;
+    setTimeout(function () { btn.textContent = old; }, 1800);
+  };
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(id).then(done).catch(function () { prompt('複製這個 ID，到小紅書搜尋：', id); });
+  } else {
+    prompt('複製這個 ID，到小紅書搜尋：', id);
+  }
+}
+</script>
 <script src="image-lightbox.js?v=2" defer></script>
 </body>
 </html>

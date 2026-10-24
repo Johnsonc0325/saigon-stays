@@ -48,7 +48,7 @@
 <span><b>規模</b>約 400 m²、兩層樓</span>
 </div>
 
-<div class="actions"><a class="btn xhs" href="https://www.rednote.com/discovery/item/6982203e000000000e03dd9c" target="_blank" rel="noopener">小紅書原文 ↗</a>
+<div class="actions"><a class="btn xhs" href="xhsdiscover://item/6982203e000000000e03dd9c" onclick="return openXhs(event, '6982203e000000000e03dd9c')" title="點擊用手機小紅書 App 開啟；沒裝 App 會自動開網頁版">📱 在小紅書開啟</a><a class="btn" href="javascript:void(0)" onclick="copyXhsId(this, '6982203e000000000e03dd9c')" title="複製筆記 ID，可貼到小紅書搜尋欄">🔗 筆記 ID</a>
 <a class="btn primary" href="https://www.google.com/maps/search/?api=1&amp;query=Vesta+Lifestyle+Gifts+34+Ngo+Quang+Huy+Thao+Dien" target="_blank" rel="noopener">Google Maps（旗艦店）↗</a>
 <a class="btn" href="http://vestalifestyle.com/" target="_blank" rel="noopener">官方網站 ↗</a>
 </div>
@@ -119,5 +119,33 @@
 <img src="images/shop-vesta-obs-12.jpg" alt="Vesta Lifestyle &amp; Gifts 實拍 12" loading="lazy" style="display:block;width:100%;height:170px;object-fit:cover;border-radius:12px"></div></section>
 </main>
 <footer><div class="wrap">SAIGON STAYS · PERSONAL TRAVEL JOURNAL</div></footer>
+<script>
+function openXhs(e, id) {
+  e.preventDefault();
+  var web = 'https://www.xiaohongshu.com/explore/' + id;
+  var t = Date.now();
+  // 嘗試開 App
+  window.location.href = 'xhsdiscover://item/' + id;
+  // 1.2 秒內沒切走（代表沒裝 App 或不支援）→ 開網頁版
+  setTimeout(function () {
+    if (Date.now() - t < 1500 && !document.hidden) {
+      window.open(web, '_blank', 'noopener');
+    }
+  }, 1200);
+  return false;
+}
+function copyXhsId(btn, id) {
+  var done = function () {
+    var old = btn.textContent;
+    btn.textContent = '已複製：' + id;
+    setTimeout(function () { btn.textContent = old; }, 1800);
+  };
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(id).then(done).catch(function () { prompt('複製這個 ID，到小紅書搜尋：', id); });
+  } else {
+    prompt('複製這個 ID，到小紅書搜尋：', id);
+  }
+}
+</script>
 <script src="image-lightbox.js?v=2" defer></script></body>
 </html>
