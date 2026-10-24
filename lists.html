@@ -79,7 +79,7 @@ nav a{color:#636a63;font-size:12px;transition:color .2s}nav a:hover{color:var(--
 </style><style>
 /* Lists workspace: editable local checklists in the same editorial visual system. */
 .listsPanel{grid-column:1/-1}
-.listsApp{display:grid;grid-template-columns:230px minmax(0,1fr);gap:24px;border:1px solid var(--line);border-radius:12px;background:#fbfcf9;overflow:hidden}
+.listsApp{display:grid;grid-template-columns:280px minmax(0,1fr);gap:24px;border:1px solid var(--line);border-radius:12px;background:#fbfcf9;overflow:hidden}
 .listsSidebar{padding:20px;border-right:1px solid var(--line);background:#f5f7f2}
 .listProgressCard{padding:16px;border:1px solid #e2e8df;border-radius:12px;background:#fff}
 .listProgressTop{display:flex;align-items:baseline;justify-content:space-between;gap:8px;color:var(--muted);font-size:11px}
@@ -88,13 +88,13 @@ nav a{color:#636a63;font-size:12px;transition:color .2s}nav a:hover{color:var(--
 .listProgressTrack span{display:block;height:100%;width:0;border-radius:inherit;background:#4e9b70;transition:width .2s}
 .listProgressCard small{font-size:11px;color:var(--muted)}
 .listsSectionLabel{margin:22px 0 8px;font-size:10px;font-weight:700;letter-spacing:.14em;color:#9a9f96}
-.listNav{display:grid;gap:5px}
-.listNav button{display:flex;align-items:center;justify-content:space-between;gap:8px;width:100%;padding:10px 11px;border:0;border-radius:9px;background:transparent;text-align:left;color:#657068;cursor:pointer;font:inherit}
+.listNav{display:grid;grid-template-columns:minmax(0,1fr);gap:7px;min-width:0}
+.listNav button{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;column-gap:8px;row-gap:3px;width:100%;min-width:0;padding:10px 11px;border:0;border-radius:9px;background:transparent;text-align:left;color:#657068;cursor:pointer;font:inherit}
 .listNav button:hover{background:#e9efe8;color:var(--ink)}
 .listNav button.active{background:#fff;color:var(--ink);box-shadow:0 2px 10px rgba(41,70,60,.07);font-weight:700}
-.listNav button span:last-child{min-width:22px;padding:2px 6px;border-radius:99px;background:#e8ede7;text-align:center;font-size:10px;color:#7a847b}
-.listNav .listNavName{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.listNavOwner{padding:2px 6px;border-radius:999px;background:#eef1f5;color:#7b8695;font:700 9px/1.5 Inter,"Noto Sans TC",sans-serif;letter-spacing:.03em;text-transform:uppercase;white-space:nowrap;flex:none}
+.listNav button span:last-child{grid-column:2;grid-row:1;justify-self:end;min-width:22px;padding:2px 6px;border-radius:99px;background:#e8ede7;text-align:center;font-size:10px;color:#7a847b}
+.listNav .listNavName{grid-column:1;grid-row:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.listNavOwner{grid-column:1;grid-row:2;justify-self:start;padding:2px 6px;border-radius:999px;background:#eef1f5;color:#7b8695;font:700 9px/1.5 Inter,"Noto Sans TC",sans-serif;letter-spacing:.03em;text-transform:uppercase;white-space:nowrap;flex:none}
 .listNav button.active .listNavOwner{background:#dfe8e2;color:#4d6b5f}
 .addListButton{width:100%;margin-top:12px;padding:10px;border:1px dashed #bdcbbd;border-radius:9px;background:transparent;color:#597060;cursor:pointer;font:inherit}
 .addListButton:hover{background:#e9f0e8}
@@ -128,7 +128,7 @@ nav a{color:#636a63;font-size:12px;transition:color .2s}nav a:hover{color:var(--
 .addTaskForm button{border:0;border-radius:8px;background:var(--ink);color:#fff;padding:0 15px;cursor:pointer;font:inherit;font-size:12px}
 .addTaskForm button:hover{background:#3b6254}
 @media(max-width:950px){
-  .listsApp{grid-template-columns:190px minmax(0,1fr);gap:0}
+  .listsApp{grid-template-columns:220px minmax(0,1fr);gap:0}
   .listsSidebar{padding:16px}
   .listMain{padding:18px 16px}
 }
@@ -136,7 +136,7 @@ nav a{color:#636a63;font-size:12px;transition:color .2s}nav a:hover{color:var(--
   .listsApp{display:block}
   .listsSidebar{border-right:0;border-bottom:1px solid var(--line)}
   .listNav{display:flex;overflow-x:auto;padding-bottom:2px}
-  .listNav button{min-width:150px}
+  .listNav button{flex:0 0 210px;min-width:210px}
   .addListButton{width:auto;padding:8px 12px}
   .newListForm{max-width:270px}
   .listMainHead{display:block}
