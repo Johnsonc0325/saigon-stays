@@ -242,7 +242,7 @@ body.trek-home .listsPanel .listMain{
 /* A single sidebar track keeps separate feature cards vertically adjacent. */
 body.trek-home .sidebarStack{
   grid-column:9 / -1!important;
-  grid-row:1 / span 4!important;
+  grid-row:auto!important;
   display:grid!important;
   align-content:start!important;
   gap:20px!important;
@@ -554,3 +554,8 @@ body.trek-home .sidebarTools .tool small{font-size:9px!important}
 @media(max-width:440px){
   body.trek-home .sidebarTools .toolsGrid{grid-template-columns:1fr!important}
 }
+
+/* Homepage content after removing the attraction, restaurant, hotel and transport cards. */
+body.trek-home .homeMainColumn{grid-column:span 8!important;display:flex!important;flex-direction:column!important;gap:20px!important;min-width:0!important}
+body.trek-home .homeMainColumn>.route,body.trek-home .homeMainColumn>.reminders{width:100%!important;flex:none!important}
+@media(max-width:1050px){body.trek-home .homeMainColumn{grid-column:1/-1!important}}
