@@ -560,3 +560,24 @@ body.trek-home .sidebarTools .tool small{font-size:9px!important}
 body.trek-home .homeMainColumn{grid-column:span 8!important;display:flex!important;flex-direction:column!important;gap:20px!important;min-width:0!important;align-self:start!important}
 body.trek-home .homeMainColumn>.route,body.trek-home .homeMainColumn>.reminders{width:100%!important;flex:none!important}
 @media(max-width:1050px){body.trek-home .homeMainColumn{grid-column:1/-1!important}}
+
+/* ── 移除旅行工具後：右欄撐滿高度，讓「當前清單」底部對齊左欄「重要提醒」 ── */
+body.trek-home .sidebarStack{
+  height:100%!important;
+  align-content:start!important;
+  grid-template-rows:auto 1fr!important;
+}
+body.trek-home .listsPanel{
+  display:flex!important;
+  flex-direction:column!important;
+  min-height:0!important;
+  height:100%!important;
+}
+body.trek-home .listsPanel>.listNavFeature{flex:0 0 auto!important}
+body.trek-home .listsPanel>.packingFeature{
+  flex:1 1 auto!important;
+  display:flex!important;
+  flex-direction:column!important;
+  min-height:0!important;
+}
+body.trek-home .listsPanel>.packingFeature>.sidebarTaskPreview{flex:1 1 auto!important;overflow:auto!important}
