@@ -600,3 +600,19 @@ body.trek-home .listsPanel>.packingFeature>.sidebarTaskPreview{flex:1 1 auto!imp
 }
 /* ── header 盒模型修正（place-*.html 沒有全域 box-sizing 導致 28px 溢出）── */
 header.site-header,header.site-header *{box-sizing:border-box}
+/* ── 圖片放大 lightbox ── */
+.zoomableImg{cursor:zoom-in}
+html.imgLightboxOpen{overflow:hidden}
+.imgLightbox{position:fixed;inset:0;z-index:9999;background:rgba(12,16,14,.94);display:flex;align-items:center;justify-content:center;padding:20px}
+.imgLightbox[hidden]{display:none}
+.imgLightboxInner{margin:0;max-width:min(1200px,100%);max-height:100%;display:flex;flex-direction:column;align-items:center;gap:10px}
+.imgLightboxInner img{max-width:100%;max-height:calc(100vh - 130px);width:auto;height:auto;object-fit:contain;border-radius:10px;background:#111}
+.imgLightboxCaption{margin:0;color:#e8ece9;font-size:13.5px;line-height:1.6;text-align:center;max-width:640px}
+.imgLightboxClose{position:absolute;top:14px;right:16px;width:44px;height:44px;border-radius:50%;border:1px solid rgba(255,255,255,.35);background:rgba(255,255,255,.12);color:#fff;font-size:24px;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.imgLightboxClose:hover{background:rgba(255,255,255,.24)}
+.imgLightboxHint{position:absolute;bottom:14px;left:0;right:0;margin:0;text-align:center;color:rgba(255,255,255,.55);font-size:12px}
+@media(max-width:600px){
+  .imgLightbox{padding:12px}
+  .imgLightboxInner img{max-height:calc(100vh - 120px)}
+  .imgLightboxClose{top:8px;right:8px}
+}
