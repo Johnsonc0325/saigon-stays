@@ -114,11 +114,33 @@
     }
   }
 
+  // lazy 載入的圖片：用 IntersectionObserver 動態標記（否則 scroll 後才載入的圖沒有放大鏡）
+  function observeLazy() {
+    if (!("IntersectionObserver" in window)) return;
+    var io = new IntersectionObserver(function (entries) {
+      for (var i = 0; i < entries.length; i++) {
+        var en = entries[i];
+        if (!en.isIntersecting) continue;
+        var im = en.target;
+        if (im.complete && isZoomable(im)) {
+          im.classList.add("zoomableImg");
+          im.setAttribute("title", "點擊看完整圖片");
+          io.unobserve(im);
+        }
+      }
+    }, { rootMargin: "300px 0px" });
+    var all = document.querySelectorAll("main img, article img, figure img, .detail img");
+    for (var j = 0; j < all.length; j++) {
+      if (!all[j].classList.contains("zoomableImg")) io.observe(all[j]);
+    }
+  }
+
   if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", markCursor);
+    document.addEventListener("DOMContentLoaded", function () { markCursor(); observeLazy(); });
   } else {
     markCursor();
+    observeLazy();
   }
   // 動態載入的圖片（例如清單渲染）也標記
-  window.addEventListener("load", function () { setTimeout(markCursor, 600); });
+  window.addEventListener("load", function () { setTimeout(function () { markCursor(); observeLazy(); }, 600); });
 })();
