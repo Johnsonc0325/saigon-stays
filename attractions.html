@@ -155,7 +155,8 @@ footer.spacer{margin-top:70px;border-top:1px solid var(--line);height:72px}
 .spotFacts b{font-size:11px;letter-spacing:.04em;color:#6b7a72;font-weight:700}
 .spotFacts a{color:#254c40;text-decoration:underline}
 .spotHistory{margin-top:8px;font-size:13.5px;line-height:1.7}
-.spotHistory summary{cursor:pointer;font-weight:700;color:#254c40;padding:4px 0}
+.spotHistory summary{cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:44px;padding:10px 14px;font-weight:700;color:#254c40;box-sizing:border-box}
+.spotHistory summary::after{flex:0 0 auto}
 .spotHistory summary:hover{color:#F59E0B}
 .spotHistory p{margin:6px 0 0;color:#4d5a52}
 @media(max-width:600px){
