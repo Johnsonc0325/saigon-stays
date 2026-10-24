@@ -459,6 +459,7 @@ body.trek-home .sidebarTask{
   align-items:center!important;
   gap:9px!important;
   min-width:0!important;
+  min-height:44px!important;
   padding:10px 0!important;
   border-top:1px solid #e7ebe7!important;
   color:#26342f!important;
@@ -556,6 +557,6 @@ body.trek-home .sidebarTools .tool small{font-size:9px!important}
 }
 
 /* Homepage content after removing the attraction, restaurant, hotel and transport cards. */
-body.trek-home .homeMainColumn{grid-column:span 8!important;display:flex!important;flex-direction:column!important;gap:20px!important;min-width:0!important}
+body.trek-home .homeMainColumn{grid-column:span 8!important;display:flex!important;flex-direction:column!important;gap:20px!important;min-width:0!important;align-self:start!important}
 body.trek-home .homeMainColumn>.route,body.trek-home .homeMainColumn>.reminders{width:100%!important;flex:none!important}
 @media(max-width:1050px){body.trek-home .homeMainColumn{grid-column:1/-1!important}}
