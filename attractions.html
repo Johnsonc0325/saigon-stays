@@ -146,6 +146,23 @@ footer.spacer{margin-top:70px;border-top:1px solid var(--line);height:72px}
   section{padding-top:42px}
 }
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+
+/* ── 景點卡片：照片 / 資訊列 / 歷史 ── */
+.spotPhoto{margin:10px 0 10px;border-radius:12px;overflow:hidden;background:#eef1ee}
+.spotPhoto img{display:block;width:100%;height:auto;max-height:240px;object-fit:cover}
+.spotFacts{display:flex;flex-wrap:wrap;gap:6px 10px;margin:8px 0 10px;font-size:12.5px;line-height:1.6}
+.spotFacts>span{display:inline-flex;align-items:baseline;gap:5px;padding:4px 9px;border-radius:999px;background:#f1f4f1;color:#3f4a42}
+.spotFacts b{font-size:11px;letter-spacing:.04em;color:#6b7a72;font-weight:700}
+.spotFacts a{color:#254c40;text-decoration:underline}
+.spotHistory{margin-top:8px;font-size:13.5px;line-height:1.7}
+.spotHistory summary{cursor:pointer;font-weight:700;color:#254c40;padding:4px 0}
+.spotHistory summary:hover{color:#F59E0B}
+.spotHistory p{margin:6px 0 0;color:#4d5a52}
+@media(max-width:600px){
+  .spotPhoto img{max-height:190px}
+  .spotFacts{font-size:12px;gap:5px 8px}
+  .spotFacts>span{padding:3px 8px}
+}
 </style>
 
 <link rel="stylesheet" href="site-header-v13.css?v=30"></head>
@@ -163,13 +180,13 @@ footer.spacer{margin-top:70px;border-top:1px solid var(--line);height:72px}
   </div>
 
   <section id="planned-spots"><h2>這次行程會去 · NEW</h2><div class="note"><b>依 Day 1–3 的實際路線整理。</b> 原本四個經典景點仍保留在下方，這裡先放這次真正排進行程的新地點。</div><div class="grid">
-<article class="card"><div class="in"><span class="pill">DAY 1 · GÒ VẤP</span><h3><a class="card-title-link" href="place-go-vap.html">🌿 Gò Vấp Floral Village Park</a></h3><p class="meta">Công viên Làng hoa Gò Vấp · Lê Văn Thọ</p><p>抵達日傍晚的輕鬆散步點，不用一落地就衝第一郡。主要是公園、綠地與街區氣氛，適合拍照後直接去吃 OM Nướng。</p></div></article>
-<article class="card"><div class="in"><span class="pill">DAY 2 · 09:00</span><h3><a class="card-title-link" href="place-tan-dinh.html">🌸 Tân Định Church</a></h3><p class="meta">289 Hai Bà Trưng</p><p>這次 Day 2 的主角之一。先在街對面拍粉紅外牆與鐘樓，再去對面的 Cộng Cà Phê 找樓上靠窗位置，從咖啡店回看教堂。</p></div></article>
-<article class="card"><div class="in"><span class="pill">DAY 2</span><h3><a class="card-title-link" href="place-book-street.html">📚 Nguyễn Văn Bình Book Street</a></h3><p class="meta">中央郵局旁</p><p>與中央郵局、聖母大教堂排成同一段步行路線，不需要額外叫車。適合慢逛書店、樹蔭街景與拍照。</p></div></article>
-<article class="card"><div class="in"><span class="pill">DAY 2 · 待確認票務</span><h3><a class="card-title-link" href="place-pho-museum.html">🍜 Phở Museum</a></h3><p class="meta">Nguyễn Thái Học 一帶</p><p>你想要的是「參觀」而不是綁定完整體驗，所以最終出發前會再確認純參觀方式、票價與開放時間。</p></div></article>
-<article class="card"><div class="in"><span class="pill">DAY 3 · METRO</span><h3><a class="card-title-link" href="place-thao-dien.html">🌿 Thảo Điền</a></h3><p class="meta">Xuân Thủy · Thảo Điền · Nguyễn Văn Hưởng</p><p>這天不是單一景點，而是一整段街區散步：獨立選物、可愛飾品、陶瓷、咖啡館與小巷。從市中心搭 Metro Line 1 過來。</p></div></article>
-<article class="card"><div class="in"><span class="pill">DAY 3 · ART</span><h3><a class="card-title-link" href="place-quang-san.html">🖼 Quang San Art Museum</a></h3><p class="meta">189B/3 Nguyễn Văn Hưởng</p><p>Day 3 的藝術主站，預留約 1.5–2 小時。官方資料列出的地址就是 Nguyễn Văn Hưởng；最終出發前再核對當日展覽與票價。</p></div></article>
-<article class="card"><div class="in"><span class="pill">DAY 3 · SUNSET</span><h3><a class="card-title-link" href="place-sala.html">🌇 Sala Urban Park</a></h3><p class="meta">Thủ Thiêm</p><p>藝術館後的傍晚散步與城市景觀段，主要作用是放慢節奏、拍照，再轉往 Trần Ngọc Diện 吃 Pizza 4P’s。</p></div></article>
+<article class="card"><div class="in"><span class="pill">DAY 1 · GÒ VẤP</span><h3><a class="card-title-link" href="place-go-vap.html">🌿 Gò Vấp Floral Village Park</a></h3><p class="meta">Công viên Làng hoa Gò Vấp · Lê Văn Thọ, Gò Vấp</p><p>抵達日傍晚的輕鬆散步點，不用一落地就衝第一郡。主要是公園、綠地與街區氣氛，適合拍照後直接去吃 OM Nướng。</p><div class="spotFacts"><span><b>開放</b>公園全天開放（以現場為準）</span><span><b>門票</b>免費</span><span><b>建議</b>30–45 分鐘</span></div><a class="map" target="_blank" rel="noopener noreferrer" href="https://www.google.com/maps/search/?api=1&query=C%C3%B4ng+vi%C3%AAn+L%C3%A0ng+hoa+G%C3%B2+V%E1%BA%A5p+Ho+Chi+Minh+City">Google Maps ↗</a><details class="spotHistory"><summary>歷史與文化</summary><p>Gò Vấp 花村（Làng hoa Gò Vấp）曾是胡志明市最大的花卉供應地之一，供應全市春節花卉。隨著都市化，花田縮減，部分區域改為公園綠地，保留舊地名「Làng hoa」。傍晚當地人在此散步、運動，是貼近日常的據點。</p></details></div></article>
+<article class="card"><div class="in"><span class="pill">DAY 2 · 09:00</span><h3><a class="card-title-link" href="place-tan-dinh.html">🌸 Tân Định Church</a></h3><p class="meta">289 Hai Bà Trưng, phường 8, Quận 3（今 Xuân Hòa Ward）</p><figure class="spotPhoto"><img src="images/spot_tan-dinh.jpg" alt="Tân Định Church" loading="lazy" decoding="async"></figure><p>這次 Day 2 的主角之一。先在街對面拍粉紅外牆與鐘樓，再去對面的 Cộng Cà Phê 找樓上靠窗位置，從咖啡店回看教堂。</p><div class="spotFacts"><span><b>遊客開放</b>07:00–12:00 · 14:00–17:00 · 20:00–21:00</span><span><b>平日彌撒</b>05:00 · 06:15 · 17:30 · 19:00</span><span><b>週日彌撒</b>05:00 · 06:15 · 07:30 · 09:00 · 16:00 · 17:30 · 19:00</span><span><b>門票</b>免費</span><span><b>電話</b><a href="tel:+842838290093" target="_blank" rel="noopener">(028) 3829 0093</a></span><span><b>評分</b>5.3 / 5（553 則）</span></div><a class="map" target="_blank" rel="noopener noreferrer" href="https://www.google.com/maps/search/?api=1&query=Tan+Dinh+Church+289+Hai+Ba+Trung+Ho+Chi+Minh+City">Google Maps ↗</a><details class="spotHistory"><summary>歷史與文化</summary><p>正式名稱「耶穌聖心堂」（Nhà thờ Thánh Tâm Chúa Giêsu），1876 年 12 月 16 日完工，由 Donatien Éveillard 神父創建，造價 15,000 銀元。建築為新羅馬式為主，混入新哥德與新文藝復興元素，塔高 52.6 公尺，是胡志明市第二大教堂（僅次於聖母大教堂）。1957 年起內外漆成粉紅色，因此得名「粉紅教堂」。官網 giaoxutandinh.net。注意：彌撒期間請勿走動拍照，尊重禮拜活動。</p></details></div></article>
+<article class="card"><div class="in"><span class="pill">DAY 2</span><h3><a class="card-title-link" href="place-book-street.html">📚 Nguyễn Văn Bình Book Street</a></h3><p class="meta">Nguyễn Văn Bình, Bến Nghé, Quận 1</p><p>與中央郵局、聖母大教堂排成同一段步行路線，不需要額外叫車。適合慢逛書店、樹蔭街景與拍照。</p><div class="spotFacts"><span><b>開放</b>街區全天；各書店約 08:00–21:00（以現場為準）</span><span><b>門票</b>免費</span><span><b>建議</b>30 分鐘</span></div><a class="map" target="_blank" rel="noopener noreferrer" href="https://www.google.com/maps/search/?api=1&query=Nguyen+Van+Binh+Book+Street+Ho+Chi+Minh+City">Google Maps ↗</a><details class="spotHistory"><summary>歷史與文化</summary><p>2016 年開幕，位於中央郵局與聖母大教堂旁的短巷，兩側是書店、咖啡座與藝文攤位，被稱為西貢的「書街」。路面鋪石、設有座椅與綠蔭，是市中心少見的步行休憩帶。</p></details></div></article>
+<article class="card"><div class="in"><span class="pill">DAY 2 · 待確認票務</span><h3><a class="card-title-link" href="place-pho-museum.html">🍜 Phở Museum</a></h3><p class="meta">211 Nguyễn Thái Học, Bến Thành, Quận 1（濱城市場地鐵站步行 5 分鐘）</p><figure class="spotPhoto"><img src="images/itin_pho-museum_1.jpg" alt="Phở Museum" loading="lazy" decoding="async"></figure><p>你想要的是「參觀」而不是綁定完整體驗，所以最終出發前會再確認純參觀方式、票價與開放時間。</p><div class="spotFacts"><span><b>開放</b>每日 09:00–21:00（最後入場 20:00）</span><span><b>門票</b>基本 VND 52,000 起；完整體驗（導覽＋一碗河粉）VND 750,000</span><span><b>電話</b><a href="tel:+84985227211" target="_blank" rel="noopener">0985 227 211</a></span><span><b>評分</b>4.8 / 5（1,170 則）</span><span><b>建議</b>1–2 小時</span><span><b>官網</b><a href="https://phomuseum.com" target="_blank" rel="noopener">phomuseum.com</a></span></div><a class="map" target="_blank" rel="noopener noreferrer" href="https://www.google.com/maps/search/?api=1&query=Pho+Museum+211+Nguyen+Thai+Hoc+Ho+Chi+Minh+City">Google Maps ↗</a><details class="spotHistory"><summary>歷史與文化</summary><p>2026 年 1 月 15 日開幕，是越南第一座河粉主題博物館，佔地約 800 平方公尺、共三層。展覽以「河粉百年旅程」為主軸，用影像與實物說明河粉如何從北部街頭走向全國，並成為越南代表性飲食。可親手體驗製作河粉、調配香料包，逛完直接品嚐。</p></details></div></article>
+<article class="card"><div class="in"><span class="pill">DAY 3 · METRO</span><h3><a class="card-title-link" href="place-thao-dien.html">🌿 Thảo Điền</a></h3><p class="meta">Thảo Điền, Thủ Đức（Metro Line 1 可達）</p><figure class="spotPhoto"><img src="images/itin_man-moi_1.jpg" alt="Thảo Điền" loading="lazy" decoding="async"></figure><p>這天不是單一景點，而是一整段街區散步：獨立選物、可愛飾品、陶瓷、咖啡館與小巷。從市中心搭 Metro Line 1 過來。</p><div class="spotFacts"><span><b>開放</b>街區全天；店家各自營業</span><span><b>門票</b>免費</span><span><b>建議</b>2 小時</span></div><a class="map" target="_blank" rel="noopener noreferrer" href="https://www.google.com/maps/search/?api=1&query=Thao+Dien+Ward+Ho+Chi+Minh+City">Google Maps ↗</a><details class="spotHistory"><summary>歷史與文化</summary><p>原是西貢河畔的住宅區，因聚集國際學校與外籍居民，逐漸發展成咖啡館、選物店與藝廊密集的文青街區。主要散步範圍在 Xuân Thủy、Nguyễn Ư Dĩ 一帶。</p></details></div></article>
+<article class="card"><div class="in"><span class="pill">DAY 3 · ART</span><h3><a class="card-title-link" href="place-quang-san.html">🖼 Quang San Art Museum</a></h3><p class="meta">Quang San, Thủ Đức</p><p>Day 3 的藝術主站，預留約 1.5–2 小時。官方資料列出的地址就是 Nguyễn Văn Hưởng；最終出發前再核對當日展覽與票價。</p><div class="spotFacts"><span><b>開放</b>需現場確認（美術館多有固定休館日）</span><span><b>門票</b>需現場確認</span><span><b>建議</b>1.5–2 小時</span></div><a class="map" target="_blank" rel="noopener noreferrer" href="https://www.google.com/maps/search/?api=1&query=Quang+San+Art+Museum+Ho+Chi+Minh+City">Google Maps ↗</a><details class="spotHistory"><summary>歷史與文化</summary><p>私人當代藝術美術館，展出越南現代與當代繪畫、雕塑，空間由舊宅改建，庭園與展廳並置。開放時間與票價變動較大，出發前建議先查官方社群或電話確認。</p></details></div></article>
+<article class="card"><div class="in"><span class="pill">DAY 3 · SUNSET</span><h3><a class="card-title-link" href="place-sala.html">🌇 Sala Urban Park</a></h3><p class="meta">Sala, Thủ Đức</p><p>藝術館後的傍晚散步與城市景觀段，主要作用是放慢節奏、拍照，再轉往 Trần Ngọc Diện 吃 Pizza 4P’s。</p><div class="spotFacts"><span><b>開放</b>公園全天開放（以現場為準）</span><span><b>門票</b>免費</span><span><b>建議</b>30–45 分鐘</span></div><a class="map" target="_blank" rel="noopener noreferrer" href="https://www.google.com/maps/search/?api=1&query=Sala+Urban+Park+Ho+Chi+Minh+City">Google Maps ↗</a><details class="spotHistory"><summary>歷史與文化</summary><p>Sala 是胡志明市近年的大型都市開發區，位於第二郡（今 Thủ Đức）河畔。區內的 Sala Urban Park 以大片草坪、水景與開闊天際線聞名，傍晚是當地人野餐與拍照的熱點。</p></details></div></article>
 </div></section><section>
     <h2>距離一覽（從 Centoria Hotel）</h2>
     <table>
@@ -186,7 +203,7 @@ footer.spacer{margin-top:70px;border-top:1px solid var(--line);height:72px}
         <div class="shot"><img src="images/spot_post.jpg" alt="中央郵局"></div>
         <div class="in">
           <h3><a class="card-title-link" href="place-post-office.html">🏤 中央郵局</a></h3>
-          <p class="meta">Saigon Central Post Office</p>
+          <p class="meta">2 Công trường Công xã Paris, Bến Nghé, Quận 1</p><figure class="spotPhoto"><img src="images/spot_post2.jpg" alt="中央郵局" loading="lazy" decoding="async"></figure>
           <p>緊鄰紅教堂的百年網紅地標。步入大廳，復古穹頂、華麗吊燈、雕花窗格滿是法式風情；復古電話亭與老式櫃檯自帶懷舊濾鏡。可以在這裡手寫明信片寄回台灣，儀式感十足。</p>
           <p style="font-size:12.5px;color:var(--ink2)"><b>拍照建議：</b>避開旅行團高峰入內；用穹頂線條仰拍很有縱深感，室外可與紅教堂同框。</p>
           <div class="foot">
@@ -201,12 +218,12 @@ footer.spacer{margin-top:70px;border-top:1px solid var(--line);height:72px}
           </div>
           <p style="margin:10px 0 0;font-size:12.5px"><a href="https://www.google.com/maps/search/?api=1&query=10.7799129,106.699902" target="_blank" rel="noopener" style="color:var(--accent);border-bottom:1px solid currentColor;text-decoration:none">Google Maps ↗</a></p>
         </div>
-      </article>
+      <div class="spotFacts"><span><b>開放</b>約 07:00–19:00（以現場公告為準）</span><span><b>門票</b>免費</span><span><b>建議</b>30–40 分鐘</span><details class="spotHistory"><summary>歷史與文化</summary><p>西貢中央郵政局建於 1886–1891 年，由法國建築師 Alfred Foulhoux 設計，融合哥德式、文藝復興與法國殖民建築元素。大廳保留拱頂、吊燈與手繪地圖，至今仍是營運中的郵局，可在此寄明信片。與紅教堂（聖母大教堂）相對，是市中心最經典的法式地標組合。</p></details></div></article>
       <article class="card">
         <div class="shot"><img src="images/spot_hall.jpg" alt="市政廳"></div>
         <div class="in">
           <h3><a class="card-title-link" href="place-city-hall.html">🏛️ 市政廳</a></h3>
-          <p class="meta">Ho Chi Minh City Hall</p>
+          <p class="meta">86 Lê Thánh Tôn, Bến Nghé, Quận 1</p><figure class="spotPhoto"><img src="images/spot_hall2.jpg" alt="市政廳" loading="lazy" decoding="async"></figure>
           <p>市中心核心地帶的法式復古建築，代表性地標。整棟色調溫柔雅致，精緻浮雕與復古窗廊盡顯百年法式浪漫，門前綠植與雕塑隨手一拍都是異域風情。白天陽光漫過輪廓、夜晚燈光點亮整棟樓，氛圍感拉滿。</p>
           <p style="font-size:12.5px;color:var(--ink2)"><b>拍照建議：</b>白天光線柔和時拍建築全景；傍晚亮燈後拍夜景，光影交融更有大片質感。</p>
           <div class="foot">
@@ -221,12 +238,12 @@ footer.spacer{margin-top:70px;border-top:1px solid var(--line);height:72px}
           </div>
           <p style="margin:10px 0 0;font-size:12.5px"><a href="https://www.google.com/maps/search/?api=1&query=10.7765431,106.700916" target="_blank" rel="noopener" style="color:var(--accent);border-bottom:1px solid currentColor;text-decoration:none">Google Maps ↗</a></p>
         </div>
-      </article>
+      <div class="spotFacts"><span><b>開放</b>僅參觀外觀（政府機關，不開放內部）</span><span><b>門票</b>免費</span><span><b>建議</b>15–20 分鐘</span><span><b>拍照</b>白天拍建築全景；傍晚亮燈後拍夜景</span><details class="spotHistory"><summary>歷史與文化</summary><p>胡志明市人民委員會（市政廳）建於 1902–1908 年，法國建築師 Gardès 設計，採法式文藝復興風格，鐘樓為視覺中心。原名 Hôtel de Ville，是法屬印度支那時期的重要行政建築。前方廣場有胡志明銅像與花園，是熱門拍照點。</p></details></div></article>
       <article class="card">
         <div class="shot"><img src="images/spot_cafe.jpg" alt="咖啡公寓"></div>
         <div class="in">
           <h3><a class="card-title-link" href="place-cafe-apartment.html">☕ 咖啡公寓</a></h3>
-          <p class="meta">The Cafe Apartment</p>
+          <p class="meta">42 Nguyễn Huệ, Bến Nghé, Quận 1</p>
           <p>一棟九層老公寓被改造成數十家風格咖啡店與小店，是胡志明最熱門的打卡點。每層樓各有一家店，從復古書店到工業風咖啡館，適合慢慢逛、慢慢拍。</p>
           <p style="font-size:12.5px;color:var(--ink2)"><b>拍照建議：</b>建議白天先逛，傍晚再到對面步行街拍整棟外觀；進店需要消費才能上樓。</p>
           <div class="foot">
@@ -241,12 +258,12 @@ footer.spacer{margin-top:70px;border-top:1px solid var(--line);height:72px}
           </div>
           <p style="margin:10px 0 0;font-size:12.5px"><a href="https://www.google.com/maps/search/?api=1&query=10.7737,106.704" target="_blank" rel="noopener" style="color:var(--accent);border-bottom:1px solid currentColor;text-decoration:none">Google Maps ↗</a></p>
         </div>
-      </article>
+      <div class="spotFacts"><span><b>開放</b>各店家約 08:00–22:00（依店家而異）</span><span><b>門票</b>免費（消費依各店）</span><span><b>建議</b>1–1.5 小時</span><details class="spotHistory"><summary>歷史與文化</summary><p>原為 1960 年代的舊公寓（Café Apartment），2015 年後陸續進駐咖啡店、服飾與選物小店，成為阮惠步行街旁的地標。建築外觀保留舊公寓的陽台與樓梯，每層風格各異，可搭電梯或走樓梯逐層逛。</p></details></div></article>
       <article class="card">
         <div class="shot"><img src="images/spot_bui.jpg" alt="范五老街"></div>
         <div class="in">
           <h3><a class="card-title-link" href="place-bui-vien.html">🌃 范五老街</a></h3>
-          <p class="meta">Bùi Viện Walking Street</p>
+          <p class="meta">Bùi Viện, Phạm Ngũ Lão, Quận 1</p><figure class="spotPhoto"><img src="images/itin_bui-vien_1.jpg" alt="范五老街" loading="lazy" decoding="async"></figure>
           <p>全球背包客聚集的網紅街區。白天街巷閒適安逸、沿街小店錯落有致；夜幕降臨後霓虹亮起，酒吧、商鋪熱鬧喧囂，動感音樂與人群交織，是體驗西貢夜生活的地方。</p>
           <p style="font-size:12.5px;color:var(--ink2)"><b>拍照建議：</b>傍晚到訪最佳，暖調街燈加霓虹氛圍感十足；坐街邊店隨拍就很出片。</p>
           <div class="foot">
@@ -261,7 +278,7 @@ footer.spacer{margin-top:70px;border-top:1px solid var(--line);height:72px}
           </div>
           <p style="margin:10px 0 0;font-size:12.5px"><a href="https://www.google.com/maps/search/?api=1&query=10.767351,106.6938836" target="_blank" rel="noopener" style="color:var(--accent);border-bottom:1px solid currentColor;text-decoration:none">Google Maps ↗</a></p>
         </div>
-      </article>
+      <div class="spotFacts"><span><b>開放</b>街區 24 小時；酒吧多於傍晚後熱鬧</span><span><b>門票</b>免費</span><span><b>建議</b>1–2 小時（夜間）</span><details class="spotHistory"><summary>歷史與文化</summary><p>范五老街（Bùi Viện）是西貢最著名的背包客街區，聚集旅宿、酒吧、路邊攤與旅行社。白天安靜，入夜後霓虹與音樂齊放，是體驗西貢夜生活的代表地點。原名與越南革新運動者 Bùi Viện 有關。</p></details></div></article>
     </div>
   </section>
 </main>
