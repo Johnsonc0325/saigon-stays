@@ -281,6 +281,8 @@ nav a{color:#636a63;font-size:12px;transition:color .2s}nav a:hover{color:var(--
     undoTimer=setTimeout(clearUndo,5000);
   }
   function render(){
+    const visible=state.lists.filter(item=>item.owner===store.currentProfileId()||item.owner==="shared"||!item.owner);
+    if(visible.length&&!visible.some(item=>item.id===state.activeListId)){state.activeListId=visible[0].id;}
     const list=activeList();
     const addForm=document.querySelector("#addTaskForm");
     const setFormEnabled=enabled=>{if(addForm)addForm.querySelectorAll("input,select,button").forEach(el=>{el.disabled=!enabled;});};
@@ -301,17 +303,14 @@ nav a{color:#636a63;font-size:12px;transition:color .2s}nav a:hover{color:var(--
     progressEl.textContent=stats.percent+"%";progressBar.style.width=stats.percent+"%";progressText.textContent=stats.done+" / "+stats.total+" 已完成";
     titleEl.textContent=list.name;countEl.textContent=list.tasks.length+" 項";
     nav.innerHTML="";
-    state.lists.forEach(item=>{
+    const myProfile=store.currentProfileId();
+    const visibleLists=state.lists.filter(item=>item.owner===myProfile||item.owner==="shared"||!item.owner);
+    visibleLists.forEach(item=>{
       const button=document.createElement("button");button.type="button";button.dataset.listId=item.id;
       button.className=item.id===state.activeListId?"active":"";
       const name=document.createElement("span");name.className="listNavName";name.textContent=item.name;
       const count=document.createElement("span");count.textContent=item.tasks.length;
       button.append(name);
-      const mine=item.owner===store.currentProfileId()||item.owner==="shared";
-      if(!mine&&item.owner){
-        const badge=document.createElement("span");badge.className="listNavOwner";
-        badge.textContent=store.profileInfo(item.owner).name;button.append(badge);
-      }
       button.append(count);nav.appendChild(button);
     });
     document.querySelectorAll("#listFilters button").forEach(button=>button.classList.toggle("active",button.dataset.filter===state.filter));

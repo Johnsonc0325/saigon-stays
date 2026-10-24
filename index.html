@@ -285,13 +285,14 @@ document.querySelectorAll(".check input").forEach((box,i)=>{box.addEventListener
     label.append(input,text);return label;
   }
   function empty(text){const el=document.createElement("p");el.className="sidebarEmpty";el.textContent=text;return el;}
-  function activeList(){return state.lists.find(list=>list.id===state.activeListId)||state.lists[0]||{id:"",name:"",tasks:[]};}
-  function switchList(listId){if(!state.lists.some(list=>list.id===listId))return;state.activeListId=listId;store.save(state);render();}
+  function visibleLists(){const p=SaigonListsStore.currentProfileId();return state.lists.filter(l=>l.owner===p||l.owner==="shared"||!l.owner);}
+  function activeList(){const v=visibleLists();return v.find(list=>list.id===state.activeListId)||v[0]||{id:"",name:"",tasks:[]};}
+  function switchList(listId){if(!visibleLists().some(list=>list.id===listId))return;state.activeListId=listId;store.save(state);render();}
   function renderListNav(){
     const nav=document.querySelector("#listNav");if(!nav)return;
     nav.replaceChildren();
     const current=activeList();
-    state.lists.forEach(list=>{
+    visibleLists().forEach(list=>{
       const listStats=stats(list);
       const btn=document.createElement("button");btn.type="button";btn.dataset.listId=list.id;
       btn.className="listNavItem"+(list.id===current.id?" is-active":"")+(listStats.total>0&&listStats.open===0?" is-complete":"");
@@ -310,7 +311,7 @@ document.querySelectorAll(".check input").forEach((box,i)=>{box.addEventListener
       btn.addEventListener("click",function(){switchList(list.id);});
       nav.append(btn);
     });
-    if(!state.lists.length){nav.append(empty("還沒有清單，點下面新增"));}
+    if(!visibleLists().length){nav.append(empty("還沒有清單，點下面新增"));}
   }
   function render(){
     renderListNav();
