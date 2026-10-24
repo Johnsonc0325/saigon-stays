@@ -1,4 +1,4 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="zh-Hant">
 <head>
 <meta charset="utf-8">
@@ -19,6 +19,42 @@ body.transport-page .action.secondary{background:#F59E0B;color:#1A202C}
 body.transport-page header.site-header .site-nav a{min-height:44px!important;height:auto!important}
 body.transport-page header.site-header .site-logo{min-height:44px!important}
 @media(max-width:750px){.transport-page .grid,.transport-page .hotel{grid-template-columns:minmax(0,1fr)}}
+body.transport-page .hotel-actions a.action{background:#F59E0B;color:#1A202C}
+/* ── 附近採購：緊湊列表（左內容 / 右地圖連結）── */
+body.transport-page .shopLead{margin:0 0 4px;font-size:13.5px;line-height:1.6;color:#6B7A72}
+body.transport-page .shopList{list-style:none;margin:0;padding:0}
+body.transport-page .shopList>li{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) auto;
+  grid-template-areas:"name map" "tag map" "meta map";
+  align-items:center;
+  gap:3px 14px;
+  padding:14px 0;
+  border-top:1px solid #E4E9E5;
+}
+body.transport-page .shopList>li:first-child{border-top:0;padding-top:2px}
+body.transport-page .shopList>li:last-child{padding-bottom:2px}
+body.transport-page .shopName{grid-area:name;font-weight:700;font-size:15px;line-height:1.35}
+body.transport-page .shopList .tag{grid-area:tag;justify-self:start;margin-top:1px}
+body.transport-page .shopMeta{grid-area:meta;font-size:13px;line-height:1.55;color:#6B7A72;margin-top:1px}
+body.transport-page .shopMap{
+  grid-area:map;
+  align-self:center;
+  display:inline-flex;align-items:center;justify-content:center;
+  min-height:44px;padding:0 14px;
+  border-radius:999px;
+  border:1px solid rgba(245,158,11,.5);
+  color:#F59E0B;font-size:13px;font-weight:700;
+  text-decoration:none;white-space:nowrap;
+  transition:background .15s ease;
+}
+body.transport-page .shopMap:hover{background:rgba(245,158,11,.18);border-color:#F59E0B}
+@media(max-width:520px){
+  body.transport-page .shopList>li{gap:4px 10px;padding:13px 0}
+  body.transport-page .shopName{font-size:14.5px}
+  body.transport-page .shopMeta{font-size:12.5px}
+  body.transport-page .shopMap{padding:0 12px;font-size:12.5px}
+}
 </style>
 </head>
 <body class="trek-ui transport-page">
@@ -92,30 +128,33 @@ body.transport-page header.site-header .site-logo{min-height:44px!important}
 </section>
 <section class="card">
 <h2>附近採購</h2>
-<div>
-<h3>Vincom Plaza Quang Trung（商場，內有 WinMart 超市）</h3>
-<span class="tag">最近的補貨點</span>
-<p>190 Quang Trung, Gò Vấp<br>有 WinMart 超市、BHD Star 電影院、PUMA outlet、美食區</p>
-<a class="action secondary" href="https://www.google.com/maps/search/?api=1&amp;query=VINCOM+PLAZA+QUANG+TRUNG+HO+CHI+MINH" target="_blank" rel="noopener">地圖 ↗</a>
-</div>
-<div>
-<h3>EMART Gò Vấp（大型超市）</h3>
-<span class="tag">大型超市</span>
-<p>366 Phan Văn Trị, Ward 5, Gò Vấp</p>
-<a class="action secondary" href="https://www.google.com/maps/search/?api=1&amp;query=EMART+G%C3%B2+V%E1%BA%A5p+HO+CHI+MINH" target="_blank" rel="noopener">地圖 ↗</a>
-</div>
-<div>
-<h3>Circle K（便利店）</h3>
-<span class="tag">24 小時</span>
-<p>469 Thống Nhất, Ward 16, Gò Vấp</p>
-<a class="action secondary" href="https://www.google.com/maps/search/?api=1&amp;query=Circle+K+HO+CHI+MINH" target="_blank" rel="noopener">地圖 ↗</a>
-</div>
-<div>
-<h3>Starbucks Quang Trung</h3>
-<span class="tag">咖啡</span>
-<p>在 Quang Trung 路上，Thông Tây Hội 區</p>
-<a class="action secondary" href="https://www.google.com/maps/search/?api=1&amp;query=Starbucks+Quang+Trung+HO+CHI+MINH" target="_blank" rel="noopener">地圖 ↗</a>
-</div>
+<p class="shopLead">都集中在 Quang Trung 路與 Gò Vấp 一帶，走路或叫 Grab 都方便。</p>
+<ul class="shopList">
+  <li>
+    <span class="shopName">Vincom Plaza Quang Trung</span>
+    <span class="tag">最近的補貨點</span>
+    <span class="shopMeta">190 Quang Trung · WinMart 超市、BHD Star 電影院、PUMA outlet、美食區</span>
+    <a class="shopMap" href="https://www.google.com/maps/search/?api=1&query=VINCOM+PLAZA+QUANG+TRUNG+HO+CHI+MINH" target="_blank" rel="noopener">地圖 ↗</a>
+  </li>
+  <li>
+    <span class="shopName">EMART Gò Vấp</span>
+    <span class="tag">大型超市</span>
+    <span class="shopMeta">366 Phan Văn Trị, Ward 5 · 品項最齊，適合一次補齊</span>
+    <a class="shopMap" href="https://www.google.com/maps/search/?api=1&query=EMART+G%C3%B2+V%E1%BA%A5p+HO+CHI+MINH" target="_blank" rel="noopener">地圖 ↗</a>
+  </li>
+  <li>
+    <span class="shopName">Circle K</span>
+    <span class="tag">24 小時</span>
+    <span class="shopMeta">469 Thống Nhất, Ward 16 · 半夜買水、零食</span>
+    <a class="shopMap" href="https://www.google.com/maps/search/?api=1&query=Circle+K+HO+CHI+MINH" target="_blank" rel="noopener">地圖 ↗</a>
+  </li>
+  <li>
+    <span class="shopName">Starbucks Quang Trung</span>
+    <span class="tag">咖啡</span>
+    <span class="shopMeta">Quang Trung 路上，Thông Tây Hội 區</span>
+    <a class="shopMap" href="https://www.google.com/maps/search/?api=1&query=Starbucks+Quang+Trung+HO+CHI+MINH" target="_blank" rel="noopener">地圖 ↗</a>
+  </li>
+</ul>
 </section>
 <section class="card">
 <h2>Metro Line 1</h2>
